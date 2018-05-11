@@ -14,8 +14,8 @@
 **另外一种是实现Runable接口.**（详见 我的Interview项目 thread包下的 NewThread2.java）
 (其实准确来讲，应该有三种，还有一种是实现Callable接口，并与Future、线程池结合使用，此文这里不讲这个，有兴趣看这里) [Java并发编程与技术内幕:Callable、Future、FutureTask、CompletionService ](http://blog.csdn.net/evankaka/article/details/51610635)
 ####二.关于线程的状态改变
-**线程的状态示意图：**
-![Alt text](http://www.runoob.com/wp-content/uploads/2014/01/java-thread.jpg "optional title")
+**线程的状态示意图（详细版本）：**
+![Alt text](http://incdn1.b0.upaiyun.com/2016/08/665f644e43731ff9db3d341da5c827e1.png "optional title")
 * 新建状态： 
 使用new关键字新建一个Thread类或者其子类的对象后，该线程就处于新建状态，程序调用start（）方法之前线程会一直保持新建状态。
 * 就绪状态：
@@ -33,8 +33,6 @@
 * 死亡状态：
 一个运行状态的线程完成任务或者其他终止条件发生时，该线程就切换到终止状态。
 
-**线程的状态示意图（详细版本）：**
-![Alt text](http://incdn1.b0.upaiyun.com/2016/08/665f644e43731ff9db3d341da5c827e1.png "optional title")
 ####三.关于线程调度
 1. 调整线程优先级：Java线程有优先级，优先级高的线程会获得较多的运行机会。
  
