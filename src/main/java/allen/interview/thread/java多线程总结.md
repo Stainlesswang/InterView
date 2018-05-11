@@ -13,6 +13,72 @@
 **一种是继承Thread类，**（详见 我的Interview项目 thread包下的 NewThread1.java）
 **另外一种是实现Runable接口.**（详见 我的Interview项目 thread包下的 NewThread2.java）
 (其实准确来讲，应该有三种，还有一种是实现Callable接口，并与Future、线程池结合使用，此文这里不讲这个，有兴趣看这里) [Java并发编程与技术内幕:Callable、Future、FutureTask、CompletionService ](http://blog.csdn.net/evankaka/article/details/51610635)
+>2018.5.11补充，关于使用ExecutorService、Callable、Future实现有返回结果的多线程
+
+**代码实现如下：**
+
+```java
+import java.util.concurrent.*;  
+import java.util.Date;  
+import java.util.List;  
+import java.util.ArrayList;  
+   
+/** 
+* Java线程：有返回值的线程 
+* 
+* @author wb_qiuquan.ying 
+*/  
+@SuppressWarnings("unchecked")  
+public class Test {  
+public static void main(String[] args) throws ExecutionException,  InterruptedException {  
+   System.out.println("----程序开始运行----");  
+   Date date1 = new Date();  
+   
+   int taskSize = 5;  
+   // 创建一个线程池  
+   ExecutorService pool = Executors.newFixedThreadPool(taskSize);  
+   // 创建多个有返回值的任务  
+   List<Future> list = new ArrayList<Future>();  
+   for (int i = 0; i < taskSize; i++) {  
+    Callable c = new MyCallable(i + " ");  
+    // 执行任务并获取Future对象  
+    Future f = pool.submit(c);  
+    // System.out.println(">>>" + f.get().toString());  
+    list.add(f);  
+   }  
+   // 关闭线程池  
+   pool.shutdown();  
+   
+   // 获取所有并发任务的运行结果  
+   for (Future f : list) {  
+    // 从Future对象上获取任务的返回值，并输出到控制台  
+    System.out.println(">>>" + f.get().toString());  
+   }  
+   
+   Date date2 = new Date();  
+   System.out.println("----程序结束运行----，程序运行时间【"  
+     + (date2.getTime() - date1.getTime()) + "毫秒】");  
+}  
+}  
+   
+class MyCallable implements Callable<Object> {  
+private String taskNum;  
+   
+MyCallable(String taskNum) {  
+   this.taskNum = taskNum;  
+}  
+   
+public Object call() throws Exception {  
+   System.out.println(">>>" + taskNum + "任务启动");  
+   Date dateTmp1 = new Date();  
+   Thread.sleep(1000);  
+   Date dateTmp2 = new Date();  
+   long time = dateTmp2.getTime() - dateTmp1.getTime();  
+   System.out.println(">>>" + taskNum + "任务终止");  
+   return taskNum + "任务返回运行结果,当前任务时间【" + time + "毫秒】";  
+}  
+}  
+```
 ####二.关于线程的状态改变
 **线程的状态示意图（详细版本）：**
 ![Alt text](http://incdn1.b0.upaiyun.com/2016/08/665f644e43731ff9db3d341da5c827e1.png "optional title")
