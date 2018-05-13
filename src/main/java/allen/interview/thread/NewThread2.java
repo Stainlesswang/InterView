@@ -8,7 +8,6 @@ public class NewThread2 implements Runnable{
     NewThread2(String name){
         this.name=name;
     }
-
     public void run() {
         for (int i = 0; i < 5; i++) {
             System.out.println(name + "运行  :  " + i);

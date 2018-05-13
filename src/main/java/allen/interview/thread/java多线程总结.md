@@ -79,6 +79,8 @@ public Object call() throws Exception {
 }  
 }  
 ```
+
+
 ####二.关于线程的状态改变
 **线程的状态示意图（详细版本）：**
 ![Alt text](http://incdn1.b0.upaiyun.com/2016/08/665f644e43731ff9db3d341da5c827e1.png "optional title")

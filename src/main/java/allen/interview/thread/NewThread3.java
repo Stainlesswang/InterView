@@ -1,5 +1,7 @@
 package allen.interview.thread;
-
+/**
+ * 带返回结果的 Future 加 Callable 以及线程池老师先又返回结果的多线程
+ * */
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
