@@ -3,7 +3,7 @@ package allen.interview.JavaAlgo;
  * 插入类排序------直接插入排序
  * 从前到后一个个遍历，将新遍历到的数插入到前边合适的位置
  * */
-public class DirectInsertSort {
+public class InsertDirectSort {
     public static void main(String[] args){
         int[] a = { 49, 38, 65, 97, 76, 13, 27, 49, 78, 34, 12, 64, 1 };
         System.out.println("排序之前：");
