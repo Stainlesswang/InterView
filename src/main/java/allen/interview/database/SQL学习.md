@@ -113,11 +113,39 @@ FROM  student INNER JOIN
 ON student.SId=t1.SId
 ```
  3. 查询在 SC 表存在成绩的学生信息
- 4. 查询所有同学的学生编号、学生姓名、选课总数、所有课程的总成绩(没成绩的显示为 null ) 4.1 查有成绩的学生信息
- 查询「李」姓老师的数量
- 查询学过「张三」老师授课的同学的信息
- 查询没有学全所有课程的同学的信息
- 查询至少有一门课与学号为" 01 "的同学所学相同的同学的信息
+ ```sql
+SELECT student.*
+FROM student WHERE SId IN (SELECT SId FROM sc);
+```
+ 4. 查询所有同学的学生编号、学生姓名、选课总数、所有课程的总成绩(没成绩的显示为 null ) 
+ ```sql
+SELECT student.SId,student.Sname,t1.count,t1.sum
+  FROM student LEFT JOIN 
+  (SELECT sc.SId ,count(sc.SId) as "count" ,sum(score)as "sum" FROM sc GROUP BY sc.SId) AS t1
+  on student.SId=t1.SId
+```
+
+ 5. 查询「李」姓老师的数量
+ ```sql
+SELECT count(*)
+FROM teacher
+WHERE Tname like "李%";
+```
+ 6. 查询学过「张三」老师授课的同学的信息
+ ```sql
+SELECT DISTINCT student.*
+FROM sc ,student
+WHERE CId IN (SELECT CId FROM course,teacher WHERE course.TId=teacher.TId AND teacher.Tname="张三")
+AND sc.SId=student.SId
+```
+7.  查询没有学全所有课程的同学的信息
+```sql
+SELECT student.*
+FROM  student
+WHERE SId NOT IN (SELECT sc.SId FROM sc GROUP BY SId
+HAVING count(SID)= (select count(CId) from course))
+```
+8.  查询至少有一门课与学号为" 01 "的同学所学相同的同学的信息
  查询和" 01 "号的同学学习的课程 完全相同的其他同学的信息
  查询没学过"张三"老师讲授的任一门课程的学生姓名
  查询两门及其以上不及格课程的同学的学号，姓名及其平均成绩
