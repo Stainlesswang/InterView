@@ -146,7 +146,13 @@ WHERE SId NOT IN (SELECT sc.SId FROM sc GROUP BY SId
 HAVING count(SID)= (select count(CId) from course))
 ```
 8.  查询至少有一门课与学号为" 01 "的同学所学相同的同学的信息
- 查询和" 01 "号的同学学习的课程 完全相同的其他同学的信息
+```sql
+select DISTINCT student.*
+from  sc ,student
+where sc.CId in (select CId from sc where sc.SId='01')
+      and   sc.SId=student.SId
+```
+9.  查询和" 01 "号的同学学习的课程 完全相同的其他同学的信息
  查询没学过"张三"老师讲授的任一门课程的学生姓名
  查询两门及其以上不及格课程的同学的学号，姓名及其平均成绩
  检索" 01 "课程分数小于 60，按分数降序排列的学生信息
