@@ -1,6 +1,4 @@
-    @(InterView)[多线程]
-
-###java多线程总结
+### java多线程总结
 
 @(InterView)
 
