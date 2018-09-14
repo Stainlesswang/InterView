@@ -1,5 +1,8 @@
 package allen.interview.thread;
 
+/**
+ * 函数式编程：可以将方法当做数据来传递，更加灵活方便
+ */
 public class FunctionInterfaceDemo {
 	interface Predicate<T>{
 		boolean test(T t);

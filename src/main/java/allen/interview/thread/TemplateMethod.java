@@ -1,7 +1,7 @@
 package allen.interview.thread;
 
 public class TemplateMethod {
-	public final void print(String message){
+	private void print(String message){
 		System.out.println("############");
 		wrapPrint(message);
 		System.out.println("############");
@@ -16,6 +16,6 @@ public class TemplateMethod {
 				System.out.println("****"+message+"*****");
 			}
 		};
-		templateMethod.print("niajsdfljasdf");
+		templateMethod.print("模板方法测试方法");
 	}
 }
