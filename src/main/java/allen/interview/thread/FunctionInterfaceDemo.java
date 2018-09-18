@@ -10,7 +10,6 @@ public class FunctionInterfaceDemo {
 
 	/**
 	 * 执行Predicate判断
-	 *
 	 * @param age       年龄
 	 * @param predicate Predicate函数式接口
 	 * @return          返回布尔类型结果

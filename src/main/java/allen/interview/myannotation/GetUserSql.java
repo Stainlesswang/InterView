@@ -9,7 +9,7 @@ public class GetUserSql {
         User u1 = new User();
         User u2 = new User();
         u1.setId(1);
-        u2.setName("forezp");
+        u2.setName("forest");
         genSql(u2);
         genSql(u1);
     }
@@ -41,10 +41,10 @@ public class GetUserSql {
                 continue;
             }
             if (fieldValue instanceof Integer) {
-                stringBuilder.append(columnName + "=" + fieldValue);
+                stringBuilder.append(columnName).append("=").append(fieldValue);
             }
             if (fieldValue instanceof String) {
-                stringBuilder.append(columnName + "=" + "'" + fieldValue + "'");
+                stringBuilder.append(columnName).append("=").append("'").append(fieldValue).append("'");
             }
 
         }

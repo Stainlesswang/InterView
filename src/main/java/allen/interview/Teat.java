@@ -10,7 +10,7 @@ public class Teat {
 
 
         String s1 = "Programming";
-        String s2 = new String("Programming");
+        String s2 = "Programming";
         String s3 = "Program";
         String s4 = "ming";
         String s5 = "Program" + "ming";
