@@ -1,6 +1,6 @@
 package allen.interview.thread;
 /**
- * 模拟多窗口叫好类
+ * 模拟多窗口叫好
  * @author wangjianqiang
  * @date 2018/9/19 9:09
  */
