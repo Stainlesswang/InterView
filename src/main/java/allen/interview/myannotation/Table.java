@@ -7,5 +7,5 @@ import java.lang.annotation.*;
 @Documented
 @Inherited
 public @interface Table {
-    String value() default "";
+	String value() default "";
 }

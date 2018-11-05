@@ -16,13 +16,11 @@ public class TemplateMethod {
 
 
 
-
-
 	public static void main(String[] args){
 		TemplateMethod templateMethod=new TemplateMethod(){
 			//此处定义 被包装在里边的wrapPrint
 			protected void  wrapPrint(String message){
-				System.out.println("****自定义"+message+"*****");
+				System.out.println("****这是我自定义的模板方法"+message+"*****");
 			}
 		};
 		//执行print 方法的时候里边调用的是 wrapPrint()方法
