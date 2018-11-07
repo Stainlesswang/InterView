@@ -17,16 +17,46 @@ public class EvenClient {
 			}
 		},"Producer").start();
 
-		//一个线程作为消费Event的线程，处理每个线程会耗时一分钟时间（为了模拟真实情况）
+		new Thread(()->{
+			for (; ;){
+				eventQueue.offer(new EventQueue.Event());
+			}
+		},"Producer1").start();
+
+		new Thread(()->{
+			for (; ;){
+				eventQueue.offer(new EventQueue.Event());
+			}
+		},"Producer2").start();
+
+		//一个线程作为消费Event的线程，处理每个线程会耗时30 seconds时间（为了模拟真实情况）
 		new Thread(()->{
 			for (; ;){
 				eventQueue.take();
 				try {
-					TimeUnit.MINUTES.sleep(1);
+					TimeUnit.SECONDS.sleep(30);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}
-		},"Consumer").start();
+		},"Consumer1").start();new Thread(()->{
+			for (; ;){
+				eventQueue.take();
+				try {
+					TimeUnit.SECONDS.sleep(30);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		},"Consumer2").start();new Thread(()->{
+			for (; ;){
+				eventQueue.take();
+				try {
+					TimeUnit.SECONDS.sleep(30);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		},"Consumer3").start();
 	}
 }
