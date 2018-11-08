@@ -1,4 +1,4 @@
-package allen.interview.thread;
+package allen.interview.java8Learn;
 
 public class TemplateMethod {
 	//相当于Thread类中的start()方法

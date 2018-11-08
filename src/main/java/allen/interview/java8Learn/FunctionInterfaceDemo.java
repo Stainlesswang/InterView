@@ -1,4 +1,6 @@
-package allen.interview.thread;
+package allen.interview.java8Learn;
+
+import java.util.Random;
 
 /**
  * 函数式编程：可以将方法当做数据来传递，更加灵活方便
@@ -16,11 +18,17 @@ public class FunctionInterfaceDemo {
 	 * @return 返回布尔类型结果
 	 */
 	private static boolean doPredicate(int age, Predicate<Integer> predicate) {
+		System.out.println(age);
 		return predicate.test(age);
 	}
 
+
+
+
 	public static void main(String[] args) {
-		boolean isAdult = doPredicate(20, x -> x > 18);
+		int randomInt= new Random().nextInt(10);
+		System.out.println("the current number is :"+randomInt);
+		boolean isAdult = doPredicate(randomInt, x -> x > 18);
 		System.out.println(isAdult);
 	}
 }

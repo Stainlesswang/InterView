@@ -9,8 +9,11 @@ import java.util.concurrent.TimeoutException;
  * @date 2018年11月07日 15:53
  */
 public interface Lock {
-	void lock() throws InterruptedException;
-	void lock(long mills) throws InterruptedException,TimeoutException;
+	void lock();
+
+	void lock(long mills) throws InterruptedException, TimeoutException;
+
 	void unlock();
+
 	List<Thread> getBlockedThreads();
 }

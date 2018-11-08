@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
  * @date 2018年11月07日 10:22
  */
 public class SynchronizedDefect {
-	private synchronized void synMethod(){
+	private synchronized void synMethod() {
 		try {
 			TimeUnit.HOURS.sleep(1);
 		} catch (InterruptedException e) {
@@ -18,11 +18,11 @@ public class SynchronizedDefect {
 
 
 	public static void main(String[] args) throws InterruptedException {
-		SynchronizedDefect defect=new SynchronizedDefect();
-		Thread t1=new Thread(defect::synMethod,"T1");
+		SynchronizedDefect defect = new SynchronizedDefect();
+		Thread t1 = new Thread(defect::synMethod, "T1");
 		t1.start();
 		TimeUnit.MILLISECONDS.sleep(2);
-		Thread t2=new Thread(defect::synMethod,"T2");
+		Thread t2 = new Thread(defect::synMethod, "T2");
 		t2.start();
 		TimeUnit.MILLISECONDS.sleep(2);
 		t2.interrupt();
