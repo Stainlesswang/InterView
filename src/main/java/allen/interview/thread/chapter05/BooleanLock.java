@@ -1,7 +1,7 @@
 package allen.interview.thread.chapter05;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 
@@ -43,22 +43,43 @@ public class BooleanLock implements Lock {
 
 	@Override
 	public void lock(long mills) throws InterruptedException, TimeoutException {
-		if (mills<=0){
-			this.lock();
-		}else{
-			long remainingMills=mills;
-			long endMills= System.currentTimeMillis()+mills;
+		synchronized (this) {
+			if (mills <= 0) {
+				this.lock();
+			} else {
+				long remainingMills = mills;
+				long endMills = System.currentTimeMillis() + mills;
+				while (locked) {
+					if (remainingMills <= 0)
+						throw new TimeoutException("can not get lock during " + mills);
+					if (!blockList.contains(currentThread))
+						blockList.add(currentThread);
+					this.wait(remainingMills);
+					remainingMills = endMills - System.currentTimeMillis();
+				}
+				//将当前线程移除阻塞列表
+				blockList.remove(currentThread());
+				//锁资源被获取
+				this.locked = true;
+				//赋值到当前线程
+				currentThread = currentThread();
+			}
 		}
-
 	}
 
 	@Override
 	public void unlock() {
-
+		synchronized (this) {
+			if (currentThread == currentThread()) {
+				this.locked = false;
+				this.notifyAll();
+			}
+		}
 	}
 
 	@Override
 	public List<Thread> getBlockedThreads() {
-		return null;
+		//返回一个不可修改的list
+		return Collections.unmodifiableList(blockList);
 	}
 }
