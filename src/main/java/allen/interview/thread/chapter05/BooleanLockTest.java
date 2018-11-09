@@ -15,6 +15,7 @@ public class BooleanLockTest {
 	private final Lock lock = new BooleanLock();
 
 	private void synMethod() {
+
 		lock.lock();
 		try {
 			int randomInt = ThreadLocalRandom.current().nextInt(10);
@@ -27,10 +28,19 @@ public class BooleanLockTest {
 		}
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		BooleanLockTest booleanLockTest = new BooleanLockTest();
-		IntStream.range(0, 9)
-				.mapToObj(i -> new Thread(booleanLockTest::synMethod, "T" + String.valueOf(i)))
-				.forEach(Thread::start);
+		//实现了synchronize的作用
+//		IntStream.range(0, 9)
+//				.mapToObj(d -> new Thread(booleanLockTest::synMethod))
+//				.forEach(Thread::start);
+
+		//可中断测试
+		new Thread(booleanLockTest::synMethod,"T1").start();
+		TimeUnit.SECONDS.sleep(2);
+		Thread t2=new Thread(booleanLockTest::synMethod,"T2");
+		t2.start();
+		TimeUnit.SECONDS.sleep(10);
+		t2.interrupt();
 	}
 }

@@ -4,7 +4,8 @@ import java.util.LinkedList;
 
 /**
  * @author WangJianQiang
- * @Description:事件队列,有如下三种状态 1.队列满
+ * @Description:事件队列,有如下三种状态
+ * 1.队列满
  * 2.队列空
  * 3.有Event但是没有满
  * @date 2018年11月06日 8:50
