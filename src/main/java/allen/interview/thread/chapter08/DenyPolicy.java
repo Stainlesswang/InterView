@@ -26,6 +26,7 @@ public interface DenyPolicy {
 		}
 	}
 
+	//使用提交者的线程
 	class RunnerDenyPolicy implements DenyPolicy {
 		@Override
 		public void reject(Runnable runnable, ThreadPool threadPool) {

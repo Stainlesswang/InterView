@@ -8,8 +8,10 @@ package allen.interview.thread.chapter08;
 public interface RunnableQueue {
 	//当有新的任务提交，首先会offer到队列中
 	void offer(Runnable runnable);
+
 	//线程到队列中取任务
-	Runnable take();
+	Runnable take() throws InterruptedException;
+
 	//获取任务队列中的任务数量
 	int size();
 }
