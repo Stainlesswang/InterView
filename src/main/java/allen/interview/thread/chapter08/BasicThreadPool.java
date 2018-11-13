@@ -1,49 +1,169 @@
 package allen.interview.thread.chapter08;
 
+import java.util.ArrayDeque;
+import java.util.Queue;
+import java.util.concurrent.TimeUnit;
+
 /**
  * @author WangJianQiang
  * @Description:
  * @date 2018年11月12日 15:24
  */
 public class BasicThreadPool extends Thread implements ThreadPool {
+	private final int initSize;
+	private final int maxSize;
+	private final int coreSize;
+	private int activityCount;
+	private final ThreadFactory threadFactory;
+	private final RunnableQueue runnableQueue;
+	private volatile boolean isShutdown=false;
+	private final Queue<ThreadTask> threadQueue = new ArrayDeque<>();
+	//默认
+	private final static DenyPolicy DEFAULT_DENY_POLICY=new DenyPolicy.DiscardDenyPolicy();
+	private final static ThreadFactory DEFAULT_THREAD_FACTORY=new DefaultFactory();
 
+	private final long keepAliveTime;
+	private final TimeUnit timeUnit;
+	public BasicThreadPool(int initSize, int maxSize, int coreSize, int queueSize) {
+		this(initSize,maxSize, coreSize,queueSize,DEFAULT_THREAD_FACTORY,DEFAULT_DENY_POLICY,10,TimeUnit.SECONDS);
+	}
+	public BasicThreadPool(int initSize, int maxSize, int coreSize, int queueSize, ThreadFactory threadFactory, DenyPolicy denyPolicy, long keepAliveTime, TimeUnit timeUnit) {
+		this.initSize = initSize;
+		this.maxSize = maxSize;
+		this.coreSize = coreSize;
+		this.threadFactory = threadFactory;
+		this.runnableQueue = new LinkedRunnableQueue(queueSize,denyPolicy,this);
+		this.keepAliveTime = keepAliveTime;
+		this.timeUnit = timeUnit;
+		init();
+	}
+
+	private void init(){
+		start();
+		for (int i = 0; i < initSize; i++) {
+			newThread();
+		}
+	}
+
+	private void newThread() {
+		InternalTask internalTask=new InternalTask(runnableQueue);
+		Thread thread=this.threadFactory.createThread(internalTask);
+		ThreadTask threadTask =new ThreadTask(thread,internalTask);
+		threadQueue.offer(threadTask);
+		this.activityCount++;
+		thread.start();
+	}
+	private void removeThread(){
+			ThreadTask threadTask=threadQueue.remove();
+			threadTask.internalTask.stop();
+			this.activityCount--;
+	}
 	@Override
 	public void execute(Runnable runnable) {
+		if (this.isShutdown)
+			throw new IllegalStateException("The ThreadPool is destroy！");
+		this.runnableQueue.offer(runnable);
 
+	}
+
+	@Override
+	public void run() {
+		while (!isShutdown && !isInterrupted()){
+			try {
+				timeUnit.sleep(keepAliveTime);
+			} catch (InterruptedException e) {
+				isShutdown=true;
+				break;
+			}
+			synchronized (this){
+				if (isShutdown)
+					break;
+				if (runnableQueue.size()>0&&activityCount<coreSize){
+					for (int i=initSize;i<coreSize;i++){
+						newThread();
+					}
+					continue;
+				}
+				if (runnableQueue.size()>0&&activityCount>maxSize){
+					for (int i=coreSize;i<maxSize;i++){
+						newThread();
+					}
+				}
+				if (runnableQueue.size()==0&&activityCount>coreSize){
+					for (int i = coreSize; i <activityCount ; i++) {
+						removeThread();
+					}
+				}
+			}
+		}
 	}
 
 	@Override
 	public void shutdown() {
-
+		synchronized (this){
+			if (isShutdown) return;
+			isShutdown=true;
+			threadQueue.forEach(threadTask -> {
+				threadTask.internalTask.stop();
+				threadTask.thread.interrupt();
+			});
+			this.interrupt();
+		}
 	}
 
 	@Override
 	public int getInitSize() {
-		return 0;
+		if (isShutdown)
+			throw new IllegalStateException("The pool is destroy");
+		return this.initSize;
 	}
 
 	@Override
 	public int getMaxSize() {
-		return 0;
+		if (isShutdown)
+			throw new IllegalStateException("The pool is destroy");
+		return this.maxSize;
 	}
 
 	@Override
 	public int getCoreSize() {
-		return 0;
+		if (isShutdown)
+			throw new IllegalStateException("The pool is destroy");
+		return this.coreSize;
 	}
 
 	@Override
 	public int getQueueSize() {
-		return 0;
+		if (isShutdown)
+			throw new IllegalStateException("The pool is destroy");
+		return this.runnableQueue.size();
 	}
 
 	@Override
 	public int getActivityCount() {
-		return 0;
+		if (isShutdown)
+			throw new IllegalStateException("The pool is destroy");
+		return this.activityCount;
 	}
 
 	@Override
 	public boolean isShutdown() {
-		return false;
+		return this.isShutdown;
+	}
+
+	private static class ThreadTask{
+		private Thread thread;
+		private InternalTask internalTask;
+		ThreadTask(Thread thread, InternalTask internalTask){
+			this.internalTask=internalTask;
+			this.thread=thread;
+		}
+	}
+
+	private static class DefaultFactory implements ThreadFactory {
+		@Override
+		public Thread createThread(Runnable runnable) {
+			return new Thread(runnable);
+		}
 	}
 }
