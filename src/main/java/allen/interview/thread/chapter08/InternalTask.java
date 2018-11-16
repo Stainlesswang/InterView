@@ -6,10 +6,11 @@ package allen.interview.thread.chapter08;
  * @date 2018年11月13日 16:12
  */
 public class InternalTask implements Runnable {
+	//
 	private final RunnableQueue runnableQueue;
 	private volatile boolean running=true;
 
-	public InternalTask(RunnableQueue runnableQueue) {
+	InternalTask(RunnableQueue runnableQueue) {
 		this.runnableQueue = runnableQueue;
 	}
 

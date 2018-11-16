@@ -10,35 +10,45 @@ import java.util.concurrent.TimeUnit;
  * @date 2018年11月12日 15:24
  */
 public class BasicThreadPool extends Thread implements ThreadPool {
+	//初始化大小
 	private final int initSize;
+	//线程池最大容量
 	private final int maxSize;
+	//核心线程数量
 	private final int coreSize;
+	//当前活跃的线程数
 	private int activityCount;
+	//Thread工厂
 	private final ThreadFactory threadFactory;
+	//任务队列
 	private final RunnableQueue runnableQueue;
-	private volatile boolean isShutdown=false;
+	//线程池是否关闭
+	private volatile boolean isShutdown = false;
+
 	private final Queue<ThreadTask> threadQueue = new ArrayDeque<>();
 	//默认
-	private final static DenyPolicy DEFAULT_DENY_POLICY=new DenyPolicy.DiscardDenyPolicy();
-	private final static ThreadFactory DEFAULT_THREAD_FACTORY=new DefaultFactory();
+	private final static DenyPolicy DEFAULT_DENY_POLICY = new DenyPolicy.DiscardDenyPolicy();
+	private final static ThreadFactory DEFAULT_THREAD_FACTORY = new DefaultFactory();
 
 	private final long keepAliveTime;
 	private final TimeUnit timeUnit;
+
 	public BasicThreadPool(int initSize, int maxSize, int coreSize, int queueSize) {
-		this(initSize,maxSize, coreSize,queueSize,DEFAULT_THREAD_FACTORY,DEFAULT_DENY_POLICY,10,TimeUnit.SECONDS);
+		this(initSize, maxSize, coreSize, queueSize, DEFAULT_THREAD_FACTORY, DEFAULT_DENY_POLICY, 10, TimeUnit.SECONDS);
 	}
-	public BasicThreadPool(int initSize, int maxSize, int coreSize, int queueSize, ThreadFactory threadFactory, DenyPolicy denyPolicy, long keepAliveTime, TimeUnit timeUnit) {
+
+	private BasicThreadPool(int initSize, int maxSize, int coreSize, int queueSize, ThreadFactory threadFactory, DenyPolicy denyPolicy, long keepAliveTime, TimeUnit timeUnit) {
 		this.initSize = initSize;
 		this.maxSize = maxSize;
 		this.coreSize = coreSize;
 		this.threadFactory = threadFactory;
-		this.runnableQueue = new LinkedRunnableQueue(queueSize,denyPolicy,this);
+		this.runnableQueue = new LinkedRunnableQueue(queueSize, denyPolicy, this);
 		this.keepAliveTime = keepAliveTime;
 		this.timeUnit = timeUnit;
 		init();
 	}
 
-	private void init(){
+	private void init() {
 		start();
 		for (int i = 0; i < initSize; i++) {
 			newThread();
@@ -46,18 +56,20 @@ public class BasicThreadPool extends Thread implements ThreadPool {
 	}
 
 	private void newThread() {
-		InternalTask internalTask=new InternalTask(runnableQueue);
-		Thread thread=this.threadFactory.createThread(internalTask);
-		ThreadTask threadTask =new ThreadTask(thread,internalTask);
+		InternalTask internalTask = new InternalTask(runnableQueue);
+		Thread thread = this.threadFactory.createThread(internalTask);
+		ThreadTask threadTask = new ThreadTask(thread, internalTask);
 		threadQueue.offer(threadTask);
 		this.activityCount++;
 		thread.start();
 	}
-	private void removeThread(){
-			ThreadTask threadTask=threadQueue.remove();
-			threadTask.internalTask.stop();
-			this.activityCount--;
+
+	private void removeThread() {
+		ThreadTask threadTask = threadQueue.remove();
+		threadTask.internalTask.stop();
+		this.activityCount--;
 	}
+
 	@Override
 	public void execute(Runnable runnable) {
 		if (this.isShutdown)
@@ -68,29 +80,29 @@ public class BasicThreadPool extends Thread implements ThreadPool {
 
 	@Override
 	public void run() {
-		while (!isShutdown && !isInterrupted()){
+		while (!isShutdown && !isInterrupted()) {
 			try {
 				timeUnit.sleep(keepAliveTime);
 			} catch (InterruptedException e) {
-				isShutdown=true;
+				isShutdown = true;
 				break;
 			}
-			synchronized (this){
+			synchronized (this) {
 				if (isShutdown)
 					break;
-				if (runnableQueue.size()>0&&activityCount<coreSize){
-					for (int i=initSize;i<coreSize;i++){
+				if (runnableQueue.size() > 0 && activityCount < coreSize) {
+					for (int i = initSize; i < coreSize; i++) {
 						newThread();
 					}
 					continue;
 				}
-				if (runnableQueue.size()>0&&activityCount>maxSize){
-					for (int i=coreSize;i<maxSize;i++){
+				if (runnableQueue.size() > 0 && activityCount > maxSize) {
+					for (int i = coreSize; i < maxSize; i++) {
 						newThread();
 					}
 				}
-				if (runnableQueue.size()==0&&activityCount>coreSize){
-					for (int i = coreSize; i <activityCount ; i++) {
+				if (runnableQueue.size() == 0 && activityCount > coreSize) {
+					for (int i = coreSize; i < activityCount; i++) {
 						removeThread();
 					}
 				}
@@ -100,9 +112,9 @@ public class BasicThreadPool extends Thread implements ThreadPool {
 
 	@Override
 	public void shutdown() {
-		synchronized (this){
+		synchronized (this) {
 			if (isShutdown) return;
-			isShutdown=true;
+			isShutdown = true;
 			threadQueue.forEach(threadTask -> {
 				threadTask.internalTask.stop();
 				threadTask.thread.interrupt();
@@ -151,12 +163,13 @@ public class BasicThreadPool extends Thread implements ThreadPool {
 		return this.isShutdown;
 	}
 
-	private static class ThreadTask{
+	private static class ThreadTask {
 		private Thread thread;
 		private InternalTask internalTask;
-		ThreadTask(Thread thread, InternalTask internalTask){
-			this.internalTask=internalTask;
-			this.thread=thread;
+
+		ThreadTask(Thread thread, InternalTask internalTask) {
+			this.internalTask = internalTask;
+			this.thread = thread;
 		}
 	}
 

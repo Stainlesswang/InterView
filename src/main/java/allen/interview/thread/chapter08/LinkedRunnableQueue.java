@@ -16,7 +16,7 @@ public class LinkedRunnableQueue implements RunnableQueue {
 	private final LinkedList<Runnable> runnableList = new LinkedList<>();
 	private final ThreadPool threadPool;
 
-	public LinkedRunnableQueue(int limit, DenyPolicy denyPolicy, ThreadPool threadPool) {
+	LinkedRunnableQueue(int limit, DenyPolicy denyPolicy, ThreadPool threadPool) {
 		this.limit = limit;
 		this.denyPolicy = denyPolicy;
 		this.threadPool = threadPool;
@@ -25,12 +25,16 @@ public class LinkedRunnableQueue implements RunnableQueue {
 	//入队列
 	@Override
 	public void offer(Runnable runnable) {
+		//runnable 相关的monitor 加上锁
 		synchronized (runnableList) {
+			//如果队列满
 			if (runnableList.size() >= limit) {
 				//无法容纳 执行拒绝策略
 				denyPolicy.reject(runnable, threadPool);
 			} else {
+				//将任务加入队列
 				runnableList.addLast(runnable);
+				//将因阻塞放入wait set中的线程全部唤醒,可以争取资源
 				runnableList.notifyAll();
 			}
 		}
@@ -42,7 +46,7 @@ public class LinkedRunnableQueue implements RunnableQueue {
 		synchronized (runnableList) {
 			while (runnableList.isEmpty()) {
 				try {
-					//当队列中任务为空时,当前线程挂起, 当前线程进入 runnableList关联的monitor waitset 中等待(有新任务的时候)唤醒
+					//当队列中任务为空时,当前线程挂起, 当前线程进入 runnableList关联的monitor wait set 中等待(有新任务的时候)唤醒
 					runnableList.wait();
 				} catch (InterruptedException e) {
 					//抛出异常 令调用者处理异常
