@@ -3,6 +3,7 @@ package allen.interview.thread.chapter08;
 import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author WangJianQiang
@@ -24,14 +25,13 @@ public class BasicThreadPool extends Thread implements ThreadPool {
 	private final RunnableQueue runnableQueue;
 	//线程池是否关闭
 	private volatile boolean isShutdown = false;
-
-	private final Queue<ThreadTask> threadQueue = new ArrayDeque<>();
-	//默认
-	private final static DenyPolicy DEFAULT_DENY_POLICY = new DenyPolicy.DiscardDenyPolicy();
-	private final static ThreadFactory DEFAULT_THREAD_FACTORY = new DefaultFactory();
-
+	//存活时长
 	private final long keepAliveTime;
 	private final TimeUnit timeUnit;
+	private final Queue<ThreadTask> threadQueue = new ArrayDeque<>();
+
+	private final static DenyPolicy DEFAULT_DENY_POLICY = new DenyPolicy.DiscardDenyPolicy();
+	private final static ThreadFactory DEFAULT_THREAD_FACTORY = new DefaultFactory();
 
 	public BasicThreadPool(int initSize, int maxSize, int coreSize, int queueSize) {
 		this(initSize, maxSize, coreSize, queueSize, DEFAULT_THREAD_FACTORY, DEFAULT_DENY_POLICY, 10, TimeUnit.SECONDS);
@@ -90,17 +90,20 @@ public class BasicThreadPool extends Thread implements ThreadPool {
 			synchronized (this) {
 				if (isShutdown)
 					break;
+				//有任务，活动线程小于核心线程   扩大线程数量
 				if (runnableQueue.size() > 0 && activityCount < coreSize) {
 					for (int i = initSize; i < coreSize; i++) {
 						newThread();
 					}
 					continue;
 				}
-				if (runnableQueue.size() > 0 && activityCount > maxSize) {
+				//有任务,活动线程小于最大线程 扩大线程数量到max
+				if (runnableQueue.size() > 0 && activityCount < maxSize) {
 					for (int i = coreSize; i < maxSize; i++) {
 						newThread();
 					}
 				}
+				//无任务,则需要缩减活动线程
 				if (runnableQueue.size() == 0 && activityCount > coreSize) {
 					for (int i = coreSize; i < activityCount; i++) {
 						removeThread();
@@ -174,9 +177,13 @@ public class BasicThreadPool extends Thread implements ThreadPool {
 	}
 
 	private static class DefaultFactory implements ThreadFactory {
+		private static final AtomicInteger GROUP_COUNTER = new AtomicInteger(1);
+		private static final ThreadGroup group = new ThreadGroup("MyThreadPool-" + GROUP_COUNTER.getAndDecrement());
+		private static final AtomicInteger COUNTER = new AtomicInteger(0);
+
 		@Override
 		public Thread createThread(Runnable runnable) {
-			return new Thread(runnable);
+			return new Thread(group, runnable, "Thread-pool-" + COUNTER.getAndDecrement());
 		}
 	}
 }

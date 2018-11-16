@@ -8,7 +8,7 @@ package allen.interview.thread.chapter08;
 public class InternalTask implements Runnable {
 	//
 	private final RunnableQueue runnableQueue;
-	private volatile boolean running=true;
+	private volatile boolean running = true;
 
 	InternalTask(RunnableQueue runnableQueue) {
 		this.runnableQueue = runnableQueue;
@@ -16,17 +16,18 @@ public class InternalTask implements Runnable {
 
 	@Override
 	public void run() {
-		while (running && !Thread.currentThread().isInterrupted()){
+		while (running && !Thread.currentThread().isInterrupted()) {
 			try {
-				Runnable task=runnableQueue.take();
+				Runnable task = runnableQueue.take();
 				task.run();
 			} catch (InterruptedException e) {
-				running=false;
+				running = false;
 				break;
 			}
 		}
 	}
-	public void stop(){
-		this.running=false;
+
+	public void stop() {
+		this.running = false;
 	}
 }
