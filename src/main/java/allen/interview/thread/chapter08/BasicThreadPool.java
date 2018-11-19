@@ -33,7 +33,7 @@ public class BasicThreadPool extends Thread implements ThreadPool {
 	private final static DenyPolicy DEFAULT_DENY_POLICY = new DenyPolicy.DiscardDenyPolicy();
 	private final static ThreadFactory DEFAULT_THREAD_FACTORY = new DefaultFactory();
 
-	public BasicThreadPool(int initSize, int maxSize, int coreSize, int queueSize) {
+	BasicThreadPool(int initSize, int maxSize, int coreSize, int queueSize) {
 		this(initSize, maxSize, coreSize, queueSize, DEFAULT_THREAD_FACTORY, DEFAULT_DENY_POLICY, 10, TimeUnit.SECONDS);
 	}
 
@@ -56,6 +56,7 @@ public class BasicThreadPool extends Thread implements ThreadPool {
 	}
 
 	private void newThread() {
+		//自定义的runnable实现。 run方法从队列中取出runnable执行run方法
 		InternalTask internalTask = new InternalTask(runnableQueue);
 		Thread thread = this.threadFactory.createThread(internalTask);
 		ThreadTask threadTask = new ThreadTask(thread, internalTask);
@@ -166,6 +167,7 @@ public class BasicThreadPool extends Thread implements ThreadPool {
 		return this.isShutdown;
 	}
 
+	//线程任务队形， 负责包装 thread 和internalTask 两个实例
 	private static class ThreadTask {
 		private Thread thread;
 		private InternalTask internalTask;
