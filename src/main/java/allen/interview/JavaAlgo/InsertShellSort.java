@@ -36,10 +36,9 @@ public class InsertShellSort {
         }
         System.out.println();
         System.out.println("排序之后：");
-        for (int i = 0; i < a.length; i++)
-        {
-            System.out.print(a[i] + " ");
-        }
+	    for (int anA : a) {
+		    System.out.print(anA + " ");
+	    }
 
     }
 
