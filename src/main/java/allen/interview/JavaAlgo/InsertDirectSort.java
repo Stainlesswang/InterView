@@ -11,11 +11,13 @@ public class InsertDirectSort {
 		for (int anA : a) {
 			System.out.print(anA + " ");
 		}
-
+		//从前向后循环数组
 		for (int i = 1; i < a.length; i++) {
 			int temp = a[i];
 			int j;
+			//从当前位置向前遍历
 			for (j = i - 1; j >= 0; j--) {
+				//遇到大的向后移动
 				if (a[j] > temp) {
 					a[j + 1] = a[j];
 				} else {
