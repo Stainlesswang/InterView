@@ -2,7 +2,7 @@ package allen.interview.JavaAlgo;
 
 /**
  * 插入类排序------shell排序
- * 按照一定间隔 一般取 n/2 为开始的间隔，然后对间隔中的
+ * 按照一定间隔 一般取 n/2 为开始的间隔，然后对间隔中的一组数据执行直接插入排序
  */
 public class InsertShellSort {
 

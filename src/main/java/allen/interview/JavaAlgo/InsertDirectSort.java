@@ -2,7 +2,7 @@ package allen.interview.JavaAlgo;
 
 /**
  * 插入类排序------直接插入排序
- * 从前到后一个个遍历，将新遍历到的数插入到前边合适的位置
+ * 从前到后一个个遍历，
  */
 public class InsertDirectSort {
 	public static void main(String[] args) {
@@ -12,9 +12,7 @@ public class InsertDirectSort {
 			System.out.print(anA + " ");
 		}
 
-
 		for (int i = 1; i < a.length; i++) {
-
 			int temp = a[i];
 			int j;
 			for (j = i - 1; j >= 0; j--) {
