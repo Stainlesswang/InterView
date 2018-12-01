@@ -12,6 +12,7 @@ public class TicketWindowRunnable implements Runnable {
 	private final static int MAX = 500;
 	private final static Object MUTEX = new Object();
 
+
 	@Override
 	public void run() {
 		//同步代码块，只能由一个线程执行该方法
