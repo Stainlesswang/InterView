@@ -34,7 +34,7 @@ public abstract class Sort<T extends Comparable<T>> {
 	 * @author WangJianQiang
 	 * @date 2018年12月01日 下午03:52:04
 	 */
-	protected void swap(T[] a, int i, int j) {
+		protected void swap(T[] a, int i, int j) {
 		T temp = a[i];
 		a[i] = a[j];
 		a[j] = temp;
