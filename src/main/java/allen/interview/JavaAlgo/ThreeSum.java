@@ -16,14 +16,12 @@ public class ThreeSum {
 
 	private ArrayList<ArrayList<Integer>> threeSum(int[] num) {
 		ArrayList<ArrayList<Integer>> result = new ArrayList<>();
-
 		if (num == null) {
 			return result;
 		}
 		//排序
 		Arrays.sort(num);
 		int sum, left, right;
-
 		for (int i = 0; i < num.length - 2; i++) {
 			//避免重复, 比如前面计算了以-1开头,后面就不用计算了
 			if (i != 0 && num[i] == num[i - 1]) {
@@ -31,7 +29,7 @@ public class ThreeSum {
 			}
 			left = i + 1;
 			right = num.length - 1;
-			/**
+			/*
 			 * 固定一个数,从后面的数中选出两个数,因为数组是有序的,所以可以
 			 * 用两个数组下标left和right,left指向当前元素的后一个位置,right指向最后一个位置
 			 * 三个数相加的和等于0时,加入解集;

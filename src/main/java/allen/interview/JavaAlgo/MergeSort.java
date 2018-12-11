@@ -11,22 +11,20 @@ package allen.interview.JavaAlgo;
  * @date 2018年12月07日 15:12
  */
 public abstract class MergeSort<T extends Comparable<T>> extends Sort<T> {
-	private T[] aux;
+	T[] aux;
 
+	protected void merge(T[] nums, int start, int mid, int end) {
+		int i = start, j = mid + 1;
 
-	protected void merge(T[] nums, int l, int m, int h) {
-
-		int i = l, j = m + 1;
-
-		for (int k = l; k <= h; k++) {
+		for (int k = start; k <= end; k++) {
 			aux[k] = nums[k]; // 将数据复制到辅助数组
 		}
 
-		for (int k = l; k <= h; k++) {
-			if (i > m) {
+		for (int k = start; k <= end; k++) {
+			if (i > mid) {
 				nums[k] = aux[j++];
 
-			} else if (j > h) {
+			} else if (j > end) {
 				nums[k] = aux[i ++];
 
 			} else if (aux[i].compareTo(nums[j]) <= 0) {
