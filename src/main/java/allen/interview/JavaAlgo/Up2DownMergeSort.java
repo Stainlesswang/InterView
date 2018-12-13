@@ -11,13 +11,14 @@ public class Up2DownMergeSort<T extends Comparable<T>> extends MergeSort<T> {
 		aux = (T[]) new Comparable[nums.length];
 		sort(nums, 0, nums.length - 1);
 	}
-	private void sort(T[] nums, int start, int end) {
-		if (end <= start) {
+
+	private void sort(T[] nums, int l, int h) {
+		if (h <= l) {
 			return;
 		}
-		int mid = start + (end - start) / 2;
-		sort(nums, start, mid);
-		sort(nums, mid + 1, end);
-		merge(nums, start, mid, end);
+		int mid = l + (h - l) / 2;
+		sort(nums, l, mid);
+		sort(nums, mid + 1, h);
+		merge(nums, l, mid, h);
 	}
 }
