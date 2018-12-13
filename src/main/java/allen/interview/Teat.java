@@ -1,9 +1,6 @@
 package allen.interview;
 
-import allen.interview.JavaAlgo.Bubble;
-import allen.interview.JavaAlgo.Insertion;
-import allen.interview.JavaAlgo.Selection;
-import allen.interview.JavaAlgo.Shell;
+import allen.interview.JavaAlgo.*;
 
 import java.util.Arrays;
 
@@ -22,10 +19,19 @@ public class Teat {
 //		Insertion<Integer> insertion=new Insertion<>();
 //		insertion.sort(a);
 		/*希尔排序测试*/
-		Shell<Integer> shell=new Shell<>();
-		shell.sort(a);
-
-		System.out.println(Arrays.asList(a));
+//		Shell<Integer> shell=new Shell<>();
+//		shell.sort(a);
+		/*归并排序测试*/
+//		Up2DownMergeSort<Integer> shell=new Up2DownMergeSort<>();
+//		shell.sort(a);
+		int N=a.length;
+		for (int sz = 1; sz < N; sz += sz) {
+			System.out.println(sz);
+			for (int lo = 0; lo < N - sz; lo += sz + sz) {
+				System.out.print(lo+"  ");
+			}
+		}
+//		System.out.println(Arrays.asList(a));
 	}
 
 

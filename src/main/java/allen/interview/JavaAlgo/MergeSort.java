@@ -23,16 +23,16 @@ public abstract class MergeSort<T extends Comparable<T>> extends Sort<T> {
 
 		for (int k = l; k <= h; k++) {
 			if (i > m) {
-				nums[k] = aux[j++];
+				nums[k] = aux[j++];//直接把右边数组全部拷贝
 
 			} else if (j > h) {
-				nums[k] = aux[i++];
+				nums[k] = aux[i++];//直接把左边数组全部拷贝
 
 			} else if (aux[i].compareTo(nums[j]) <= 0) {
-				nums[k] = aux[i++]; // 先进行这一步，保证稳定性
+				nums[k] = aux[i++]; // 左边较小,赋值
 
 			} else {
-				nums[k] = aux[j++];
+				nums[k] = aux[j++]; // 右边较小,赋值
 			}
 		}
 	}
