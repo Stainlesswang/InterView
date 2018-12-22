@@ -11,7 +11,6 @@ public interface DenyPolicy {
 
 	//该拒绝策略直接将任务丢弃
 	class DiscardDenyPolicy implements DenyPolicy {
-
 		@Override
 		public void reject(Runnable runnable, ThreadPool threadPool) {
 
