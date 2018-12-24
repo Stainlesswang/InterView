@@ -1,0 +1,6 @@
+var urlPath = path + "/appAnimalClassify/appAnimalClassify_";
+	var addPath="addAppAnimalClassify";
+	var deletByIdPath="deleteAppAnimalClassifyById";
+	var updatePath="updateAppAnimalClassifyById";
+	var flexigridPath="searchAppAnimalClassifyFG";
+	var getBeanByIdPath="getAppAnimalClassifyById";

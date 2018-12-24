@@ -3,6 +3,7 @@ package allen.interview;
 import allen.interview.JavaAlgo.*;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class Teat {
 
@@ -24,12 +25,17 @@ public class Teat {
 		/*归并排序测试*/
 //		Up2DownMergeSort<Integer> shell=new Up2DownMergeSort<>();
 //		shell.sort(a);
-		int N=a.length;
-		for (int sz = 1; sz < N; sz += sz) {
-			System.out.println(sz);
-			for (int lo = 0; lo < N - sz; lo += sz + sz) {
-				System.out.print(lo+"  ");
-			}
+//		int N=a.length;
+//		for (int sz = 1; sz < N; sz += sz) {
+//			System.out.println(sz);
+//			for (int lo = 0; lo < N - sz; lo += sz + sz) {
+//				System.out.print(lo+"  ");
+//			}
+//		}
+		int N=100;
+		for (int sz = 1; sz < N; sz ++) {
+			Random random=new Random();
+			System.out.println(random.nextInt(9) + 1 + "");
 		}
 //		System.out.println(Arrays.asList(a));
 	}
