@@ -1,4 +1,4 @@
-package allen.interview.JavaAlgo;
+package allen.interview.JavaAlgo.sort;
 
 /**
  * 选择排序

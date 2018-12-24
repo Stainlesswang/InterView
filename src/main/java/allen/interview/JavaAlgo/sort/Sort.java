@@ -1,4 +1,4 @@
-package allen.interview.JavaAlgo;
+package allen.interview.JavaAlgo.sort;
 
 /**
  * 我们规定Sort接口来定义排序规范，并且待排序元素需要实现Comparable接口

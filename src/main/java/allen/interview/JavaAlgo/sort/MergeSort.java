@@ -1,4 +1,4 @@
-package allen.interview.JavaAlgo;
+package allen.interview.JavaAlgo.sort;
 
 /**
  * 归并排序 合并排序 merge

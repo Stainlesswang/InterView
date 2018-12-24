@@ -1,4 +1,4 @@
-package allen.interview.JavaAlgo;
+package allen.interview.JavaAlgo.sort;
 
 /**
  * 冒泡排序
