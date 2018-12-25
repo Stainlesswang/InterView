@@ -7,7 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FreeMarkerTest {
+public class  FreeMarkerTest {
     public static void main(String[] args) {
         try {
             //创建Configuration实例，指定FreeMarker的版本
