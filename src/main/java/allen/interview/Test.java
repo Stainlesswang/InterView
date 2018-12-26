@@ -1,13 +1,9 @@
 package allen.interview;
 
-import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import static java.lang.System.out;
-
-public class Teat {
+public class Test {
     public static void main(String[] args) {
 
 
