@@ -37,11 +37,11 @@ public class Type {
 		typeMap.put("BIGINT", "java.math.BigInteger");
 		typeMap.put("DECIMAL", "java.math.BigDecimal");
 		typeMap.put("BOOLEAN", "Long");
-		typeMap.put("DATE", "java.sql.Date");
-		typeMap.put("TIME", "java.sql.Time");
-		typeMap.put("DATETIME", "java.sql.Timestamp");
-		typeMap.put("TIMESTAMP", "java.sql.Timestamp");
-		typeMap.put("YEAR", "java.sql.Date");
+		typeMap.put("DATE", "String");
+		typeMap.put("TIME", "String");
+		typeMap.put("DATETIME", "String");
+		typeMap.put("TIMESTAMP", "String");
+		typeMap.put("YEAR", "String");
 		typeMap.put("OTHER", "String");
 	}
 
