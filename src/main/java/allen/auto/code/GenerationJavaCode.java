@@ -194,11 +194,6 @@ public class GenerationJavaCode {
 	}
 
 
-
-	public static void main(String[] args) {
-
-	}
-
 	/**
 	 * 将类名转换为文件名，java公共类名与其文件名应该相同，这里将首字母转换为大写 如operateLog 转换后为 OperateLog
 	 *
