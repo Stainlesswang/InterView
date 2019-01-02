@@ -34,27 +34,27 @@ public class GenerationJavaCode {
 
 
 	static {
-		fileNameArray[0][0] = "entityTemplate.ftl";
+		fileNameArray[0][0] = "bean.ftl";
 		fileNameArray[0][1] = ".java";
 
 
-		fileNameArray[1][0] = "serviceTemplate.ftl";
+		fileNameArray[1][0] = "service.ftl";
 		fileNameArray[1][1] = "Service.java";
 
 
-		fileNameArray[2][0] = "serviceImplTemplate.ftl";
+		fileNameArray[2][0] = "serviceImpl.ftl";
 		fileNameArray[2][1] = "ServiceImpl.java";
 
 
-		fileNameArray[3][0] = "daoTemplate.ftl";
+		fileNameArray[3][0] = "dao.ftl";
 		fileNameArray[3][1] = "Dao.java";
 
 
-		fileNameArray[4][0] = "daoImplTemplate.ftl";
+		fileNameArray[4][0] = "daoImpl.ftl";
 		fileNameArray[4][1] = "DaoImpl.java";
 
-		fileNameArray[5][0] = "mapper.ftl";
-		fileNameArray[5][1] = "Mapper.xml";
+		fileNameArray[5][0] = "html.ftl";
+		fileNameArray[5][1] = "Index.html";
 	}
 
 
