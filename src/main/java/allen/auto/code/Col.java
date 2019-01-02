@@ -23,7 +23,7 @@ public class Col {
 	/**
 	 * @return
 	 * @author WangJianQiang
-	 * @date 2019年01月02日 下午02:51:07
+	 * 2019年01月02日1下午04:35:16午02:51:07
 	 */
 	public Col(Integer index, String fieldName, Type type) {
 		this.index = index;
@@ -83,7 +83,6 @@ public class Col {
 				allowNull = "no";
 			}
 		}
-
 	}
 
 	public Integer getIndex() {
