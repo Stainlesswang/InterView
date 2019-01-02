@@ -21,8 +21,6 @@ public class CodeTest {
 		String upClassName="appletmodify";
 		String lowClassName="appletmodify";
 		String basePath="com.chinaso.modules.applet";
-		String templateDir=System.getProperty("user.dir")+"/src/main/java/"+"com/xx/common/code/template";
-
 		String generateFilePath=System.getProperty("user.dir")+"/src/main/java/"+basePath.replace(".", "/");
 		GenerationJavaCode autoGenerationJavaCode=
 				new GenerationJavaCode(url, username, password, driver, tableName, generateFilePath, basePath,upClassName,lowClassName);

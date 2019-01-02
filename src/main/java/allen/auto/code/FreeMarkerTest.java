@@ -4,6 +4,7 @@ import freemarker.template.*;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,21 +24,30 @@ public class  FreeMarkerTest {
             cfg.setWrapUncheckedExceptions(true);
 
             //2.0 创建数据模型
-            Map<String, Object> root = new HashMap<>();
-            root.put("user", "神经病");
-            Map latest = new HashMap();
-            root.put("latestProduct", latest);
-            latest.put("url", "products/greenmouse.html");
-            latest.put("name", "green mouse");
-            root.put("latestProduct", latest);
+            Map<String, Object> rootMap = new HashMap<String, Object>();
+            rootMap.put("upClassName", "Allen");
+            rootMap.put("lowClassName", "allen");
+            rootMap.put("chineseName", "艾伦");
+            ArrayList<Col> list=new ArrayList<Col>();
+            Col col=new Col(0,"id",Type.get("INT"));
+            col.setMethodName("Id");
+            col.setName("id");
+            Col col2=new Col(0,"name",Type.get("VERCHAR"));
+            col2.setMethodName("Name");
+            col2.setName("name");
+            list.add(col);
+            list.add(col2);
+            rootMap.put("columns",list);
+            rootMap.put("tableName","allenDb");
+            rootMap.put("packageName", "allen.auto.code");
 
             //3.0 获取模板
-            Template template = cfg.getTemplate("test.ftl");
+            Template template = cfg.getTemplate("bean.ftl");
 
-            File testFile = new File("./template", "test.html");
+            File testFile = new File("./template", "Allen.java");
             //4.0 给模板绑定数据模型
             Writer out = new FileWriter(testFile);
-            template.process(root, out);
+            template.process(rootMap, out);
             System.out.println(testFile.getAbsolutePath());
             out.flush();
         } catch (IOException e) {

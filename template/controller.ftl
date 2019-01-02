@@ -1,93 +1,66 @@
-package com.chinaso.modules.app.controller;
+package ${packageName};
 
 import com.chinaso.common.ajax.AjaxResponse;
 import com.chinaso.common.ajax.AlertMessage;
 import com.chinaso.common.constant.GlobalPagePathConstants;
-import com.chinaso.common.fastdfs.FastDFSClientWrapper;
-import com.chinaso.common.flexigrid.bean.FlexiGrid;
 import com.chinaso.common.global.baseAbstract.BaseController;
 import com.chinaso.common.json.JackJsonUtil;
-import com.chinaso.common.tfs.TFSService;
-import com.chinaso.modules.activity.service.TempImageService;
-import com.chinaso.modules.app.bean.AppAnimalClassifyBean;
-import com.chinaso.modules.app.bean.AppAnimalSoundBean;
-import com.chinaso.modules.app.service.AppAnimalClassifyService;
-import com.chinaso.modules.app.service.AppAnimalSoundService;
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 /**
- * 动物数据控制器
+ * ${chineseName}控制器
  * @author WangJianQiang
  * @date 2018年12月24日 上午10:13:48
  */
 @Controller
-@RequestMapping("/appAnimalSound")
-public class AppAnimalSoundController extends BaseController {
+@RequestMapping("/${lowClassName}")
+public class ${upClassName}Controller extends BaseController {
 	@Autowired
-	private AppAnimalSoundService appAnimalSoundService;
-	@Autowired
-	private AppAnimalClassifyService appAnimalClassifyService;
-	@Autowired
-	private TempImageService tempImageService;
-	@Autowired
-	private FastDFSClientWrapper fastDFSClientWrapper;
-	@Autowired
-	private TFSService tfsService;
-	@Value("${image.server.timeout}")
-	private String imageServerTimeout;
+	private ${upClassName}Service ${lowClassName}Service;
 	/**
-	 * 跳转到动物数据管理首页
+	 * 跳转到${chineseName}管理首页
 	 * @author WangJianQiang
 	 * @date 2018年12月24日 上午10:14:14
 	 * @param
 	 * @return java.lang.String
 	 */
-	@RequestMapping("/appAnimalSound_toIndex")
+	@RequestMapping("/${lowClassName}_toIndex")
 	public String toIndex() {
 		return GlobalPagePathConstants.TO_APP_ANIMAL_SOUND_INDEX;
 	}
 
 	/**
-	 * 查找动物数据表格
+	 * 查找${chineseName}数据表格
 	 * @author WangJianQiang
 	 * @date 2018年12月24日 上午10:14:24
 	 * @param query_json
 	 * @return com.chinaso.common.flexigrid.bean.FlexiGrid
 	 */
-	@RequestMapping("/appAnimalSound_searchAppAnimalSoundFG")
+	@RequestMapping("/${lowClassName}_search${upClassName}FG")
 	public @ResponseBody
-	FlexiGrid searchAppAnimalSoundFG(String query_json) throws Exception {
-		return appAnimalSoundService.searchAppAnimalSoundFG(query_json);
+	FlexiGrid search${upClassName}FG(String query_json) throws Exception {
+		return ${lowClassName}Service.search${upClassName}FG(query_json);
 	}
 
 	/**
-	 * 根据id获取动物数据
+	 * 根据id获取${chineseName}数据
 	 * @author WangJianQiang
 	 * @date 2018年12月24日 上午10:14:41
 	 * @param bean
 	 * @return java.lang.Object
 	 */
-	@RequestMapping("/appAnimalSound_updateAppAnimalSoundIdxById")
+	@RequestMapping("/${lowClassName}_update${upClassName}IdxById")
 	public @ResponseBody
-	Object updateAppAnimalSoundIdxById(AppAnimalSoundBean bean) {
+	Object update${upClassName}IdxById(${upClassName}Bean bean) {
 		AjaxResponse ajaxResponse;
 		bean.setUpdateuserid(getCurrentUserId());
 		try {
-			ajaxResponse = appAnimalSoundService.updateAppAnimalSoundIdxById(bean);
+			ajaxResponse = ${lowClassName}Service.update${upClassName}IdxById(bean);
 		} catch (Exception e) {
 			ajaxResponse = AlertMessage.getActionResponse("msgCommonUpdateFail");
 			ajaxResponse.setData(e.getMessage());
@@ -96,19 +69,19 @@ public class AppAnimalSoundController extends BaseController {
 	}
 
 	/**
-	 * 删除动物数据
+	 * 删除${chineseName}数据
 	 * @author WangJianQiang
 	 * @date 2018年12月24日 上午10:14:51
 	 * @param id
 	 * @return java.lang.Object
 	 */
-	@RequestMapping("/appAnimalSound_deleteAppAnimalSound")
+	@RequestMapping("/${lowClassName}_delete${upClassName}")
 	public @ResponseBody
-	Object deleteAppAnimalSound(Integer id) {
+	Object delete${upClassName}(Integer id) {
 		AjaxResponse ajaxResponse;
 		if (null != id) {
 			try {
-				ajaxResponse = appAnimalSoundService.deleteAppAnimalSound(id, getCurrentUserId());
+				ajaxResponse = ${lowClassName}Service.delete${upClassName}(id, getCurrentUserId());
 			} catch (Exception e) {
 				ajaxResponse = AlertMessage.getActionResponse("msgCommonUpdateFail");
 				ajaxResponse.setData(e.getMessage());
@@ -120,124 +93,48 @@ public class AppAnimalSoundController extends BaseController {
 	}
 
 	/**
-	 * 根据id获取动物信息
+	 * 根据id获取${chineseName}信息
 	 * @author WangJianQiang
 	 * @date 2018年12月25日 上午08:50:14
 	 * @param id
 	 * @return com.chinaso.common.ajax.AjaxResponse
 	 */
-	@RequestMapping("/appAnimalSound_getAppAnimalSoundById")
+	@RequestMapping("/${lowClassName}_get${upClassName}ById")
 	public @ResponseBody
-	AjaxResponse getAppAnimalSoundById(Integer id) throws Exception {
-		AppAnimalSoundBean appAnimalSoundBean = appAnimalSoundService.getAppAnimalSoundById(id);
+	AjaxResponse get${upClassName}ById(Integer id) throws Exception {
+${upClassName}Bean ${lowClassName}Bean = ${lowClassName}Service.get${upClassName}ById(id);
 		AjaxResponse result = new AjaxResponse(AjaxResponse.AJAX_CODE_SUCCESS);
-		result.setData(appAnimalSoundBean);
+		result.setData(${lowClassName}Bean);
 		return result;
 	}
 
 	/**
-	 * 获取全部动物分类
-	 * @author WangJianQiang
-	 * @date 2018年12月25日 上午08:50:29
-	 * @param
-	 * @return com.chinaso.common.ajax.AjaxResponse
-	 */
-	@RequestMapping("/appAnimalSound_getAnimalClass")
-	public @ResponseBody
-	AjaxResponse getAnimalClass() throws Exception {
-		List<AppAnimalClassifyBean> list = appAnimalClassifyService.getListAppAnimalClassify();
-	AjaxResponse result = new AjaxResponse(AjaxResponse.AJAX_CODE_SUCCESS);
-	result.setData(list);
-	return result;
-	}
-
-	/**
-	* 增加动物数据
+	* 增加${chineseName}数据
 	* @author WangJianQiang
 	* @date 2018年12月25日 上午08:50:49
-	* @param appAnimalSoundBean
+	* @param ${lowClassName}Bean
 	* @return java.lang.Object
 	*/
-	@RequestMapping("/appAnimalSound_addAppAnimalSound")
+	@RequestMapping("/${lowClassName}_add${upClassName}")
 	public @ResponseBody
-	Object addAppAnimalSound(AppAnimalSoundBean appAnimalSoundBean) throws Exception {
-	appAnimalSoundBean.setCreatorid(getCurrentUserId());
-	return appAnimalSoundService.addAppAnimalSound(appAnimalSoundBean);
+	Object add${upClassName}(${upClassName}Bean ${lowClassName}Bean) throws Exception {
+${lowClassName}Bean.setCreatorid(getCurrentUserId());
+	return ${lowClassName}Service.add${upClassName}(${lowClassName}Bean);
 	}
 
 	/**
-	* 更新动物数据
+	* 更新${chineseName}数据
 	* @author WangJianQiang
 	* @date 2018年12月25日 上午08:51:04
-	* @param appAnimalSoundBean
+	* @param ${lowClassName}Bean
 	* @return java.lang.Object
 	*/
-	@RequestMapping("/appAnimalSound_updateAppAnimalSound")
+	@RequestMapping("/${lowClassName}_update${upClassName}")
 	public @ResponseBody
-	Object updateAppAnimalSound(AppAnimalSoundBean appAnimalSoundBean) throws Exception {
-	appAnimalSoundBean.setUpdateuserid(getCurrentUserId());
-	return appAnimalSoundService.updateAppAnimalSoundById(appAnimalSoundBean);
-	}
-	/**
-	* 上传音频
-	* @author WangJianQiang
-	* @date 2018年12月25日 上午08:51:18
-	* @param file
-	* @return java.lang.String
-	*/
-	@RequestMapping(value = "/appAnimalSound_uploadAudio", produces = "application/json;charset=UTF-8")
-	@ResponseBody
-	public String uploadAudio(MultipartFile file) throws Exception {
-	AjaxResponse ajaxResponse = null;
-	if (null != file && !StringUtils.isEmpty(file.getOriginalFilename())) {
-	String audio = fastDFSClientWrapper.getPrefix()+fastDFSClientWrapper.uploadFile(file);
-	ajaxResponse = new AjaxResponse(AjaxResponse.AJAX_CODE_SUCCESS);
-	tempImageService.addTempImage(audio, getCurrentUserId());
-	ajaxResponse.setData(audio);
-	}
-	return JackJsonUtil.fromObjectToJson(ajaxResponse);
+	Object update${upClassName}(${upClassName}Bean ${lowClassName}Bean) throws Exception {
+	${lowClassName}Bean.setUpdateuserid(getCurrentUserId());
+	return ${lowClassName}Service.update${upClassName}ById(${lowClassName}Bean);
 	}
 
-	/**
-	* 上传图片
-	* @author WangJianQiang
-	* @date 2018年12月25日 上午08:51:38
-	* @param file
-	* @return java.lang.String
-	*/
-	@RequestMapping(value = "/appAnimalSound_uploadImage", produces = "application/json;charset=UTF-8")
-	@ResponseBody
-	public String uploadImage(MultipartFile file){
-	AjaxResponse ajaxResponse;
-	String tfsUrl;
-	String tfsKey;
-	InputStream fis = null;
-	AppAnimalSoundBean bean=new AppAnimalSoundBean();
-	try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-	fis = file.getInputStream();
-	IOUtils.copy(fis, baos);
-	TFSService.TFSResult tfsResult = tfsService.storeUploadImage(baos, Integer.valueOf(imageServerTimeout));
-	tfsUrl = tfsResult.getTfsUrl();
-	tfsKey = tfsResult.getTfsKey();
-	final BufferedImage image = ImageIO.read(file.getInputStream());
-	tempImageService.addTempImage(tfsUrl, getCurrentUserId());
-	bean.setImgtfskey(tfsKey);
-	bean.setImgw(image.getWidth());
-	bean.setImgh(image.getHeight());
-	} catch (Exception e) {
-	ajaxResponse = new AjaxResponse(AjaxResponse.AJAX_CODE_FAIL);
-	return JackJsonUtil.fromObjectToJson(ajaxResponse);
-	} finally {
-	if (fis != null) {
-	try {
-	fis.close();
-	} catch (IOException e) {
-	e.printStackTrace();
-	}
-	}
-	}
-	ajaxResponse = new AjaxResponse(AjaxResponse.AJAX_CODE_SUCCESS);
-	ajaxResponse.setData(bean);
-	return JackJsonUtil.fromObjectToJson(ajaxResponse);
-	}
+
 	}
