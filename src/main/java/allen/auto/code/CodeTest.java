@@ -17,13 +17,14 @@ public class CodeTest {
 		String username="java_admin";
 		String password="GeHa5MT3I4tyqS0oRV30SVP3";
 		String driver="com.mysql.jdbc.Driver";
-		String tableName="appletmodify";
-		String upClassName="appletmodify";
-		String lowClassName="appletmodify";
+		String tableName="userheadlinemodify";
+		String chineseName="小程序修改";
+		String upClassName="UserHeadlineModify";
+		String lowClassName="userHeadlineModify";
 		String basePath="com.chinaso.modules.applet";
 		String generateFilePath=System.getProperty("user.dir")+"/src/main/java/"+basePath.replace(".", "/");
 		GenerationJavaCode autoGenerationJavaCode=
-				new GenerationJavaCode(url, username, password, driver, tableName, generateFilePath, basePath,upClassName,lowClassName);
+				new GenerationJavaCode(url, username, password, driver, tableName, generateFilePath, basePath,upClassName,lowClassName,chineseName);
 		 autoGenerationJavaCode.autoGenerationJavaCode();
 	}
 }
