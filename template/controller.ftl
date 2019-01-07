@@ -116,6 +116,11 @@ ${lowClassName}Bean.setCreatorid(getCurrentUserId());
 	${lowClassName}Bean.setUpdateuserid(getCurrentUserId());
 	return ${lowClassName}Service.update${upClassName}ById(${lowClassName}Bean);
 	}
-
+   //var urlPath = path + "/${lowClassName}/${lowClassName}_";
+	//var addPath = "add${upClassName}";
+	//var deletByIdPath = "delete${upClassName}";
+	//var updatePath = "update${upClassName}";
+	//var flexigridPath = "search${upClassName}FG";
+	//var getBeanByIdPath = "get${upClassName}ById";
 
 	}

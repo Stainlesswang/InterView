@@ -1,4 +1,4 @@
-package com.chinaso.modules.app.service.impl;
+package ${packageName};
 
 import com.chinaso.common.ajax.AjaxResponse;
 import com.chinaso.common.ajax.AlertMessage;
@@ -32,7 +32,7 @@ public class ${upClassName}ServiceImpl implements ${upClassName}Service {
 	/*
 	 *
 	 * (non-Javadoc)
-	 * @see com.chinaso.modules.app.service#search${upClassName}FG[query]
+	 * @see ${packageName?substring(0,packageName?index_of(".impl"))}#search${upClassName}FG[query]
 	 * @author WangJianQiang
 	 * @date 2018年12月25日 上午09:13:40
 	 * @param query
@@ -56,7 +56,7 @@ public class ${upClassName}ServiceImpl implements ${upClassName}Service {
 	/*
 	 *
 	 * (non-Javadoc)
-	 * @see com.chinaso.modules.app.service#search${upClassName}List[]
+	 * @see ${packageName?substring(0,packageName?index_of(".impl"))}#search${upClassName}List[]
 	 * @author WangJianQiang
 	 * @date 2018年12月25日 上午09:13:45
 	 * @param
@@ -72,7 +72,7 @@ public class ${upClassName}ServiceImpl implements ${upClassName}Service {
 	/*
 	*
 	* (non-Javadoc)
-	* @see com.chinaso.modules.app.service#delete${upClassName}[id, updateUserId]
+	* @see ${packageName?substring(0,packageName?index_of(".impl"))}#delete${upClassName}[id, updateUserId]
 	* @author WangJianQiang
 	* @date 2018年12月25日 上午09:13:49
 	* @param id
@@ -98,7 +98,7 @@ public class ${upClassName}ServiceImpl implements ${upClassName}Service {
 	/*
 	*
 	* (non-Javadoc)
-	* @see com.chinaso.modules.app.service#update${upClassName}IdxById[${lowClassName}Bean]
+	* @see ${packageName?substring(0,packageName?index_of(".impl"))}#update${upClassName}IdxById[${lowClassName}Bean]
 	* @author WangJianQiang
 	* @date 2018年12月25日 上午09:13:53
 	* @param ${lowClassName}Bean
@@ -132,7 +132,7 @@ public class ${upClassName}ServiceImpl implements ${upClassName}Service {
 	/*
 	*
 	* (non-Javadoc)
-	* @see com.chinaso.modules.app.service#update${upClassName}ById[${lowClassName}Bean]
+	* @see ${packageName?substring(0,packageName?index_of(".impl"))}#update${upClassName}ById[${lowClassName}Bean]
 	* @author WangJianQiang
 	* @date 2018年12月25日 上午09:13:57
 	* @param ${lowClassName}Bean
@@ -195,7 +195,7 @@ public class ${upClassName}ServiceImpl implements ${upClassName}Service {
 	/*
 	*
 	* (non-Javadoc)
-	* @see com.chinaso.modules.app.service#add${upClassName}[bean]
+	* @see ${packageName?substring(0,packageName?index_of(".impl"))}#add${upClassName}[bean]
 	* @author WangJianQiang
 	* @date 2018年12月25日 上午09:14:24
 	* @param bean
@@ -228,7 +228,7 @@ public class ${upClassName}ServiceImpl implements ${upClassName}Service {
 	/*
 	*
 	* (non-Javadoc)
-	* @see com.chinaso.modules.app.service#get${upClassName}ById[${lowClassName}Id]
+	* @see ${packageName?substring(0,packageName?index_of(".impl"))}#get${upClassName}ById[${lowClassName}Id]
 	* @author WangJianQiang
 	* @date 2018年12月25日 上午09:14:31
 	* @param ${lowClassName}Id

@@ -60,7 +60,7 @@ public interface ${upClassName}Dao extends BaseDao<${upClassName}Bean> {
 		/**
 		* 根据id获取${chineseName}
 		* @param id
-		* @return ${packageName}.bean.${upClassName}Bean
+		* @return ${upClassName}Bean
 		* @author WangJianQiang
 		* @date  ${.now?date} ${.now?time}
 		*/
@@ -69,7 +69,7 @@ public interface ${upClassName}Dao extends BaseDao<${upClassName}Bean> {
 		/**
 		* 根据名称获取${chineseName}
 		* @param name
-		* @return ${packageName}.bean.${upClassName}Bean
+		* @return ${upClassName}Bean
 		* @author WangJianQiang
 		* @date  ${.now?date} ${.now?time}
 		*/

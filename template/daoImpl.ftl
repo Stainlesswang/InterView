@@ -61,7 +61,8 @@ public class ${upClassName}DaoImpl extends YoungManage<${upClassName}Bean> imple
 			public long getCount${upClassName}(Map<String, Object> params) throws Exception {
 			StringBuffer sqlCount = new StringBuffer();
 			sqlCount.append("SELECT COUNT(*) FROM " + ${upClassName}Bean.FINAL_TABLE_NAME + " tsd ");
-			this.addQueryCondition(sqlCount, params, false, false);
+			sqlCount.append(" WHERE deleteflag = 0 ");
+			this.addQueryCondition(sqlCount, params);
 			return mNamedReadJdbcTemplate.queryForObject(sqlCount.toString(), params, Integer.class);
 			}
 
@@ -144,9 +145,9 @@ public class ${upClassName}DaoImpl extends YoungManage<${upClassName}Bean> imple
 				* @return ${upClassName}Bean
 				*/
 				@Override
-				public ${upClassName}Bean get${upClassName}ByName(String name) {
+				public ${upClassName}Bean get${upClassName}ByName(String ${condition}) {
 				Map<String, Object> paramMap = new HashMap<String, Object>();
-				paramMap.put("${condition}", name);
+				paramMap.put("${condition}", ${condition});
 				String sql = "SELECT * FROM " + ${upClassName}Bean.FINAL_TABLE_NAME + " a  WHERE  a.deleteflag = 0  AND a.${condition} = :${condition}";
 				try {
 				return mNamedReadJdbcTemplate.queryForObject(sql, paramMap, new BeanPropertyRowMapper<${upClassName}Bean>(${upClassName}Bean.class));
