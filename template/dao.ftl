@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * ${chineseName}连接层接口
  * @author WangJianQiang
- * @date 2018年12月25日 上午08:59:53
+ * @date  ${.now?date} ${.now?time}
  */
 public interface ${upClassName}Dao extends BaseDao<${upClassName}Bean> {
 
@@ -15,7 +15,7 @@ public interface ${upClassName}Dao extends BaseDao<${upClassName}Bean> {
 		* @param params
 		* @return java.util.List<${upClassName}Bean>
 		* @author WangJianQiang
-		* @date 2018年12月25日 上午09:00:18
+		* @date  ${.now?date} ${.now?time}
 		*/
 		public List<${upClassName}Bean> search${upClassName}(Map<String, Object> params) throws Exception;
 
@@ -24,7 +24,7 @@ public interface ${upClassName}Dao extends BaseDao<${upClassName}Bean> {
 		* @param params
 		* @return long
 		* @author WangJianQiang
-		* @date 2018年12月25日 上午09:00:44
+		* @date  ${.now?date} ${.now?time}
 		*/
 		public long getCount${upClassName}(Map<String, Object> params) throws Exception;
 
@@ -33,7 +33,7 @@ public interface ${upClassName}Dao extends BaseDao<${upClassName}Bean> {
 		* @param bean
 		* @return int
 		* @author WangJianQiang
-		* @date 2018年12月25日 上午09:00:56
+		* @date  ${.now?date} ${.now?time}
 		*/
 		public int update${upClassName}(${upClassName}Bean bean) throws Exception;
 
@@ -42,7 +42,7 @@ public interface ${upClassName}Dao extends BaseDao<${upClassName}Bean> {
 		* @param bean
 		* @return long
 		* @author WangJianQiang
-		* @date 2018年12月25日 上午09:01:12
+		* @date  ${.now?date} ${.now?time}
 		*/
 		public long add${upClassName}(${upClassName}Bean bean) throws Exception;
 
@@ -51,18 +51,10 @@ public interface ${upClassName}Dao extends BaseDao<${upClassName}Bean> {
 		* @param bean
 		* @return int
 		* @author WangJianQiang
-		* @date 2018年12月25日 上午09:01:20
+		* @date  ${.now?date} ${.now?time}
 		*/
 		public int delete${upClassName}(${upClassName}Bean bean) throws Exception;
 
-		/**
-		* 获取最大序号
-		* @param aacid
-		* @return int
-		* @author WangJianQiang
-		* @date 2018年12月25日 上午09:01:35
-		*/
-		public int getMaxIdx(Integer aacid);
 
 
 		/**
@@ -70,7 +62,7 @@ public interface ${upClassName}Dao extends BaseDao<${upClassName}Bean> {
 		* @param id
 		* @return ${packageName}.bean.${upClassName}Bean
 		* @author WangJianQiang
-		* @date 2018年12月25日 上午09:02:12
+		* @date  ${.now?date} ${.now?time}
 		*/
 		public ${upClassName}Bean get${upClassName}ById(Integer id) throws Exception;
 
@@ -79,7 +71,7 @@ public interface ${upClassName}Dao extends BaseDao<${upClassName}Bean> {
 		* @param name
 		* @return ${packageName}.bean.${upClassName}Bean
 		* @author WangJianQiang
-		* @date 2018年12月25日 上午09:02:26
+		* @date  ${.now?date} ${.now?time}
 		*/
 		public ${upClassName}Bean get${upClassName}ByName(String name);
 

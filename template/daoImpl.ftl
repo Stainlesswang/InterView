@@ -1,9 +1,7 @@
-package com.chinaso.modules.app.dao.impl;
+package ${packageName};
 
 import com.chinaso.common.constant.GlobalFunctionConstants;
 import com.chinaso.common.global.bean.BeanTools;
-import com.chinaso.modules.app.bean.AppAnimalSoundBean;
-import com.chinaso.modules.app.dao.AppAnimalSoundDao;
 import com.chinaso.modules.db.YoungManage;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -14,44 +12,55 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 动物数据数据库连接层实现
+ * ${chineseName}数据库连接层实现
  *
  * @author WangJianQiang
- * @date 2018年12月25日 上午09:03:08
+ * @date ${.now?date} ${.now?time}
  */
 @Repository
-public class AppAnimalSoundDaoImpl extends YoungManage<AppAnimalSoundBean> implements AppAnimalSoundDao {
+public class ${upClassName}DaoImpl extends YoungManage<${upClassName}Bean> implements ${upClassName}Dao {
 
 	/*
 	*
 	* (non-Javadoc)
-	* @see com.chinaso.modules.app.dao#searchAppAnimalSound[params]
+	* @see ${packageName?substring(0,packageName?index_of(".impl"))}#search${upClassName}[params]
 	* @author WangJianQiang
-	* @date 2018年12月25日 上午09:03:12
+	* @date ${.now?date} ${.now?time}
 	* @param params
-	* @return java.util.List<com.chinaso.modules.app.bean.AppAnimalSoundBean>
+	* @return java.util.List<${upClassName}Bean>
 		*/
 		@Override
-		public List<AppAnimalSoundBean> searchAppAnimalSound(Map<String, Object> params) throws Exception {
+		public List<${upClassName}Bean> search${upClassName}(Map<String, Object> params) throws Exception {
 		StringBuffer sql = new StringBuffer();
-		sql.append("SELECT tsd.*  FROM " + AppAnimalSoundBean.FINAL_TABLE_NAME + " tsd ");
-		this.addQueryCondition(sql, params, true, true);
-		return mNamedReadJdbcTemplate.query(sql.toString(), params, new BeanPropertyRowMapper<AppAnimalSoundBean>(AppAnimalSoundBean.class));
+		sql.append("SELECT tsd.*  FROM " + ${upClassName}Bean.FINAL_TABLE_NAME + " tsd ");
+		sql.append(" WHERE deleteflag = 0 ");
+		this.addQueryCondition(sql, params);
+		if (params.get("_order_by") != null) {
+		sql.append(" ORDER BY ").append(params.get("_order_by"));
+		}
+		Object pageNow = params.get("pageNow");
+		Object pageSize = params.get("pageSize");
+		if (pageNow != null && pageSize != null && pageNow instanceof Integer && pageSize instanceof Integer) {
+		Integer _pageNow = (Integer) pageNow;
+		Integer _pageSize = (Integer) pageSize;
+		sql.append(" LIMIT " + (_pageNow - 1) * _pageSize + "," + _pageSize);
+		}
+		return mNamedReadJdbcTemplate.query(sql.toString(), params, new BeanPropertyRowMapper<${upClassName}Bean>(${upClassName}Bean.class));
 			}
 
 			/*
 			*
 			* (non-Javadoc)
-			* @see com.chinaso.modules.app.dao#getCountAppAnimalSound[params]
+			* @see ${packageName?substring(0,packageName?index_of(".impl"))}#getCount${upClassName}[params]
 			* @author WangJianQiang
-			* @date 2018年12月25日 上午09:03:16
+			* @date ${.now?date} ${.now?time}
 			* @param params
 			* @return long
 			*/
 			@Override
-			public long getCountAppAnimalSound(Map<String, Object> params) throws Exception {
+			public long getCount${upClassName}(Map<String, Object> params) throws Exception {
 			StringBuffer sqlCount = new StringBuffer();
-			sqlCount.append("SELECT COUNT(*) FROM " + AppAnimalSoundBean.FINAL_TABLE_NAME + " tsd ");
+			sqlCount.append("SELECT COUNT(*) FROM " + ${upClassName}Bean.FINAL_TABLE_NAME + " tsd ");
 			this.addQueryCondition(sqlCount, params, false, false);
 			return mNamedReadJdbcTemplate.queryForObject(sqlCount.toString(), params, Integer.class);
 			}
@@ -59,215 +68,119 @@ public class AppAnimalSoundDaoImpl extends YoungManage<AppAnimalSoundBean> imple
 			/*
 			*
 			* (non-Javadoc)
-			* @see com.chinaso.modules.app.dao#updateAppAnimalSound[bean]
+			* @see ${packageName?substring(0,packageName?index_of(".impl"))}#update${upClassName}[bean]
 			* @author WangJianQiang
-			* @date 2018年12月25日 上午09:03:20
+			* @date ${.now?date} ${.now?time}
 			* @param bean
 			* @return int
 			*/
 			@Override
-			public int updateAppAnimalSound(AppAnimalSoundBean bean) throws Exception {
-			return updateBeanByPrimary(BeanTools.beanToMapForDaoAll(bean), "aasid");
+			public int update${upClassName}(${upClassName}Bean bean) throws Exception {
+			return updateBeanByPrimary(BeanTools.beanToMapForDaoAll(bean), "${id}");
 			}
 
 			/*
 			*
 			* (non-Javadoc)
-			* @see com.chinaso.modules.app.dao#addAppAnimalSound[bean]
+			* @see ${packageName?substring(0,packageName?index_of(".impl"))}#add${upClassName}[bean]
 			* @author WangJianQiang
-			* @date 2018年12月25日 上午09:03:24
+			* @date ${.now?date} ${.now?time}
 			* @param bean
 			* @return long
 			*/
 			@Override
-			public long addAppAnimalSound(AppAnimalSoundBean bean) throws Exception {
-			return insertBean(BeanTools.beanToMapForDaoNotNull(bean), "aasid");
+			public long add${upClassName}(${upClassName}Bean bean) throws Exception {
+			return insertBean(BeanTools.beanToMapForDaoNotNull(bean), "${id}");
 			}
 
 			/*
 			*
 			* (non-Javadoc)
-			* @see com.chinaso.modules.app.dao#deleteAppAnimalSound[bean]
+			* @see ${packageName?substring(0,packageName?index_of(".impl"))}#delete${upClassName}[bean]
 			* @author WangJianQiang
-			* @date 2018年12月25日 上午09:03:30
+			* @date ${.now?date} ${.now?time}
 			* @param bean
 			* @return int
 			*/
 			@Override
-			public int deleteAppAnimalSound(AppAnimalSoundBean bean) throws Exception {
-			Map<String, Object> paramMap = new HashMap<String, Object>();
-			paramMap.put("idx", bean.getIdx());
-			paramMap.put("aacid", bean.getAacid());
-			String sql = "UPDATE " + AppAnimalSoundBean.FINAL_TABLE_NAME + " SET idx = idx - 1 WHERE idx > :idx AND aacid = :aacid ";
-			mNamedWriteJdbcTemplate.update(sql, paramMap);
+			public int delete${upClassName}(${upClassName}Bean bean) throws Exception {
 			Map<String, Object> params = new HashMap<String, Object>();
-			params.put("aasid", bean.getAasid());
+			params.put("${id}", bean.getAasid());
 			params.put("updateuserid", bean.getUpdateuserid());
 			params.put("deleteflag", GlobalFunctionConstants.FINAL_DELETE_FLAG_1);
-			String sqlDelete = "UPDATE " + AppAnimalSoundBean.FINAL_TABLE_NAME + " SET deleteflag = :deleteflag, updateuserid = :updateuserid WHERE aasid = :aasid";
+			String sqlDelete = "UPDATE " + ${upClassName}Bean.FINAL_TABLE_NAME + " SET deleteflag = :deleteflag, updateuserid = :updateuserid WHERE ${id} = :${id}";
 			return mNamedWriteJdbcTemplate.update(sqlDelete, params);
 			}
 
 			/*
 			*
 			* (non-Javadoc)
-			* @see com.chinaso.modules.app.dao#getMaxIdx[aacid]
+			* @see ${packageName?substring(0,packageName?index_of(".impl"))}#get${upClassName}ById[id]
 			* @author WangJianQiang
-			* @date 2018年12月25日 上午09:03:35
-			* @param aacid
-			* @return int
-			*/
-			@Override
-			public int getMaxIdx(Integer aacid) {
-			String sql = "SELECT COUNT(*) FROM " + AppAnimalSoundBean.FINAL_TABLE_NAME + " WHERE aacid = :aacid AND deleteflag = 0 ";
-			Map<String, Object> paramMap = new HashMap<String, Object>();
-			paramMap.put("aacid", aacid);
-			return getNamedJdbc().queryForObject(sql, paramMap, Integer.class);
-			}
-
-			/*
-			*
-			* (non-Javadoc)
-			* @see com.chinaso.modules.app.dao#deleteOneIdx[aacid, idx]
-			* @author WangJianQiang
-			* @date 2018年12月25日 上午09:03:40
-			* @param aacid
-			* @param idx
-			* @return int
-			*/
-			@Override
-			public int deleteOneIdx(Integer aacid, Integer idx) {
-			Map<String, Object> paramMap = new HashMap<String, Object>();
-			paramMap.put("idx", idx);
-			paramMap.put("aacid", aacid);
-			String sql = "UPDATE " + AppAnimalSoundBean.FINAL_TABLE_NAME + " SET idx = idx - 1 WHERE idx > :idx AND aacid = :aacid ";
-			return mNamedWriteJdbcTemplate.update(sql, paramMap);
-			}
-
-
-			/*
-			*
-			* (non-Javadoc)
-			* @see com.chinaso.modules.app.dao#getAppAnimalSoundById[id]
-			* @author WangJianQiang
-			* @date 2018年12月25日 上午09:03:46
+			* @date ${.now?date} ${.now?time}
 			* @param id
-			* @return com.chinaso.modules.app.bean.AppAnimalSoundBean
+			* @return ${upClassName}Bean
 			*/
 			@Override
-			public AppAnimalSoundBean getAppAnimalSoundById(Integer id) throws Exception {
+			public ${upClassName}Bean get${upClassName}ById(Integer id) throws Exception {
 			Map<String, Object> paramMap = new HashMap<String, Object>();
-			paramMap.put("aasid", id);
-			String sql = "SELECT * FROM " + AppAnimalSoundBean.FINAL_TABLE_NAME + " a  WHERE a.aasid = :aasid AND deleteflag = 0";
+			paramMap.put("${id}", id);
+			String sql = "SELECT * FROM " + ${upClassName}Bean.FINAL_TABLE_NAME + " a  WHERE a.${id} = :${id} AND deleteflag = 0";
 			try {
-			return mNamedReadJdbcTemplate.queryForObject(sql, paramMap, new BeanPropertyRowMapper<AppAnimalSoundBean>(AppAnimalSoundBean.class));
+			return mNamedReadJdbcTemplate.queryForObject(sql, paramMap, new BeanPropertyRowMapper<${upClassName}Bean>(${upClassName}Bean.class));
 				} catch (EmptyResultDataAccessException e) {
 				return null;
 				}
 				}
 
-
-				/*
+                <#if condition??>
+                    	/*
 				*
 				* (non-Javadoc)
-				* @see com.chinaso.modules.app.dao#getAppAnimalSoundByName[name]
+				* @see ${packageName?substring(0,packageName?index_of(".impl"))}#get${upClassName}ByName[name]
 				* @author WangJianQiang
-				* @date 2018年12月25日 上午09:03:50
+				* @date ${.now?date} ${.now?time}
 				* @param name
-				* @return com.chinaso.modules.app.bean.AppAnimalSoundBean
+				* @return ${upClassName}Bean
 				*/
 				@Override
-				public AppAnimalSoundBean getAppAnimalSoundByName(String name) {
+				public ${upClassName}Bean get${upClassName}ByName(String name) {
 				Map<String, Object> paramMap = new HashMap<String, Object>();
-				paramMap.put("aasname", name);
-				String sql = "SELECT * FROM " + AppAnimalSoundBean.FINAL_TABLE_NAME + " a  WHERE  a.deleteflag = 0  AND a.aasname = :aasname";
+				paramMap.put("${condition}", name);
+				String sql = "SELECT * FROM " + ${upClassName}Bean.FINAL_TABLE_NAME + " a  WHERE  a.deleteflag = 0  AND a.${condition} = :${condition}";
 				try {
-				return mNamedReadJdbcTemplate.queryForObject(sql, paramMap, new BeanPropertyRowMapper<AppAnimalSoundBean>(AppAnimalSoundBean.class));
+				return mNamedReadJdbcTemplate.queryForObject(sql, paramMap, new BeanPropertyRowMapper<${upClassName}Bean>(${upClassName}Bean.class));
 					} catch (EmptyResultDataAccessException e) {
 					return null;
 					}
 					}
-
-					/*
-					*
-					* (non-Javadoc)
-					* @see com.chinaso.modules.app.dao#updateAppAnimalSoundIdxById[bean]
-					* @author WangJianQiang
-					* @date 2018年12月25日 上午09:03:53
-					* @param bean
-					* @return int
-					*/
-					@Override
-					public int updateAppAnimalSoundIdxById(AppAnimalSoundBean bean) throws Exception {
-					if (null != bean.getTmp_oldIdx()) {
-					Map<String, Object> paramMap = new HashMap<String, Object>();
-					paramMap.put("idx", bean.getIdx());
-					paramMap.put("oldIdx", bean.getTmp_oldIdx());
-					paramMap.put("aacid", bean.getAacid());
-					if (bean.getIdx() < bean.getTmp_oldIdx()) {
-					String sql = "UPDATE " + AppAnimalSoundBean.FINAL_TABLE_NAME + " SET idx = idx + 1 WHERE idx >= :idx AND idx < :oldIdx AND aacid = :aacid ";
-					mNamedWriteJdbcTemplate.update(sql, paramMap);
-					} else if (bean.getIdx() > bean.getTmp_oldIdx()) {
-					String sql = "UPDATE " + AppAnimalSoundBean.FINAL_TABLE_NAME + " SET idx = idx - 1 WHERE idx <= :idx AND idx > :oldIdx AND aacid = :aacid ";
-					mNamedWriteJdbcTemplate.update(sql, paramMap);
-					}
-					}
-					return updateBeanByPrimary(BeanTools.beanToMapForDaoAll(bean), "aasid");
-					}
+                </#if>
 
 					/**
 					* 增加查询条件
-					* @param condtion
-					* @param params
-					* @param isOrderBy
-					* @param isLimit
+					*
 					* @return java.lang.String
 					* @author WangJianQiang
-					* @date 2018年12月25日 上午09:04:09
+					* @date
+					* @Param condtion
+					* @Param params
 					*/
-					private String addQueryCondition(StringBuffer condtion, Map<String, Object> params, boolean isOrderBy, boolean isLimit) {
-					condtion.append(" WHERE 1=1 AND tsd.deleteflag=0 ");
-					Map<String, Object> paramMap = new HashMap<String, Object>();
-					if (null != params) {
+					private String addQueryCondition(StringBuffer condtion, Map<String, Object> params) {
 					for (Map.Entry<String, Object> entry : params.entrySet()) {
 					String key = entry.getKey();
-					String keyLower = key.toLowerCase();
 					Object value = entry.getValue();
-					if (null == value) {
+					if (value == null) {
 					continue;
 					}
-					if ("pagenow".equals(keyLower) || "pagesize".equals(keyLower)
-					|| "sortname".equals(keyLower) || "sortorder".equals(keyLower) || "_order_by".equals(keyLower)) {
-					continue;
+					if ("spname".equals(key)) {
+					condtion.append(" AND tsd.").append(key).append(" LIKE CONCAT('%',:").append(key).append(",'%')");
 					}
-					if ("aasname".equals(key) && value instanceof String) {
-					condtion.append(" and tsd.").append(key).append(" like CONCAT('%',:").append(key).append(",'%')");
+					if ("status".equals(key)) {
+					condtion.append(" AND tsd.").append(key).append(" =:status");
 					}
-					if ("aacid".equals(key)) {
-					condtion.append(" and tsd.").append(key).append("=:").append(key);
-					}
-					}
-					}
-					if (isOrderBy) {
-					if (null != params.get("_order_by")) {
-					condtion.append(" ORDER BY ");
-					condtion.append(params.get("_order_by"));
-					} else {
-					if (null != params.get("sortName")) {
-					condtion.append(params.get("sortName")).append(" ");
-					condtion.append(ORDER_DESC.equals(params.get("sortOrder")) ? ORDER_DESC : ORDER_ASC);
-					}
-					}
-					}
-					if (isLimit) {
-					Object pageNow = params.get("pageNow");
-					Object pageSize = params.get("pageSize");
-					if (null != pageNow && null != pageSize && pageNow instanceof Integer && pageSize instanceof Integer) {
-					Integer _pageNow = (Integer) pageNow;
-					Integer _pageSize = (Integer) pageSize;
-					condtion.append(" LIMIT " + (_pageNow - 1) * _pageSize + "," + _pageSize);
-					}
+
 					}
 					return condtion.toString();
 					}
+
 					}

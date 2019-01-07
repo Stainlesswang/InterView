@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>动物管理</title>
+	<title>${chineseName}管理</title>
 	<head th:replace="include/head"/>
-	<script type="text/javascript" th:src="@{{path}/js/jquery/jquery.json-2.2.js(path=${basePath})}"></script>
-	<script type="text/javascript" th:src="@{{path}/js/jquery-flexigrid/flexigrid.js(path=${basePath})}"></script>
-	<script type="text/javascript" th:src="@{{path}/js/mJs/ajaxfileupload.js(path=${basePath})}"></script>
-	<script type="text/javascript" th:src="@{{path}/js/My97DatePicker/WdatePicker.js(path=${basePath})}"></script>
-	<script type="text/javascript"
-			th:src="@{{path}/js/jquery-ztree/jquery.ztree.core-3.5.js(path=${basePath})}"></script>
-	<script type="text/javascript"
-			th:src="@{{path}/js/jquery-ztree/jquery.ztree.excheck-3.5.js(path=${basePath})}"></script>
-	<link rel="stylesheet" type="text/css"
-		  th:href="@{{path}/js/jquery-flexigrid/css/gray/flexigrid.css(path=${basePath})}"/>
-	<link rel="stylesheet" type="text/css"
-		  th:href="@{{path}/js/jquery-ztree/zTreeStyle3.5/zTreeStyle.css(path=${basePath})}"/>
+	<#--<script type="text/javascript" th:src="@{{path}/js/jquery/jquery.json-2.2.js(path=${basePath})}"></script>-->
+	<#--<script type="text/javascript" th:src="@{{path}/js/jquery-flexigrid/flexigrid.js(path=${basePath})}"></script>-->
+	<#--<script type="text/javascript" th:src="@{{path}/js/mJs/ajaxfileupload.js(path=${basePath})}"></script>-->
+	<#--<script type="text/javascript" th:src="@{{path}/js/My97DatePicker/WdatePicker.js(path=${basePath})}"></script>-->
+	<#--<script type="text/javascript"-->
+			<#--th:src="@{{path}/js/jquery-ztree/jquery.ztree.core-3.5.js(path=${basePath})}"></script>-->
+	<#--<script type="text/javascript"-->
+			<#--th:src="@{{path}/js/jquery-ztree/jquery.ztree.excheck-3.5.js(path=${basePath})}"></script>-->
+	<#--<link rel="stylesheet" type="text/css"-->
+		  <#--th:href="@{{path}/js/jquery-flexigrid/css/gray/flexigrid.css(path=${basePath})}"/>-->
+	<#--<link rel="stylesheet" type="text/css"-->
+		  <#--th:href="@{{path}/js/jquery-ztree/zTreeStyle3.5/zTreeStyle.css(path=${basePath})}"/>-->
 </head>
 <body>
 <div class="searchTopDiv">
 	<div class="toolItem" style="width:1300px;">
 		<div class="toolDiv bg_cde3ff tc clearb">
-			<strong class="smallTitle">动物管理</strong>
+			<strong class="smallTitle">${chineseName}管理</strong>
 		</div>
 		<div class="clearb pTB10">
 			<table id="addDiv" class="tablePopC" cellspacing="0" cellpadding="0">
@@ -63,7 +63,7 @@
 			<table class="tablePopB" cellspacing="0" cellpadding="0">
 				<tr>
 					<td><input id="web_icon_image" type="file" placeholder="图片最大1M" name="file"/></td>
-					<!--<th>宽高：<span th:text="${width}"></span>*<span th:text="${height}"></span></th>-->
+					<#--<!--<th>宽高：<span th:text="${width}"></span>*<span th:text="${height}"></span></th>&ndash;&gt;-->
 
 				</tr>
 			</table>
@@ -85,7 +85,6 @@
 			<table class="tablePopB" cellspacing="0" cellpadding="0">
 				<tr>
 					<td><input id="file_Audio" type="file" placeholder="音频最大1M" name="file"/></td>
-					<!--<th>宽高：<span th:text="${width}"></span>*<span th:text="${height}"></span></th>-->
 
 				</tr>
 			</table>
@@ -97,7 +96,7 @@
 		</div>
 	</div>
 </div>
-<!-- 添加/修改动物Div -->
+<!-- 添加/修改${chineseName}Div -->
 <div id="AddOrEditDiv" style="display: none;width:600px;">
 	<div class="popPor w900">
 		<div class="popTitle">
@@ -115,7 +114,7 @@
 					</td>
 					<td rowspan="1">
 						<input id="" type="button" class="bthBluePop" onclick="showUploadImageDiv(1)" value="上传图片"/>
-						<!--宽高：<span th:text="${width}"></span>*<span th:text="${height}"></span>-->
+						<#--<!--宽高：<span th:text="${width}"></span>*<span th:text="${height}"></span>&ndash;&gt;-->
 						宽：<span id="iconwidth">00</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;高:<span id="iconheight">00</span>
 					</td>
 				</tr>
@@ -128,7 +127,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="width:80px;" align="right"><em style="color: #9e0505">*</em><strong> 动物名称： </strong></td>
+					<td style="width:80px;" align="right"><em style="color: #9e0505">*</em><strong> ${chineseName}名称： </strong></td>
 					<td colspan="5" align="left">
 						<input type="text" class="inputTex" id="edit_name" style="width: 93%;height: 25px" value=""/>
 					</td>
@@ -150,13 +149,13 @@
 	</div>
 </div>
 <script type="text/javascript">
-	var urlPath = path + "/appAnimalSound/appAnimalSound_";
-	var addPath = "addAppAnimalSound";
-	var deletByIdPath = "deleteAppAnimalSound";
-	var updatePath = "updateAppAnimalSound";
-	var flexigridPath = "searchAppAnimalSoundFG";
-	var getBeanByIdPath = "getAppAnimalSoundById";
-	// updateAppAnimalSoundIdxById
+	var urlPath = path + "/${lowClassName}/${lowClassName}_";
+	var addPath = "add${upClassName}";
+	var deletByIdPath = "delete${upClassName}";
+	var updatePath = "update${upClassName}";
+	var flexigridPath = "search${upClassName}FG";
+	var getBeanByIdPath = "get${upClassName}ById";
+	// update${upClassName}IdxById
 
 	var total = 0;
 	var globalReturnFlag = -1;
@@ -304,7 +303,7 @@
 				// 	width: "100",
 				// 	align: 'center',
 				// 	render: function (val, row) {
-				// 		return row.aasid;
+				// 		return row.${id};
 				// 	}
 				// },
 				{
@@ -327,7 +326,7 @@
 											"</option>"
 								}
 							}
-							return "<select  class='table_Select' style='width:80%' onchange='updateAnimalSoundIdxById(\"" + row.aasid + "\",this.options[this.options.selectedIndex].value)'>" + html + "</select>";
+							return "<select  class='table_Select' style='width:80%' onchange='updateAnimalSoundIdxById(\"" + row.${id} + "\",this.options[this.options.selectedIndex].value)'>" + html + "</select>";
 						} else {
 							return row.idx;
 						}
@@ -335,7 +334,7 @@
 					}
 				},
 				{
-					display: '动物名称',
+					display: '${chineseName}名称',
 					width: "120",
 					align: 'center',
 					render: function (val, row) {
@@ -381,8 +380,8 @@
 					align: 'center',
 					render: function (val, row) {
 						var result = "";
-						result += "<input  type='button' class='bthBlueOper' value='修改' onclick='showAddOrEditDiv(\"edit\", \"" + row.aasid + "\")'/>";
-						result += "<input type='button' class='bthBlueOper mgL10' value='删除' onclick='deleteLocation(\"" + row.aasid + "\",\"" + row.aasname + "\")'/>";
+						result += "<input  type='button' class='bthBlueOper' value='修改' onclick='showAddOrEditDiv(\"edit\", \"" + row.${id} + "\")'/>";
+						result += "<input type='button' class='bthBlueOper mgL10' value='删除' onclick='deleteLocation(\"" + row.${id} + "\",\"" + row.aasname + "\")'/>";
 						return result;
 					}
 				},
@@ -427,14 +426,14 @@
 				return true;
 			},
 			onError: function () {
-				L.msg.error("[(${ajaxErrorInfo})]");
+				<#--L.msg.error("[(${ajaxErrorInfo})]");-->
 				L.loadingOff();
 				return true;
 			}
 		});
 	}
 
-	/** 重置查询动物  */
+	/** 重置查询${chineseName}  */
 	function resetSearch() {
 		$("#searchInputTex").val("");
 		$("#search_aacid").val("");
@@ -474,7 +473,7 @@
 		}
 	}
 
-	/** 重置动物添加表单  */
+	/** 重置${chineseName}添加表单  */
 	function resetLocationDiv() {
 		// $("#name").removeAttr('disabled').removeClass("textGrayColor");
 		$("#edit_type").val("");
@@ -490,11 +489,11 @@
 		$("#AddOrEditDiv").find("input[type='text']").val("");
 	}
 
-	/** 弹出动物添加/编辑页面*/
+	/** 弹出${chineseName}添加/编辑页面*/
 	function showAddOrEditDiv(model, id) {
 		resetLocationDiv();
 		if (model == "add") {
-			$("#AddOrEditDivTitle").text("添加动物");
+			$("#AddOrEditDivTitle").text("添加${chineseName}");
 			$("#AddOrEditDivConfirm").unbind();
 			$("#AddOrEditDivConfirm").click(function () {
 				addBean();
@@ -537,11 +536,11 @@
 							$("#AddOrEditDivConfirm").unbind();
 							keyDownAction(function (event) {
 								if (event.which == "13") {
-									editBean(obj.aasid, obj);
+									editBean(obj.${id}, obj);
 								}
 							});
 							$("#AddOrEditDivConfirm").click(function () {
-								editBean(obj.aasid, obj);
+								editBean(obj.${id}, obj);
 							});
 							L.loadingOff();
 							L.pop({content: '#AddOrEditDiv'});
@@ -606,7 +605,7 @@
 			L.closeAll();
 			return false;
 		}
-		bean["aasid"] = Id;
+		bean["${id}"] = Id;
 		$.ajax({
 			url: urlPath + updatePath + "?tmp=" + Math.round(Math.random() * 100000),
 			data: bean,
@@ -671,10 +670,10 @@
 	/** 更新块排序*/
 	function updateAnimalSoundIdxById(id, idx) {
 		var bean = {};
-		bean["aasid"] = id;
+		bean["${id}"] = id;
 		bean["idx"] = idx;
 		$.ajax({
-			url: urlPath + "updateAppAnimalSoundIdxById?tmp=" + Math.round(Math.random() * 100000),
+			url: urlPath + "update${upClassName}IdxById?tmp=" + Math.round(Math.random() * 100000),
 			data: bean,
 			type: "post",
 			dataType: "json",
@@ -720,7 +719,7 @@
 		});
 	}
 
-	/*获取动物分类信息*/
+	/*获取信息*/
 	function initClassData() {
 		$.ajax({
 			url: urlPath + "getAnimalClass?tmp=" + Math.round(Math.random() * 100000),
@@ -779,7 +778,7 @@
 		}
 		message = checkStrParam(name, 49, false);
 		if ("" != message) {
-			L.msg.error("动物名称" + message);
+			L.msg.error("${chineseName}名称" + message);
 			return globalReturnFlag;
 		}
 		message = checkStrParam(aacid, 20, false);

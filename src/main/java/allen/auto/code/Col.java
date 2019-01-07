@@ -23,7 +23,7 @@ public class Col {
 	/**
 	 * @return
 	 * @author WangJianQiang
-	 * 2019年01月02日1下午04:35:16午02:51:07
+	 * 2019年01月02日1下午04:35:16
 	 */
 	public Col(Integer index, String fieldName, Type type) {
 		this.index = index;

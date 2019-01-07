@@ -4,7 +4,7 @@ import java.io.Serializable;
 /**
  * ${chineseName}实体类
  * @author WangJianQiang
- * @date 2018年12月25日 上午08:45:50
+ * @date ${.now?date} ${.now?time}
  */
 public class ${upClassName}Bean implements Serializable {
 

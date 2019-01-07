@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * ${chineseName}控制器
  * @author WangJianQiang
- * @date 2018年12月24日 上午10:13:48
+ * @date ${.now?date} ${.now?time}
  */
 @Controller
 @RequestMapping("/${lowClassName}")
@@ -25,7 +25,7 @@ public class ${upClassName}Controller extends BaseController {
 	/**
 	 * 跳转到${chineseName}管理首页
 	 * @author WangJianQiang
-	 * @date 2018年12月24日 上午10:14:14
+	 * @date ${.now?date} ${.now?time}
 	 * @param
 	 * @return java.lang.String
 	 */
@@ -37,7 +37,7 @@ public class ${upClassName}Controller extends BaseController {
 	/**
 	 * 查找${chineseName}数据表格
 	 * @author WangJianQiang
-	 * @date 2018年12月24日 上午10:14:24
+	 * @date ${.now?date} ${.now?time}
 	 * @param query_json
 	 * @return com.chinaso.common.flexigrid.bean.FlexiGrid
 	 */
@@ -50,46 +50,27 @@ public class ${upClassName}Controller extends BaseController {
 	/**
 	 * 根据id获取${chineseName}数据
 	 * @author WangJianQiang
-	 * @date 2018年12月24日 上午10:14:41
+	 * @date ${.now?date} ${.now?time}
 	 * @param bean
 	 * @return java.lang.Object
 	 */
 	@RequestMapping("/${lowClassName}_update${upClassName}IdxById")
 	public @ResponseBody
 	Object update${upClassName}IdxById(${upClassName}Bean bean) {
-		AjaxResponse ajaxResponse;
-		bean.setUpdateuserid(getCurrentUserId());
-		try {
-			ajaxResponse = ${lowClassName}Service.update${upClassName}IdxById(bean);
-		} catch (Exception e) {
-			ajaxResponse = AlertMessage.getActionResponse("msgCommonUpdateFail");
-			ajaxResponse.setData(e.getMessage());
-		}
-		return ajaxResponse;
+		return ${lowClassName}Service.update${upClassName}IdxById(bean);
 	}
 
 	/**
 	 * 删除${chineseName}数据
 	 * @author WangJianQiang
-	 * @date 2018年12月24日 上午10:14:51
+	 * @date ${.now?date} ${.now?time}
 	 * @param id
 	 * @return java.lang.Object
 	 */
 	@RequestMapping("/${lowClassName}_delete${upClassName}")
 	public @ResponseBody
 	Object delete${upClassName}(Integer id) {
-		AjaxResponse ajaxResponse;
-		if (null != id) {
-			try {
-				ajaxResponse = ${lowClassName}Service.delete${upClassName}(id, getCurrentUserId());
-			} catch (Exception e) {
-				ajaxResponse = AlertMessage.getActionResponse("msgCommonUpdateFail");
-				ajaxResponse.setData(e.getMessage());
-			}
-		} else {
-			ajaxResponse = new AjaxResponse(AjaxResponse.AJAX_CODE_ILLEGAL_PARAM);
-		}
-		return ajaxResponse;
+		return ${lowClassName}Service.delete${upClassName}(id, getCurrentUserId());;
 	}
 
 	/**
@@ -102,7 +83,7 @@ public class ${upClassName}Controller extends BaseController {
 	@RequestMapping("/${lowClassName}_get${upClassName}ById")
 	public @ResponseBody
 	AjaxResponse get${upClassName}ById(Integer id) throws Exception {
-${upClassName}Bean ${lowClassName}Bean = ${lowClassName}Service.get${upClassName}ById(id);
+        ${upClassName}Bean ${lowClassName}Bean = ${lowClassName}Service.get${upClassName}ById(id);
 		AjaxResponse result = new AjaxResponse(AjaxResponse.AJAX_CODE_SUCCESS);
 		result.setData(${lowClassName}Bean);
 		return result;
