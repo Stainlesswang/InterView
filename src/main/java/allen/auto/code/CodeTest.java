@@ -12,15 +12,16 @@ import java.sql.SQLException;
  */
 public class CodeTest {
 	public static void main(String[] args) throws ClassNotFoundException, TemplateException, SQLException, IOException {
-		String url = "jdbc:mysql://10.10.160.5:3306/young";
-		String username = "java_admin";
-		String password = "GeHa5MT3I4tyqS0oRV30SVP3";
+		String url = "jdbc:mysql://:3306/young";
+		String username = "";
+		String password = "";
 		String driver = "com.mysql.jdbc.Driver";
-		String tableName = "apppinyin";
-		String chineseName = "拼音";
-		String upClassName = "AppPinYin";
-		String lowClassName = "appPinYin";
-		String searchCondition = "pinyin";
+		String tableName = "apppinyinclassify";
+		String chineseName = "拼音分类";
+		String upClassName = "AppPinYinClassify";
+		String lowClassName = "appPinYinClassify";
+		//排重需要的参数名称
+		String searchCondition = "name";
 		String basePath = "com.chinaso.modules.app.pinyin";
 		String generateFilePath = System.getProperty("user.dir") + "/src/main/java/" + basePath.replace(".", "/");
 		GenerationJavaCode autoGenerationJavaCode =
