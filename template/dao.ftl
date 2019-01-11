@@ -75,5 +75,52 @@ public interface ${upClassName}Dao extends BaseDao<${upClassName}Bean> {
 		*/
 		public ${upClassName}Bean get${upClassName}ByName(String name);
 
+        <#if idx??>
+
+        /**
+		* 根据id更新排序号
+		* @return int
+		* @author WangJianQiang
+		* @date
+		* @Param id
+		* @Param newIdx
+		* @Param userId
+		* @Param time
+		*/
+		public int updateIdx(String id, int newIdx, String userId, String time);
+
+		/**
+		* 区间内序号加一
+		* @return int
+		* @author WangJianQiang
+		* @date
+		* @Param beginIdx
+		* @Param endIdx
+		* @Param userId
+		* @Param time
+		*/
+		public int incIdx(int beginIdx, int endIdx, String userId, String time<#if typeid??>, Integer ${typeid}</#if>);
+
+		/**
+		* 区间内序号减一
+		* @return int
+		* @author WangJianQiang
+		* @date
+		* @Param beginIdx
+		* @Param endIdx
+		* @Param userId
+		* @Param time
+		*/
+		public int decIdx(int beginIdx, int endIdx, String userId, String time<#if typeid??>, Integer ${typeid}</#if>);
+
+		/**
+		* 获取最大序号
+		* @return int
+		* @author WangJianQiang
+		* @date
+		* @Param
+		*/
+		public int maxIdx(<#if typeid??>Integer ${typeid}</#if>);
+        </#if>
 
 		}

@@ -46,16 +46,6 @@ public interface ${upClassName}Service {
 
 
 	/**
-	* 更新${chineseName}排序号
-	*
-	* @param ${lowClassName}Bean
-	* @return com.chinaso.common.ajax.AjaxResponse
-	* @author WangJianQiang
-	* @date ${.now?date} ${.now?time}
-	*/
-	public AjaxResponse update${upClassName}IdxById(${upClassName}Bean ${lowClassName}Bean) throws Exception;
-
-	/**
 	* 更新${chineseName}
 	* @author WangJianQiang
 	* @date ${.now?date} ${.now?time}
@@ -81,4 +71,16 @@ public interface ${upClassName}Service {
 	* @return ${upClassName}Bean
 	*/
 	public ${upClassName}Bean get${upClassName}ById(Integer ${lowClassName}Id) throws Exception;
+    <#if idx??>
+/**
+	 * 修改序号
+	 * @return void
+	 * @author WangJianQiang
+	 * @date
+	 * @Param id
+	 * @Param newNum
+	 * @Param updateUserId
+	 */
+	public AjaxResponse changeOrderNum(Integer id, int newNum, String updateUserId);
+    </#if>
 	}

@@ -184,4 +184,93 @@ public class ${upClassName}DaoImpl extends YoungManage<${upClassName}Bean> imple
 					return condtion.toString();
 					}
 
+                <#if idx??>
+                /*
+	 *
+	 * (non-Javadoc)
+	 * @see ${packageName?substring(0,packageName?index_of(".impl"))}#updateIdx[${id}, newIdx, userId, time]
+	 * @author WangJianQiang
+	 * @date  ${.now?date} ${.now?time}
+	 * @Param ${id}
+	 * @Param newIdx
+	 * @Param userId
+	 * @Param time
+	 * @return int
+	 */
+	@Override
+	public int updateIdx(String ${id}, int newIdx, String userId, String time) {
+		String sql = "UPDATE " + ${upClassName}Bean.FINAL_TABLE_NAME + " SET idx = :idx, updateUserId = :updateUserId WHERE ${id} = :${id} ";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("${id}", ${id});
+		params.put("idx", newIdx);
+		params.put("updateUserId", userId);
+		return getNamedJdbc().update(sql, params);
+	}
+
+	/*
+	 *
+	 * (non-Javadoc)
+	 * @see ${packageName?substring(0,packageName?index_of(".impl"))}#incIdx[beginIdx, endIdx, userId, time]
+	 * @author WangJianQiang
+	 * @date ${.now?date} ${.now?time}
+	 * @Param beginIdx
+	 * @Param endIdx
+	 * @Param userId
+	 * @Param time
+	 * @return int
+	 */
+	@Override
+	public int incIdx(int beginIdx, int endIdx, String userId,String time<#if typeid??>, Integer ${typeid}</#if>) {
+		String sql = "UPDATE " + ${upClassName}Bean.FINAL_TABLE_NAME +
+				" SET idx = (idx + 1), updateUserId = :updateUserId WHERE deleteflag= 0  AND idx >= :beginIdx AND idx <= :endIdx <#if typeid??>AND ${typeid} = :${typeid}</#if> ";
+		Map<String, Object> params = new HashMap<String, Object>();
+        <#if typeid??>params.put("${typeid}", ${typeid});</#if>
+		params.put("beginIdx", beginIdx);
+		params.put("endIdx", endIdx);
+		params.put("updateUserId", userId);
+		return getNamedJdbc().update(sql, params);
+	}
+
+	/*
+	 *
+	 * (non-Javadoc)
+	 * @see ${packageName?substring(0,packageName?index_of(".impl"))}#decIdx[beginIdx, endIdx, userId, time]
+	 * @author WangJianQiang
+	 * @date ${.now?date} ${.now?time}
+	 * @Param beginIdx
+	 * @Param endIdx
+	 * @Param userId
+	 * @Param time
+	 * @return int
+	 */
+	@Override
+	public int decIdx(int beginIdx, int endIdx, String userId, String time<#if typeid??>, Integer ${typeid}</#if>) {
+		String sql = "UPDATE " + ${upClassName}Bean.FINAL_TABLE_NAME +
+				" SET idx = (idx - 1), updateUserId = :updateUserId WHERE deleteflag= 0  AND  idx >= :beginIdx AND idx <= :endIdx <#if typeid??>AND ${typeid} = :${typeid}</#if>";
+		Map<String, Object> params = new HashMap<String, Object>();
+                    <#if typeid??>params.put("${typeid}", ${typeid});</#if>
+
+                    params.put("beginIdx", beginIdx);
+		params.put("endIdx", endIdx);
+		params.put("updateUserId", userId);
+		return getNamedJdbc().update(sql, params);
+	}
+
+	/*
+	 *
+	 * (non-Javadoc)
+	 * @see ${packageName?substring(0,packageName?index_of(".impl"))}#maxIdx[]
+	 * @author WangJianQiang
+	 * @date ${.now?date} ${.now?time}
+	 * @Param
+	 * @return int
+	 */
+	@Override
+	public int maxIdx(<#if typeid??>Integer ${typeid}</#if>) {
+		String sql = "SELECT COUNT(*) FROM " + ${upClassName}Bean.FINAL_TABLE_NAME + " WHERE deleteflag= 0 <#if typeid??>AND ${typeid} = :${typeid}</#if>";
+		Map<String, Object> params = new HashMap<String, Object>();
+        <#if typeid??>params.put("${typeid}", ${typeid});</#if>
+		return getNamedJdbc().queryForObject(sql, params, Integer.class);
+	}
+                </#if>
 					}

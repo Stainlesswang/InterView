@@ -18,12 +18,12 @@ public class Type {
 		//基本的sql数据类型
 		typeMap.put("VARCHAR", "String");
 		typeMap.put("CHAR", "String");
-		typeMap.put("BLOB", "byte[]");
+		typeMap.put("BLOB", "Integer");
 		typeMap.put("TEXT", "String");
 		typeMap.put("INT", "Integer");
 		typeMap.put("INT UNSIGNED", "Integer");
-		typeMap.put("INTEGER", "Long");
-		typeMap.put("INTEGER UNSIGNED", "Long");
+		typeMap.put("INTEGER", "Integer");
+		typeMap.put("INTEGER UNSIGNED", "Integer");
 		typeMap.put("TINYINT", "Integer");
 		typeMap.put("TINYINT UNSIGNED", "Integer");
 		typeMap.put("SMALLINT", "Integer");
@@ -33,10 +33,10 @@ public class Type {
 		typeMap.put("FLOAT", "Float");
 		typeMap.put("FLOAT UNSIGNED", "Float");
 		typeMap.put("DOUBLE", "Double");
-		typeMap.put("BIT", "Boolean");
+		typeMap.put("BIT", "Integer");
 		typeMap.put("BIGINT", "java.math.BigInteger");
 		typeMap.put("DECIMAL", "java.math.BigDecimal");
-		typeMap.put("BOOLEAN", "Long");
+		typeMap.put("BOOLEAN", "Integer");
 		typeMap.put("DATE", "String");
 		typeMap.put("TIME", "String");
 		typeMap.put("DATETIME", "String");

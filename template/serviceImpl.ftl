@@ -17,9 +17,9 @@ import org.springframework.util.StringUtils;
 import java.util.*;
 
 /**
- * 动物数据服务层实现层
+ * ${chineseName}服务层实现层
  * @author WangJianQiang
- * @date 2018年12月25日 上午09:12:43
+ * @date ${.now?date} ${.now?time}
  */
 @Service
 public class ${upClassName}ServiceImpl implements ${upClassName}Service {
@@ -34,7 +34,7 @@ public class ${upClassName}ServiceImpl implements ${upClassName}Service {
 	 * (non-Javadoc)
 	 * @see ${packageName?substring(0,packageName?index_of(".impl"))}#search${upClassName}FG[query]
 	 * @author WangJianQiang
-	 * @date 2018年12月25日 上午09:13:40
+	 * @date ${.now?date} ${.now?time}
 	 * @param query
 	 * @return com.chinaso.common.flexigrid.bean.FlexiGrid
 	 */
@@ -58,7 +58,7 @@ public class ${upClassName}ServiceImpl implements ${upClassName}Service {
 	 * (non-Javadoc)
 	 * @see ${packageName?substring(0,packageName?index_of(".impl"))}#search${upClassName}List[]
 	 * @author WangJianQiang
-	 * @date 2018年12月25日 上午09:13:45
+	 * @date ${.now?date} ${.now?time}
 	 * @param
 	 * @return java.util.List<com.chinaso.modules.app.bean.${upClassName}Bean>
 	*/
@@ -74,7 +74,7 @@ public class ${upClassName}ServiceImpl implements ${upClassName}Service {
 	* (non-Javadoc)
 	* @see ${packageName?substring(0,packageName?index_of(".impl"))}#delete${upClassName}[id, updateUserId]
 	* @author WangJianQiang
-	* @date 2018年12月25日 上午09:13:49
+	* @date ${.now?date} ${.now?time}
 	* @param id
 	* @param updateUserId
 	* @return com.chinaso.common.ajax.AjaxResponse
@@ -98,43 +98,9 @@ public class ${upClassName}ServiceImpl implements ${upClassName}Service {
 	/*
 	*
 	* (non-Javadoc)
-	* @see ${packageName?substring(0,packageName?index_of(".impl"))}#update${upClassName}IdxById[${lowClassName}Bean]
-	* @author WangJianQiang
-	* @date 2018年12月25日 上午09:13:53
-	* @param ${lowClassName}Bean
-	* @return com.chinaso.common.ajax.AjaxResponse
-	*/
-	@Override
-	public AjaxResponse update${upClassName}IdxById(${upClassName}Bean ${lowClassName}Bean) throws Exception {
-	AjaxResponse ajaxResponse = null;
-	${upClassName}Bean dbBean = ${lowClassName}Dao.get${upClassName}ById(${lowClassName}Bean.getAasid());
-	if (null == dbBean) {
-	ajaxResponse = new AjaxResponse(AjaxResponse.AJAX_CODE_FAIL);
-	} else {
-	if (${lowClassName}Bean.getIdx().equals(dbBean.getIdx())) {
-	ajaxResponse = new AjaxResponse(AjaxResponse.AJAX_CODE_SUCCESS);
-	} else {
-	int maxIdx = ${lowClassName}Dao.getMaxIdx(dbBean.getAacid());
-	if (${lowClassName}Bean.getIdx() >= 1 && ${lowClassName}Bean.getIdx() <= maxIdx) {
-	dbBean.setTmp_oldIdx(dbBean.getIdx());
-	dbBean.setIdx(${lowClassName}Bean.getIdx());
-	dbBean.setUpdatetime(DateTools.getFormatNowDate());
-	dbBean.setUpdateuserid(${lowClassName}Bean.getUpdateuserid());
-	if (0 < ${lowClassName}Dao.update${upClassName}IdxById(dbBean)) {
-	ajaxResponse = new AjaxResponse(AjaxResponse.AJAX_CODE_SUCCESS);
-	}
-	}
-	}
-	}
-	return ajaxResponse;
-	}
-
-	/*
-	*
-	* (non-Javadoc)
 	* @see ${packageName?substring(0,packageName?index_of(".impl"))}#update${upClassName}ById[${lowClassName}Bean]
 	* @author WangJianQiang
-	* @date 2018年12月25日 上午09:13:57
+	* @date ${.now?date} ${.now?time}
 	* @param ${lowClassName}Bean
 	* @return com.chinaso.common.ajax.AjaxResponse
 	*/
@@ -197,7 +163,7 @@ public class ${upClassName}ServiceImpl implements ${upClassName}Service {
 	* (non-Javadoc)
 	* @see ${packageName?substring(0,packageName?index_of(".impl"))}#add${upClassName}[bean]
 	* @author WangJianQiang
-	* @date 2018年12月25日 上午09:14:24
+	* @date ${.now?date} ${.now?time}
 	* @param bean
 	* @return com.chinaso.common.ajax.AjaxResponse
 	*/
@@ -230,7 +196,7 @@ public class ${upClassName}ServiceImpl implements ${upClassName}Service {
 	* (non-Javadoc)
 	* @see ${packageName?substring(0,packageName?index_of(".impl"))}#get${upClassName}ById[${lowClassName}Id]
 	* @author WangJianQiang
-	* @date 2018年12月25日 上午09:14:31
+	* @date ${.now?date} ${.now?time}
 	* @param ${lowClassName}Id
 	* @return com.chinaso.modules.app.bean.${upClassName}Bean
 	*/
@@ -245,4 +211,63 @@ public class ${upClassName}ServiceImpl implements ${upClassName}Service {
 	}
 	return ${lowClassName}Bean;
 	}
+
+    <#if idx??>
+    /*
+	 *
+	 * (non-Javadoc)
+	 * @see ${packageName?substring(0,packageName?index_of(".impl"))}#changeOrderNum[id, newNum, updateUserId]
+	 * @author WangJianQiang
+	 * @date ${.now?date} ${.now?time}
+	 * @Param id
+	 * @Param newNum
+	 * @Param updateUserId
+	 * @return void
+	 */
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public AjaxResponse changeOrderNum(Integer id, int newNum, String updateUserId) {
+		if (StringUtils.isEmpty(id)) {
+			return AlertMessage.getActionResponse("msgCommonIllegalParam");
+		}
+		${upClassName}Bean dbBean = ${lowClassName}Dao.get${upClassName}ById(id);
+		if (null == dbBean) {
+			return AlertMessage.getActionResponse("msg${upClassName}NotExist");
+		}
+		//修改 判断向前移动还是向后移动
+		int oldIdx = dbBean.getIdx();
+		if (oldIdx < newNum) {
+			${lowClassName}Dao.decIdx(++oldIdx, newNum, updateUserId, DateTools.getFormatNowDate());
+		} else {
+			${lowClassName}Dao.incIdx(newNum, --oldIdx, updateUserId, DateTools.getFormatNowDate());
+		}
+		if (0 < ${lowClassName}Dao.updateIdx(String.valueOf(id), newNum, updateUserId, DateTools.getFormatNowDate())) {
+			return new AjaxResponse(AjaxResponse.AJAX_CODE_SUCCESS);
+		} else {
+			return new AjaxResponse(AjaxResponse.AJAX_CODE_FAIL);
+		}
+	}
+/**
+	 * 删除一条数据序号要做的改变
+	 *
+	 * @param bean
+	 * @param updateUserId
+	 * @return com.chinaso.common.ajax.AjaxResponse
+	 * @author WangJianQiang
+	 * @date  ${.now?date} ${.now?time}
+	 */
+	private AjaxResponse changeOrderNum(${upClassName}Bean bean, Integer updateUserId) {
+		if (null == bean) {
+			return AlertMessage.getActionResponse("msg${upClassName}NotExist");
+		}
+		int maxIdx = ${lowClassName}Dao.maxIdx();
+		if (0 < ${lowClassName}Dao.decIdx(bean.getIdx() + 1, maxIdx, String.valueOf(updateUserId), DateTools.getFormatNowDate())) {
+			return new AjaxResponse(AjaxResponse.AJAX_CODE_SUCCESS);
+		} else {
+			return new AjaxResponse(AjaxResponse.AJAX_CODE_FAIL);
+		}
+	}
+
+    </#if>
+
 	}
