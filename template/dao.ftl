@@ -38,6 +38,16 @@ public interface ${upClassName}Dao extends BaseDao<${upClassName}Bean> {
 		public int update${upClassName}(${upClassName}Bean bean) throws Exception;
 
 		/**
+		* 更新${chineseName}指定字段
+		*
+		* @param bean
+		* @param updateField
+		* @return int
+		* @author WangJianQiang
+		* @date ${.now?date} ${.now?time}
+		*/
+		public int update${upClassName}WithField(${upClassName}Bean bean, String updateField) throws Exception;
+		/**
 		* 增加${chineseName}
 		* @param bean
 		* @return long
@@ -65,15 +75,17 @@ public interface ${upClassName}Dao extends BaseDao<${upClassName}Bean> {
 		* @date  ${.now?date} ${.now?time}
 		*/
 		public ${upClassName}Bean get${upClassName}ById(Integer id) throws Exception;
-
-		/**
+ <#if condition??>
+     /**
 		* 根据名称获取${chineseName}
 		* @param name
 		* @return ${upClassName}Bean
 		* @author WangJianQiang
 		* @date  ${.now?date} ${.now?time}
 		*/
-		public ${upClassName}Bean get${upClassName}ByName(String name);
+		public ${upClassName}Bean get${upClassName}ByName(String name<#if typeid??>, Integer ${typeid}</#if>);
+ </#if>
+
 
         <#if idx??>
 

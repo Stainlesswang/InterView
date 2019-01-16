@@ -79,7 +79,20 @@ public class ${upClassName}DaoImpl extends YoungManage<${upClassName}Bean> imple
 			public int update${upClassName}(${upClassName}Bean bean) throws Exception {
 			return updateBeanByPrimary(BeanTools.beanToMapForDaoAll(bean), "${id}");
 			}
-
+			/*
+			*
+			* (non-Javadoc)
+			* @see ${packageName?substring(0,packageName?index_of(".impl"))}#update${upClassName}WithField[bean, updateField]
+			* @author WangJianQiang
+			* @date ${.now?date} ${.now?time}
+			* @param bean
+			* @param updateField
+			* @return int
+			*/
+			@Override
+			public int update${upClassName}WithField(${upClassName}Bean bean, String updateField) {
+			return updateBean(bean, ${upClassName}Bean.FINAL_TABLE_NAME, updateField, "${id}");
+			}
 			/*
 			*
 			* (non-Javadoc)
@@ -145,10 +158,11 @@ public class ${upClassName}DaoImpl extends YoungManage<${upClassName}Bean> imple
 				* @return ${upClassName}Bean
 				*/
 				@Override
-				public ${upClassName}Bean get${upClassName}ByName(String ${condition}) {
+				public ${upClassName}Bean get${upClassName}ByName(String ${condition}<#if typeid??>, Integer ${typeid}</#if>) {
 				Map<String, Object> paramMap = new HashMap<String, Object>();
+                    <#if typeid??>paramMap.put("${typeid}", ${typeid});</#if>
 				paramMap.put("${condition}", ${condition});
-				String sql = "SELECT * FROM " + ${upClassName}Bean.FINAL_TABLE_NAME + " a  WHERE  a.deleteflag = 0  AND a.${condition} = :${condition}";
+				String sql = "SELECT * FROM " + ${upClassName}Bean.FINAL_TABLE_NAME + " a  WHERE  a.deleteflag = 0  AND a.${condition} = :${condition} <#if typeid??>AND ${typeid} = :${typeid}</#if>" ;
 				try {
 				return mNamedReadJdbcTemplate.queryForObject(sql, paramMap, new BeanPropertyRowMapper<${upClassName}Bean>(${upClassName}Bean.class));
 					} catch (EmptyResultDataAccessException e) {

@@ -70,13 +70,13 @@ public class ${upClassName}Controller extends BaseController {
 	@RequestMapping("/${lowClassName}_delete${upClassName}")
 	public @ResponseBody
 	Object delete${upClassName}(Integer id) {
-		return ${lowClassName}Service.delete${upClassName}(id, getCurrentUserId());;
+		return ${lowClassName}Service.delete${upClassName}(id, getCurrentUserId());
 	}
 
 	/**
 	 * 根据id获取${chineseName}信息
 	 * @author WangJianQiang
-	 * @date 2018年12月25日 上午08:50:14
+	 * @date ${.now?date} ${.now?time}
 	 * @param id
 	 * @return com.chinaso.common.ajax.AjaxResponse
 	 */
@@ -92,7 +92,7 @@ public class ${upClassName}Controller extends BaseController {
 	/**
 	* 增加${chineseName}数据
 	* @author WangJianQiang
-	* @date 2018年12月25日 上午08:50:49
+	* @date ${.now?date} ${.now?time}
 	* @param ${lowClassName}Bean
 	* @return java.lang.Object
 	*/
@@ -106,7 +106,7 @@ ${lowClassName}Bean.setCreatorid(getCurrentUserId());
 	/**
 	* 更新${chineseName}数据
 	* @author WangJianQiang
-	* @date 2018年12月25日 上午08:51:04
+	* @date ${.now?date} ${.now?time}
 	* @param ${lowClassName}Bean
 	* @return java.lang.Object
 	*/

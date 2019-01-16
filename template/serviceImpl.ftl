@@ -86,6 +86,7 @@ public class ${upClassName}ServiceImpl implements ${upClassName}Service {
 	if (null == dbBean) {
 	ajaxResponse = new AjaxResponse(AjaxResponse.AJAX_CODE_FAIL);
 	} else {
+	changeOrderNum(dbBean, updateUserId);
 	if (0 < ${lowClassName}Dao.delete${upClassName}(dbBean)) {
 	ajaxResponse = new AjaxResponse(AjaxResponse.AJAX_CODE_SUCCESS);
 	} else {
@@ -108,7 +109,7 @@ public class ${upClassName}ServiceImpl implements ${upClassName}Service {
 	@Override
 	public AjaxResponse update${upClassName}ById(${upClassName}Bean ${lowClassName}Bean) throws Exception {
 	AjaxResponse ajaxResponse = null;
-	${upClassName}Bean dbBean = ${lowClassName}Dao.get${upClassName}ById(${lowClassName}Bean.getAasid());
+	${upClassName}Bean dbBean = ${lowClassName}Dao.get${upClassName}ById(${lowClassName}Bean.get${id?cap_first}());
 	if (null == dbBean) {
 	return new AjaxResponse(AjaxResponse.AJAX_CODE_FAIL);
 	}
@@ -139,13 +140,16 @@ public class ${upClassName}ServiceImpl implements ${upClassName}Service {
 	tempImageDao.insertTempImage(imageBean);
 	}
 	}
-	if (!dbBean.getAacid().equals(${lowClassName}Bean.getAacid())) {
-	${lowClassName}Dao.deleteOneIdx(dbBean.getAacid(), dbBean.getIdx());
-	int maxIdx = ${lowClassName}Dao.getMaxIdx(${lowClassName}Bean.getAacid());
+	dbBean.setAasname(${lowClassName}Bean.getAasname());
+    <#if typeid??>
+	if (!dbBean.get${typeid?cap_first}().equals(${lowClassName}Bean.get${typeid?cap_first}())) {
+	changeOrderNum(dbBean, ${lowClassName}Bean.getUpdateuserid());
+	int maxIdx = ${lowClassName}Dao.maxIdx(${lowClassName}Bean.get${typeid?cap_first}());
 	dbBean.setIdx(++maxIdx);
 	}
-	dbBean.setAasname(${lowClassName}Bean.getAasname());
-	dbBean.setAacid(${lowClassName}Bean.getAacid());
+
+	dbBean.set${typeid?cap_first}(${lowClassName}Bean.get${typeid?cap_first}());
+    </#if>
 	dbBean.setAudiourl(${lowClassName}Bean.getAudiourl());
 	dbBean.setImgtfskey(${lowClassName}Bean.getImgtfskey());
 	dbBean.setImgh(${lowClassName}Bean.getImgh());
@@ -178,11 +182,14 @@ public class ${upClassName}ServiceImpl implements ${upClassName}Service {
 	if (null != dMenuBean) {
 	return AlertMessage.getActionResponse("msgAppAnimalRepeat");
 	}
-	int maxIdx = ${lowClassName}Dao.getMaxIdx(bean.getAacid());
+    <#if typeid??>
+	int maxIdx = ${lowClassName}Dao.maxIdx(bean.get${typeid?cap_first}());
+	bean.setIdx(++maxIdx);
+
+    </#if>
 	bean.setCreatetime(DateTools.getFormatNowDate());
 	bean.setUpdateuserid(bean.getCreatorid());
 	bean.setUpdatetime(DateTools.getFormatNowDate());
-	bean.setIdx(++maxIdx);
 	tempImageDao.deleteTempImage(bean.getAudiourl());
 	tempImageDao.deleteTempImageByKey(Collections.singletonList(bean.getImgtfskey()));
 	if (0 < ${lowClassName}Dao.add${upClassName}(bean)) {
@@ -207,7 +214,7 @@ public class ${upClassName}ServiceImpl implements ${upClassName}Service {
 	}
 	${upClassName}Bean ${lowClassName}Bean = ${lowClassName}Dao.get${upClassName}ById(${lowClassName}Id);
 	if (null == ${lowClassName}Bean) {
-	throw new ChinasoException(AlertMessage.getMessageObjByKey("msgAppAnimalNotExist"));
+	throw new ChinasoException(AlertMessage.getMessageObjByKey("msg${upClassName}NotExist"));
 	}
 	return ${lowClassName}Bean;
 	}
@@ -226,7 +233,7 @@ public class ${upClassName}ServiceImpl implements ${upClassName}Service {
 	 */
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public AjaxResponse changeOrderNum(Integer id, int newNum, String updateUserId) {
+	public AjaxResponse changeOrderNum(Integer id, int newNum, String updateUserId <#if typeid??>, Integer ${typeid}</#if>) {
 		if (StringUtils.isEmpty(id)) {
 			return AlertMessage.getActionResponse("msgCommonIllegalParam");
 		}
@@ -237,9 +244,9 @@ public class ${upClassName}ServiceImpl implements ${upClassName}Service {
 		//修改 判断向前移动还是向后移动
 		int oldIdx = dbBean.getIdx();
 		if (oldIdx < newNum) {
-			${lowClassName}Dao.decIdx(++oldIdx, newNum, updateUserId, DateTools.getFormatNowDate());
+			${lowClassName}Dao.decIdx(++oldIdx, newNum, updateUserId, DateTools.getFormatNowDate() <#if typeid??>, dbBean.get${typeid?cap_first}()</#if>);
 		} else {
-			${lowClassName}Dao.incIdx(newNum, --oldIdx, updateUserId, DateTools.getFormatNowDate());
+			${lowClassName}Dao.incIdx(newNum, --oldIdx, updateUserId, DateTools.getFormatNowDate()<#if typeid??>, dbBean.get${typeid?cap_first}()</#if>);
 		}
 		if (0 < ${lowClassName}Dao.updateIdx(String.valueOf(id), newNum, updateUserId, DateTools.getFormatNowDate())) {
 			return new AjaxResponse(AjaxResponse.AJAX_CODE_SUCCESS);
@@ -261,7 +268,7 @@ public class ${upClassName}ServiceImpl implements ${upClassName}Service {
 			return AlertMessage.getActionResponse("msg${upClassName}NotExist");
 		}
 		int maxIdx = ${lowClassName}Dao.maxIdx();
-		if (0 < ${lowClassName}Dao.decIdx(bean.getIdx() + 1, maxIdx, String.valueOf(updateUserId), DateTools.getFormatNowDate())) {
+		if (0 < ${lowClassName}Dao.decIdx(bean.getIdx() + 1, maxIdx, String.valueOf(updateUserId), DateTools.getFormatNowDate()<#if typeid??>, bean.get${typeid?cap_first}()</#if>)) {
 			return new AjaxResponse(AjaxResponse.AJAX_CODE_SUCCESS);
 		} else {
 			return new AjaxResponse(AjaxResponse.AJAX_CODE_FAIL);
@@ -269,5 +276,7 @@ public class ${upClassName}ServiceImpl implements ${upClassName}Service {
 	}
 
     </#if>
-
+	//msg.messagemap[msg${upClassName}Repeat]=-10003::${chineseName}名称已存在!
+	//msg.messagemap[msg${upClassName}NameNull]=-10003::名称不能为空!
+	//msg.messagemap[msg${upClassName}NotExist]=-10004::该${chineseName}不存在!
 	}
