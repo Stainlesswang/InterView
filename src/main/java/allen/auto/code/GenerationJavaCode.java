@@ -99,7 +99,8 @@ public class GenerationJavaCode {
 		rootMap.put("upClassName", upClassName);
 		rootMap.put("lowClassName", lowClassName);
 		rootMap.put("chineseName", chineseName);
-		List<Col> list = getColumnList();
+//		List<Col> list = getColumnList();
+		List<Col> list = DbInfoUtil.getTableInfo(driver,url,name,passWord,tableName);
 		rootMap.put("columns", list);
 		//排重字段
 		rootMap.put("condition", searchCondition);

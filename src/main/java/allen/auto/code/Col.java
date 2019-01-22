@@ -1,7 +1,5 @@
 package allen.auto.code;
 
-import java.util.List;
-
 /**
  * @author WangJianQiang
  * @Description:
@@ -19,7 +17,8 @@ public class Col {
 	private String allowNull = "no";
 	private Boolean hasNext = true;
 
-
+	public Col() {
+	}
 	/**
 	 * @return
 	 * @author WangJianQiang
@@ -29,60 +28,6 @@ public class Col {
 		this.index = index;
 		this.fieldName = fieldName;
 		this.type = type;
-	}
-
-	/**
-	 * 构造校验
-	 *
-	 * @param tab
-	 * @param index
-	 * @param defs
-	 * @param isColMap
-	 * @author hym
-	 * @time 2017年7月22日 下午5:19:20
-	 */
-	public Col(String tab, int index, List<Object> defs, Boolean isColMap) {
-		int size = defs.size();
-		this.index = index;
-		if (size < 2) {
-			throw new RuntimeException("表'" + tab + "'的第'" + index + "'字段没有定义字段名");
-		}
-		name = (String) defs.get(1);
-		if (name == null || name.trim().length() == 0) {
-			throw new RuntimeException("表'" + tab + "'的第'" + index + "'字段没有定义字段名");
-		}
-		desc = (String) defs.get(2);
-		if (size < 4) {
-			throw new RuntimeException("表'" + tab + "'的'" + name + "'字段没有定义类型");
-		}
-		String typeStr = (String) defs.get(3);
-		if (typeStr == null || typeStr.trim().length() == 0) {
-			throw new RuntimeException("表'" + tab + "'的'" + name + "'字段没有定义字类型");
-		}
-		typeStr = typeStr.trim().toLowerCase();
-		type = Type.get(typeStr);
-		if (type == null) {
-			throw new RuntimeException("表'" + tab + "'的'" + name + "'字段类型定义错误");
-		}
-//		fieldName = format();
-		if (size >= 6) {
-			default_ = defs.get(5).toString().trim();
-			if (default_.length() == 0) {
-				default_ = null;
-			}
-		}
-		if (size >= 7) {
-			isPK = defs.get(6).toString().trim().toLowerCase();
-			if (isPK.length() == 0) {
-				isPK = "no";
-			}
-		}
-		if (size >= 8) {
-			allowNull = defs.get(7).toString().trim().toLowerCase();
-			if (allowNull.length() == 0) {
-				allowNull = "no";
-			}
-		}
 	}
 
 	public Integer getIndex() {

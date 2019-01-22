@@ -27,9 +27,9 @@ public class DbInfoUtil {
 	 * @param table  表名
 	 * @return Map集合
 	 */
-	public static List getTableInfo(String driver, String url, String user, String pwd, String table) {
-		List result = new ArrayList();
-
+	public static List<Col> getTableInfo(String driver, String url, String user, String pwd, String table) {
+		List<Col> colList = new ArrayList<>();
+		HashSet<String> nameSet = new HashSet<>();
 		Connection conn = null;
 		DatabaseMetaData dbmd = null;
 
@@ -41,69 +41,43 @@ public class DbInfoUtil {
 
 			while (resultSet.next()) {
 				String tableName = resultSet.getString("TABLE_NAME");
-				System.out.println(tableName);
-
 				if (tableName.equals(table)) {
-					ResultSet rs = conn.getMetaData().getColumns(null, getSchema(conn), tableName.toUpperCase(), "%");
-
+					ResultSet rs = conn.getMetaData().getColumns(null, conn.getMetaData().getUserName(), tableName.toUpperCase(), "%");
 					while (rs.next()) {
-						//System.out.println("字段名："+rs.getString("COLUMN_NAME")+"--字段注释："+rs.getString("REMARKS")+"--字段数据类型："+rs.getString("TYPE_NAME"));
-						Map map = new HashMap();
 						String colName = rs.getString("COLUMN_NAME");
-						map.put("code", colName);
-
+						if (nameSet.contains(colName)) {
+							break;
+						} else {
+							nameSet.add(colName);
+						}
+						//System.out.println("字段名："+rs.getString("COLUMN_NAME")+"--字段注释："+rs.getString("REMARKS")+"--字段数据类型："+rs.getString("TYPE_NAME"));
 						String remarks = rs.getString("REMARKS");
 						if (remarks == null || remarks.equals("")) {
 							remarks = colName;
 						}
-						map.put("name", remarks);
-
 						String dbType = rs.getString("TYPE_NAME");
-						map.put("dbType", dbType);
-
-						map.put("valueType", changeDbType(dbType));
-						result.add(map);
+						Col col = new Col();
+						col.setFieldName(colName);
+						col.setMethodName(dealClassName(colName));
+						col.setDesc(remarks);
+						col.setType(Type.get(dbType));
+						colList.add(col);
 					}
 				}
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
+			if(null!=conn){
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 
-		return result;
-	}
-
-	private static String changeDbType(String dbType) {
-		dbType = dbType.toUpperCase();
-		switch (dbType) {
-			case "VARCHAR":
-			case "VARCHAR2":
-			case "CHAR":
-				return "1";
-			case "NUMBER":
-			case "DECIMAL":
-				return "4";
-			case "INT":
-			case "SMALLINT":
-			case "INTEGER":
-				return "2";
-			case "BIGINT":
-				return "6";
-			case "DATETIME":
-			case "TIMESTAMP":
-			case "DATE":
-				return "7";
-			default:
-				return "1";
-		}
+		return colList;
 	}
 
 	//获取连接
@@ -136,13 +110,12 @@ public class DbInfoUtil {
 
 	public static void main(String[] args) {
 
-		//这里是Oracle连接方法
 
 		String table = "appletmodify";
-		String url="jdbc:mysql://10.10.160.5:3306/young";
-		String user="java_admin";
-		String pwd="GeHa5MT3I4tyqS0oRV30SVP3";
-		String driver="com.mysql.jdbc.Driver";
+		String url = "jdbc:mysql://10.10.160.5:3306/young";
+		String user = "java_admin";
+		String pwd = "GeHa5MT3I4tyqS0oRV30SVP3";
+		String driver = "com.mysql.jdbc.Driver";
 		//mysql
 		/*
 		String driver = "com.mysql.jdbc.Driver";
@@ -153,10 +126,15 @@ public class DbInfoUtil {
 		String table = "oe_student";
 		*/
 
-		List list = getTableInfo(driver, url, user, pwd, table);
-		for (Object o:list) {
-			System.out.println(o);
+		List<Col> list = getTableInfo(driver, url, user, pwd, table);
+		for (Col o : list) {
+			System.out.println(o.getFieldName());
 		}
 	}
 
+	private static String dealClassName(String className) {
+		String first = className.substring(0, 1).toUpperCase();
+		String rest = className.substring(1, className.length());
+		return new StringBuffer(first).append(rest).toString();
+	}
 }

@@ -86,8 +86,7 @@ public class Type {
 		if (StringUtils.isEmpty(javaType)) {
 			javaType = typeMap.get("OTHER");
 		}
-		Type result = new Type(sqlType, javaType);
-		return result;
+		return new Type(sqlType, javaType);
 	}
 
 }

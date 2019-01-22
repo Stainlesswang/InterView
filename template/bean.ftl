@@ -10,6 +10,7 @@ public class ${upClassName}Bean implements Serializable {
 
 	public final static String FINAL_TABLE_NAME = "${tableName}";
 <#list columns as col>
+    /** ${col.desc} */
     private ${col.type.javaType} ${col.fieldName};
 </#list>
     private String tmp_creatorName;
