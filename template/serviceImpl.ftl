@@ -86,7 +86,8 @@ public class ${upClassName}ServiceImpl implements ${upClassName}Service {
 	if (null == dbBean) {
 	ajaxResponse = new AjaxResponse(AjaxResponse.AJAX_CODE_FAIL);
 	} else {
-	changeOrderNum(dbBean, updateUserId);
+	//changeOrderNum(dbBean, updateUserId);
+	dbBean.setUpdateuserid(updateUserId);
 	if (0 < ${lowClassName}Dao.delete${upClassName}(dbBean)) {
 	ajaxResponse = new AjaxResponse(AjaxResponse.AJAX_CODE_SUCCESS);
 	} else {
