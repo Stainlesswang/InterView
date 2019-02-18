@@ -1,0 +1,14 @@
+# Java Interview Question 
+1. **为什么String 要设计为final 不可变**  
+String的源代码：
+```java
+public final class String
+    implements java.io.Serializable, Comparable<String>, CharSequence {
+    /** The value is used for character storage. */
+    private final char value[];}
+```
+final修饰的 value[] 数组是final的只能说明它是地址不可变，并不代表该数组内容不可变。另一个关键的修饰符是**private**限定了value
+数组的访问限制。
+- String 不可变保证了常量池的使用
+- String 不可变才可以利用它作为不可变的key
+- 线程安全的

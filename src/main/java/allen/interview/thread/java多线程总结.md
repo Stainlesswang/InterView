@@ -6,7 +6,7 @@
 >**进程是啥？**一个进程包括操作系统分配的内存空间、包含一个或者多个线程。线程必须依赖进程的存在
 
 ****
-####一.如何New一个新线程
+####一.如何New一个新线程``
 在java中要想实现多线程，有两种手段，
 **一种是继承Thread类，**（详见 我的Interview项目 thread包下的 NewThread1.java）
 **另外一种是实现Runable接口.**（详见 我的Interview项目 thread包下的 NewThread2.java）
