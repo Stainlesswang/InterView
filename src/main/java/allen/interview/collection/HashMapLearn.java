@@ -1,7 +1,9 @@
 package allen.interview.collection;
 
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author WangJianQiang
@@ -11,7 +13,9 @@ import java.util.Map;
 public class HashMapLearn {
 
 	public static void main(String[] args) {
-		Map<String, String> map = new HashMap<String, String>();
+		Map<String, String> hashMap = new HashMap<>();
+		Map<String, String> hashtable = new Hashtable<>();
+		Map<String, String> concurrentHashMap = new ConcurrentHashMap<>();
 
 	}
 }
