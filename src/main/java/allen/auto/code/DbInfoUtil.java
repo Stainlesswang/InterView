@@ -112,9 +112,9 @@ public class DbInfoUtil {
 
 
 		String table = "appletmodify";
-		String url = "jdbc:mysql://10.10.160.5:3306/young";
-		String user = "java_admin";
-		String pwd = "GeHa5MT3I4tyqS0oRV30SVP3";
+		String url = "";
+		String user = "";
+		String pwd = "";
 		String driver = "com.mysql.jdbc.Driver";
 		//mysql
 		/*
