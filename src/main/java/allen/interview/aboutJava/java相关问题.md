@@ -15,4 +15,33 @@ final修饰的 value[] 数组是final的只能说明它是地址不可变，并�
 2. **Java异常**  
    - Throwable子类分为  Exception（异常）And Error（错误）囊括了java中会遇到的各种情况
    - Exception一般是程序出现的错误，是修改我们的代码可以修改的情况，但是Error就是一些我们处理不了的情况，例如：内存溢出异常或者虚拟机异常我们无法处理
-   - Exception运行时异常是指
+   - Exception运行时异常(RuntimeException)是指可以不强制进行try-catch就可以编译通过。例如常见的空指针异常，数组越界异常等
+   - 非运行时异常，或者叫编译异常 从程序语法角度讲是必须进行处  理的异常，如果不处理，
+   程序就不能编译通过。如IOException、SQLException等以及用户自定义的Exception异常，一般情况下不自定义检查异常。
+3. **Java反射**
+   > 反射可以获取类的所有信息
+   1. 反射的获取Class对象方式有三种：1 Class类的 *forName(String
+      clazzName)* 方法，必须使用全限定名
+      2.调用某个类的class属性来获取该类对应的Class对象
+      3.调用某个对象的getClass()方法。该方法是java.lang.Object类中的一个方法
+      ```
+         //第一种方式 通过Class类的静态方法——forName()来实现
+         class1 = Class.forName("com.lvr.reflection.Person");
+         //第二种方式 通过类的class属性
+         class1 = Person.class;
+         //第三种方式 通过对象getClass方法
+         Person person = new Person();
+         Class<?> class1 = person.getClass();
+         ```
+   2. Class.forName()和ClassLoader获取类的区别:
+      只要记住了web项目在加载Mysql驱动的时候使用的是Class.forName("com.mysql.Driver"),因为需要执行Driver类中的静态代码块来
+      *DriverManager.registerDriver(new Driver());*注册驱动.
+      [blog about this](http://www.importnew.com/29389.html)
+   ```
+      ClassLoader loader=ClassLoader.getSystemClassLoader();
+              	//loadClass只是把类的二进制流加载到JVM中，不进行初始化
+              	Class n=loader.loadClass("allen.interview.jvm.InitialOrderTest");
+              	//forName方法会初始化static变量和static块代码
+              	Class n2=Class.forName("allen.interview.jvm.InitialOrderTest");
+   ```
+   

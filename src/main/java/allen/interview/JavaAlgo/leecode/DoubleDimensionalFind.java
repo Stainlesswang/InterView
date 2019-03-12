@@ -17,6 +17,8 @@ package allen.interview.JavaAlgo.leecode;
  * Given target = 20, return false.
  *
  * 要求时间复杂度 O(M + N)，空间复杂度 O(1)
+ *
+ * 技巧：从右上角的数开始，左边的都比它小，下方的都比它大。每次比较大小后确定下一次搜索范围。逐步缩小查找的范围
  * @date 2019年03月11日 14:33
  */
 public class DoubleDimensionalFind {

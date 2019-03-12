@@ -11,15 +11,18 @@ public class Test {
 
         try {
         	ClassLoader loader=ClassLoader.getSystemClassLoader();
-        	Class n=loader.loadClass("allen.auto.code.Col");
-	        Field[] fields= n.getDeclaredFields();
-	        for (Field field : fields) {
-		        System.out.print(field.getName()+";");
-	        }
-	        Method[] methods=n.getMethods();
-	        for (Method method : methods) {
-		        System.out.println(method.getName());
-	        }
+        	//loadClass只是把类的二进制流加载到JVM中，不进行初始化
+        	Class n=loader.loadClass("allen.interview.jvm.InitialOrderTest");
+        	//forName方法会初始化static变量和static块代码
+        	Class n2=Class.forName("allen.interview.jvm.InitialOrderTest");
+//	        Field[] fields= n.getDeclaredFields();
+//	        for (Field field : fields) {
+//		        System.out.print(field.getName()+";");
+//	        }
+//	        Method[] methods=n.getMethods();
+//	        for (Method method : methods) {
+//		        System.out.println(method.getName());
+//	        }
 
 //            Class aClass = Class.forName("allen.auto.code.FreeMarkerTest");
 //            Object object=aClass.newInstance();
