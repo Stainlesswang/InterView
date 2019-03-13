@@ -44,4 +44,8 @@ final修饰的 value[] 数组是final的只能说明它是地址不可变，并�
               	//forName方法会初始化static变量和static块代码
               	Class n2=Class.forName("allen.interview.jvm.InitialOrderTest");
    ```
+4. **接口和静态类的区别**
+   1. 静态类概念：含有静态方法的类必须声明为静态类
+      - 静态类不能被实例化
+      - 静态类的静态方法必须是
    
