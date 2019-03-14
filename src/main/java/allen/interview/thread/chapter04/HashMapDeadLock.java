@@ -24,6 +24,7 @@ public class HashMapDeadLock {
 			new Thread(() -> {
 				for (int j = 0; j < Integer.MAX_VALUE; j++) {
 					hashMapDeadLock.add(String.valueOf(j), String.valueOf(j));
+					System.out.println(Thread.currentThread().getName());
 				}
 			}, "thread-" + i).start();
 		}

@@ -37,15 +37,20 @@ final修饰的 value[] 数组是final的只能说明它是地址不可变，并�
       只要记住了web项目在加载Mysql驱动的时候使用的是Class.forName("com.mysql.Driver"),因为需要执行Driver类中的静态代码块来
       *DriverManager.registerDriver(new Driver());*注册驱动.
       [blog about this](http://www.importnew.com/29389.html)
-   ```
+       ```
       ClassLoader loader=ClassLoader.getSystemClassLoader();
-              	//loadClass只是把类的二进制流加载到JVM中，不进行初始化
-              	Class n=loader.loadClass("allen.interview.jvm.InitialOrderTest");
-              	//forName方法会初始化static变量和static块代码
-              	Class n2=Class.forName("allen.interview.jvm.InitialOrderTest");
-   ```
+      //loadClass只是把类的二进制流加载到JVM中，不进行初始化
+      Class n=loader.loadClass("allen.interview.jvm.InitialOrderTest");
+      //forName方法会初始化static变量和static块代码
+       Class n2=Class.forName("allen.interview.jvm.InitialOrderTest");
+      ```
 4. **接口和静态类的区别**
    1. 静态类概念：含有静态方法的类必须声明为静态类
+      静态类就是半成品的类，不能实例化只能被继承
       - 静态类不能被实例化
-      - 静态类的静态方法必须是
-   
+      - 静态类的静态方法必须是 非
+   2. 接口：更加抽象的行为抽象
+      - 变量默认都是 static final 类型的
+      - 方法必须都是public的
+      - Java8之后增强了接口：可以定义default方法（只能通过实现类使用并且可以重载）
+        和static方法（只能通过接口使用）

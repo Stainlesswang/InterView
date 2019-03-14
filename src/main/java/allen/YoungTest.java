@@ -2,18 +2,16 @@ package allen;
 
 import allen.interview.JavaAlgo.leecode.DuplicateNum;
 
+import java.io.File;
 import java.util.Arrays;
+import java.util.Date;
 
 public class YoungTest {
 
 	public static void main(String[] args) {
-		final String a= "ab";
-		String b = "abc";
-		String c = new String("abc");
-		String d = "ab" +"c";
-		String ee = a +"c";
-		System.out.println(d == b);
-//		System.out.println(c == d);
-//		System.out.println(d == b);
+		assert args != null;
+		for(String childFile: args) {
+			System.out.println("-childName："+childFile+" 最后修改时间：");
+		}
 	}
 }

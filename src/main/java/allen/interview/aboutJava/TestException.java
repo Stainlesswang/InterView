@@ -5,7 +5,7 @@ package allen.interview.aboutJava;
  * @Description:
  * @date 2019年03月08日 17:08
  */
-public class TestException {
+public  class TestException {
 	public TestException() {
 	}
 

@@ -37,7 +37,8 @@ public class AllenUtil {
             String fileAbsolutePath = file.getAbsolutePath();//文件绝对路径
             System.out.println("找到了jar包同目录的文件夹："+fileAbsolutePath);
             File[] childFiles = file.listFiles();
-            for(File childFile:childFiles) {
+	        assert childFiles != null;
+	        for(File childFile:childFiles) {
                 System.out.println("-childName："+childFile.getName()+" 最后修改时间："+new Date(childFile.lastModified()));
             }
         }else {
