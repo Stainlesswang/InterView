@@ -54,3 +54,15 @@ final修饰的 value[] 数组是final的只能说明它是地址不可变，并�
       - 方法必须都是public的
       - Java8之后增强了接口：可以定义default方法（只能通过实现类使用并且可以重载）
         和static方法（只能通过接口使用）
+5. **Java基础类型及大小**
+
+|类型|大小| 
+|:-----:|:----:|
+|byte|1字节|
+|char|2字节|
+|short|2字节|
+|int|4字节|
+|long|8字节|
+|float|4字节|
+|double|8字节|
+|boolean|JVM规范中，boolean变量作为int处理，也就是4字节；boolean数组当做byte数组处理|
