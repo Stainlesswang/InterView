@@ -24,4 +24,4 @@ Java IO 是操作输入计算机的数据及输出计算机结果的重要组成
         StringReader, StringWriter
        
       -  Socket流
-         键盘：用System.in（是一个InputStream对象）读取，用System.out（是一个OutoutStream对象）打印
+         键盘：用System.in（是一个InputStream对象）读取，用System.out（是一个OutputStream对象）打印

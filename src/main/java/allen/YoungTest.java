@@ -1,19 +1,27 @@
 package allen;
 
-import allen.interview.JavaAlgo.leecode.DuplicateNum;
-
 import java.io.File;
-import java.util.Arrays;
-import java.util.BitSet;
-import java.util.Date;
 
 public class YoungTest {
 
 	public static void main(String[] args) {
-		BitSet bitSet= new BitSet();
-		assert args != null;
-		for(String childFile: args) {
-			System.out.println("-childName："+childFile+" 最后修改时间：");
+		findFile("D:/WorkSpace");
+	}
+
+	private static void findFile(String path) {
+		if (null == path) {
+			return;
+		}
+		File[] files = new File(path).listFiles();
+		assert files != null;
+		for (File f : files) {
+			if (f.isFile()) {
+				System.out.println("this fileName is " + f.getName());
+			} else if (f.isDirectory()) {
+				findFile(f.getPath());
+			} else {
+				System.out.println("someThing wrong!");
+			}
 		}
 	}
 }
