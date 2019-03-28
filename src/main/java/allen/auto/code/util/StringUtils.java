@@ -1,4 +1,4 @@
-package allen.interview.util;
+package allen.auto.code.util;
 
 
 import java.io.UnsupportedEncodingException;

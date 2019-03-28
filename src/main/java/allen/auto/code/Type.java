@@ -1,6 +1,6 @@
 package allen.auto.code;
 
-import allen.interview.util.StringUtils;
+import allen.auto.code.util.StringUtils;
 
 import java.util.HashMap;
 
