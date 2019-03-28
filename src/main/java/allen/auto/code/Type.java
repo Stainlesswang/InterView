@@ -1,8 +1,9 @@
 package allen.auto.code;
 
-import allen.auto.code.util.StringUtils;
 
 import java.util.HashMap;
+import allen.auto.*;
+import allen.util.StringUtils;
 
 /**
  * @author WangJianQiang
