@@ -2,7 +2,7 @@ package allen.interview.designPatterns.singleton;
 
 /**
  * @author WangJianQiang
- * @Description:
+ * @Description: 一个双重检验锁的优雅单例模式
  * @date 2019年03月26日 15:52
  */
 public class SingleTonLazy {
