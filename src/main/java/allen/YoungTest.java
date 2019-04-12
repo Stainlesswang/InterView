@@ -14,6 +14,8 @@ public class YoungTest {
 		}
 		File[] files = new File(path).listFiles();
 		assert files != null;
+
+
 		for (File f : files) {
 			if (f.isFile()) {
 				System.out.println("this fileName is " + f.getName());
