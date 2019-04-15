@@ -16,6 +16,7 @@ public class ValueOrReference {
 		Student s2 = new Student("小李");
 		//这个时候传递的不是s1和s2的引用,而是引用的拷贝.这里要注意了哇
 		Student s3=ValueOrReference.swap(s1, s2);
+		Student s4=ValueOrReference.swap( s2);
 		System.out.println("s1:" + s1.getName());
 		System.out.println("s2:" + s2.getName());
 		System.out.println(s3.getName());
@@ -29,10 +30,13 @@ public class ValueOrReference {
 		System.out.println("y:" + y.getName());
 		return x;
 	}
-
+	private static Student swap(Student y) {
+		System.out.println("y:" + y.getName());
+		return y;
+	}
 	private static class Student {
 		private String name;
-		Student(String name){
+		private Student(String name){
 			this.name=name;
 		}
 
