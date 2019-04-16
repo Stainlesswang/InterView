@@ -13,12 +13,12 @@ public class StreamTest {
 	public static void main(String[] args) {
 		List<String> myList =
 				Arrays.asList("a1", "a2", "b1", "c2", "c1");
-//		myList
-//				.stream()
-//				.filter(i->i.startsWith("a"))
-//				.map(String::toUpperCase)
-//				.sorted()
-//				.forEach(System.out::println);
+		myList
+				.stream()
+				.filter(i->i.startsWith("a"))
+				.map(String::toUpperCase)
+				.sorted()
+				.forEach(System.out::println);
 		IntStream.range(1, 4)
 				.mapToObj(i -> "a" + i)
 				.forEach(System.out::println);

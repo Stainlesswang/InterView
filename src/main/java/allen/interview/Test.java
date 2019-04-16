@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 
 public class Test {
     public static void main(String[] args) {
@@ -15,6 +16,9 @@ public class Test {
         	Class n=loader.loadClass("allen.interview.jvm.InitialOrderTest");
         	//forName方法会初始化static变量和static块代码
         	Class n2=Class.forName("allen.interview.jvm.InitialOrderTest");
+            ArrayList<String> list=new ArrayList<>();
+            list.add("fuck");
+            System.out.println(list);
 //	        Field[] fields= n.getDeclaredFields();
 //	        for (Field field : fields) {
 //		        System.out.print(field.getName()+";");
