@@ -1,8 +1,6 @@
 package allen.interview.aboutJava;
 
 
-import java.util.Arrays;
-
 /**
  * @author WangJianQiang
  * @Description:
