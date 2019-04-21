@@ -1,24 +1,27 @@
-####针对示例表结构进行SQL学习
+##针对示例表结构进行SQL学习
  表结构为：
  Mysql 练习题
  我使用的Mysql版本是5.7.19。答案可能会因版本会有少许出入。
  
  练习数据
- 数据表 --1.学生表 Student(SId,Sname,Sage,Ssex)
+ 数据表 :
  
- --SId 学生编号,Sname 学生姓名,Sage 出生年月,Ssex 学生性别
+ - 1.学生表 Student(SId,Sname,Sage,Ssex) SId 学生编号,Sname 学生姓名,Sage 出生年月,Ssex 学生性别
  
- --2.课程表 Course(CId,Cname,TId) --CId --课程编号,Cname 课程名称,TId 教师编号
+ - 2.课程表 Course(CId,Cname,TId) --CId --课程编号,Cname 课程名称,TId 教师编号
  
- --3.教师表 Teacher(TId,Tname) --TId 教师编号,Tname 教师姓名
+ - 3.教师表 Teacher(TId,Tname) --TId 教师编号,Tname 教师姓名
  
- --4.成绩表 SC(SId,CId,score) --SId 学生编号,CId 课程编号,score 分数
+ - 4.成绩表 SC(SId,CId,score) --SId 学生编号,CId 课程编号,score 分数
  
- 创建测试数据
+ 
+###创建测试数据
  
  学生表 Student
+ 
  ```sql
-create table Student(SId varchar(10),Sname varchar(10),Sage datetime,Ssex varchar(10));
+ 
+ create table Student(SId varchar(10),Sname varchar(10),Sage datetime,Ssex varchar(10));
  insert into Student values('01' , '赵雷' , '1990-01-01' , '男');
  insert into Student values('02' , '钱电' , '1990-12-21' , '男');
  insert into Student values('03' , '孙风' , '1990-05-20' , '男');
@@ -30,29 +33,32 @@ create table Student(SId varchar(10),Sname varchar(10),Sage datetime,Ssex varcha
  insert into Student values('10' , '李四' , '2017-12-25' , '女');
  insert into Student values('11' , '李四' , '2017-12-30' , '女');
  insert into Student values('12' , '赵六' , '2017-01-01' , '女');
- insert into Student values('13' , '孙七' , '2018-01-01' , '女');
-```
+ insert into Student values('13' , '孙七' , '2018-01-01' , '女'); 
+ ```
+
+科目表 Course
  
- 科目表 Course
  ```sql
 create table Course(CId varchar(10),Cname nvarchar(10),TId varchar(10))
  insert into Course values('01' , '语文' , '02')
  insert into Course values('02' , '数学' , '01')
  insert into Course values('03' , '英语' , '03')
-```
+ ```
  
  
  教师表 Teacher
+ 
  ```sql
-create table Teacher(TId varchar(10),Tname varchar(10))
+ create table Teacher(TId varchar(10),Tname varchar(10))
  insert into Teacher values('01' , '张三')
  insert into Teacher values('02' , '李四')
  insert into Teacher values('03' , '王五')
-```
+ ```
  
  成绩表 SC
+ 
  ```sql
-create table SC(SId varchar(10),CId varchar(10),score decimal(18,1))
+ create table SC(SId varchar(10),CId varchar(10),score decimal(18,1))
  insert into SC values('01' , '01' , 80)
  insert into SC values('01' , '02' , 90)
  insert into SC values('01' , '03' , 99)
@@ -71,38 +77,46 @@ create table SC(SId varchar(10),CId varchar(10),score decimal(18,1))
  insert into SC values('06' , '03' , 34)
  insert into SC values('07' , '02' , 89)
  insert into SC values('07' , '03' , 98)
-```
+ ```
  
- 练习题目
+###练习题目
  1. 查询" 01 "课程比" 02 "课程成绩高的学生的信息及课程分数 
+ 
  ```sql
 SELECT *
 FROM (SELECT SId,score FROM sc WHERE CId="02")AS t1,
   ( SELECT SId,score FROM sc WHERE CId="01")AS t2
 WHERE t1.SId=t2.SId AND t1.score>t2.score ;
 ```
- 1.1 查询同时存在" 01 "课程和" 02 "课程的情况 
+
+2.  查询同时存在" 01 "课程和" 02 "课程的情况 
+ 
  ```sql
 select *
 from (select SId ,score from sc where sc.CId='01')as t1 , (select SId ,score from sc where sc.CId='02') as t2
 where t1.SId=t2.SId;
 ```
- 1.2 查询存在" 01 "课程但可能不存在" 02 "课程的情况(不存在时显示为 null ) 
+
+3. 查询存在" 01 "课程但可能不存在" 02 "课程的情况(不存在时显示为 null ) 
+ 
  ```sql
 select *
 from (select SId ,score from sc where sc.CId='01')as t1
   LEFT join (select SId ,score from sc where sc.CId='02') as t2
     on t1.SId=t2.SId
 ```
- 1.3 查询不存在" 01 "课程但存在" 02 "课程的情况
+
+4. 查询不存在" 01 "课程但存在" 02 "课程的情况
+ 
  ```sql
 SELECT SId,score
 FROM sc
 WHERE SId NOT IN (SELECT SId FROM sc WHERE CId="01")
 AND CId="02"
-
 ```
- 2. 查询平均成绩大于等于 60 分的同学的学生编号和学生姓名和平均成绩
+
+5. 查询平均成绩大于等于 60 分的同学的学生编号和学生姓名和平均成绩
+
  ```sql
 SELECT student.* ,t1.avg
 FROM  student INNER JOIN
@@ -112,12 +126,16 @@ FROM  student INNER JOIN
         HAVING avg(score)>=60)as t1
 ON student.SId=t1.SId
 ```
- 3. 查询在 SC 表存在成绩的学生信息
+ 
+6. 查询在 SC 表存在成绩的学生信息
+ 
  ```sql
 SELECT student.*
 FROM student WHERE SId IN (SELECT SId FROM sc);
 ```
- 4. 查询所有同学的学生编号、学生姓名、选课总数、所有课程的总成绩(没成绩的显示为 null ) 
+ 
+7. 查询所有同学的学生编号、学生姓名、选课总数、所有课程的总成绩(没成绩的显示为 null ) 
+ 
  ```sql
 SELECT student.SId,student.Sname,t1.count,t1.sum
   FROM student LEFT JOIN 
@@ -125,34 +143,42 @@ SELECT student.SId,student.Sname,t1.count,t1.sum
   on student.SId=t1.SId
 ```
 
- 5. 查询「李」姓老师的数量
+8. 查询「李」姓老师的数量
+ 
  ```sql
 SELECT count(*)
 FROM teacher
 WHERE Tname like "李%";
 ```
- 6. 查询学过「张三」老师授课的同学的信息
+
+9. 查询学过「张三」老师授课的同学的信息
+ 
  ```sql
 SELECT DISTINCT student.*
 FROM sc ,student
 WHERE CId IN (SELECT CId FROM course,teacher WHERE course.TId=teacher.TId AND teacher.Tname="张三")
 AND sc.SId=student.SId
 ```
-7.  查询没有学全所有课程的同学的信息
-```sql
+
+10.  查询没有学全所有课程的同学的信息
+
+ ```sql
 SELECT student.*
 FROM  student
 WHERE SId NOT IN (SELECT sc.SId FROM sc GROUP BY SId
 HAVING count(SID)= (select count(CId) from course))
 ```
-8.  查询至少有一门课与学号为" 01 "的同学所学相同的同学的信息
-```sql
+
+11.  查询至少有一门课与学号为" 01 "的同学所学相同的同学的信息
+
+ ```sql
 select DISTINCT student.*
 from  sc ,student
 where sc.CId in (select CId from sc where sc.SId='01')
       and   sc.SId=student.SId
-```
-9.  查询和" 01 "号的同学学习的课程 完全相同的其他同学的信息
+ ```
+
+12.  查询和" 01 "号的同学学习的课程 完全相同的其他同学的信息
  查询没学过"张三"老师讲授的任一门课程的学生姓名
  查询两门及其以上不及格课程的同学的学号，姓名及其平均成绩
  检索" 01 "课程分数小于 60，按分数降序排列的学生信息
