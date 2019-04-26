@@ -4,6 +4,7 @@ import com.google.common.base.Joiner;
 import com.google.common.hash.BloomFilter;
 import com.google.common.hash.Funnels;
 
+import java.io.*;
 import java.util.*;
 
 /**
@@ -41,7 +42,7 @@ public class GoogleGuava {
 		System.out.println(Joiner.on(",").join(set));
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		for (int i = 0; i < size; i++) {
 			bloomFilter.put(i);
 		}
@@ -59,7 +60,9 @@ public class GoogleGuava {
 			}
 		}
 		System.out.println("有误伤的数量：" + list.size());
-
+		File file=new File("D:/bit.txt");
+		OutputStream outputStream=new FileOutputStream(file);
+		bloomFilter.writeTo(outputStream);
 	}
 
 
