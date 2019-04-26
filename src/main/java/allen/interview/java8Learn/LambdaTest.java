@@ -20,6 +20,6 @@ public class LambdaTest {
 		names.sort(Comparator.reverseOrder());
 		System.out.println(names);
 		//使用lambda表达式
-//		names.sort(names,(String a,String b)->{return b.compareTo(a);});
+//		names.sort(names,(Stri ng a,String b)->{return b.compareTo(a);});
 	}
 }
