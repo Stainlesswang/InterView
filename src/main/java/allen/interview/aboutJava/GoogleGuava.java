@@ -60,9 +60,8 @@ public class GoogleGuava {
 			}
 		}
 		System.out.println("有误伤的数量：" + list.size());
-		File file=new File("D:/bit.txt");
-		OutputStream outputStream=new FileOutputStream(file);
-		bloomFilter.writeTo(outputStream);
+
+
 	}
 
 
