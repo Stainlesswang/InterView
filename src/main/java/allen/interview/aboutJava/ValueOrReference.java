@@ -9,7 +9,6 @@ package allen.interview.aboutJava;
  */
 public class ValueOrReference {
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		Student s1 = new Student("小张");
 		Student s2 = new Student("小李");
 		//这个时候传递的不是s1和s2的引用,而是引用的拷贝.这里要注意了哇
