@@ -1,10 +1,7 @@
 package allen.interview.collection;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -14,9 +11,14 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class HashMapLearn {
 
-	public static void main(String[] args) {
-		Map<String, String> hashMap = new HashMap<>();
-		Map<String, String> hashtable = new Hashtable<>();
-		Map<String, String> concurrentHashMap = new ConcurrentHashMap<>();
-	}
+    public static void main(String[] args) {
+        Map<String, String> hashMap = new HashMap<>();
+
+        hashMap.put("sss", null);
+        Map<String, String> hashtable = new Hashtable<>();
+        Map<String, String> concurrentHashMap = new LinkedHashMap<>();
+        for (Map.Entry o : hashMap.entrySet()) {
+            System.out.println(o.getKey());
+        }
+    }
 }
