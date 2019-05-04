@@ -9,7 +9,7 @@ public class SingleTonLazy {
 	//使用volatile将该对象编程多线程间可见的
 	private static volatile SingleTonLazy singleTonLazy = null;
 
-	private SingleTonLazy() {
+    private SingleTonLazy() {
 	}
 
 	/**
