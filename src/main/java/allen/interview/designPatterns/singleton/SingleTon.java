@@ -8,7 +8,8 @@ package allen.interview.designPatterns.singleton;
  * @date 2019年03月26日 15:45
  */
 public class SingleTon {
-	private static SingleTon singleTon = new SingleTon();
+    private static SingleTon singleTon = new SingleTon();
+
 
 	private SingleTon() {
 	}
