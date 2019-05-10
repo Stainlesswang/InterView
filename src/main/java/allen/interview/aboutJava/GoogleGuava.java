@@ -17,6 +17,7 @@ public class GoogleGuava {
 
 //	private static BloomFilter<Integer> bloomFilter = BloomFilter.create(Funnels.integerFunnel(), size, 0.0001);
 
+    private  native void start0();
 	/**
 	 * Optional 可以令模棱两可的null值
 	 *
@@ -31,13 +32,14 @@ public class GoogleGuava {
 		System.out.println(optional.get());
 	}
 
-	public static String  StringUtilTest() {
+	public  String  StringUtilTest() {
 		Set<Integer> set = new LinkedHashSet<Integer>();
 		set.add(1583);
 		set.add(1584);
 		set.add(1585);
 		set.add(1586);
 		set.add(1587);
+        start0();
 		System.out.println(Joiner.on(",").join(set));
 		return Joiner.on(",").join(set);
 	}
