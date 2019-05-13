@@ -6,7 +6,7 @@ package allen.interview.designPatterns.singleton;
  * @date 2019年03月26日 15:52
  */
 public class SingleTonLazy {
-	//使用volatile将该对象编程多线程间可见的
+	//使用volatile保证了'可见性',即多个线程看到的该变量的状态都是'最新的'
 	private static volatile SingleTonLazy singleTonLazy = null;
 
     private SingleTonLazy() {

@@ -1,29 +1,14 @@
 package allen;
 
+import allen.interview.designPatterns.singleton.SomeThing;
+
 import java.io.File;
 
 public class YoungTest {
 
-	public static void main(String[] args) {
-		findFile("D:/WorkSpace");
-	}
+        public static void main(String[] args) {
+            System.out.println("创建一个实例");
+            SomeThing someThing=SomeThing.getInstance();
 
-	private static void findFile(String path) {
-		if (null == path) {
-			return;
-		}
-		File[] files = new File(path).listFiles();
-		assert files != null;
-
-
-		for (File f : files) {
-			if (f.isFile()) {
-				System.out.println("this fileName is " + f.getName());
-			} else if (f.isDirectory()) {
-				findFile(f.getPath());
-			} else {
-				System.out.println("someThing wrong!");
-			}
-		}
-	}
+        }
 }

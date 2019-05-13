@@ -220,4 +220,48 @@ t2.setPriority(Thread.MIN_PRIORITY);
    其他线程可以访问;wait()使用notify或者notifyAlll或者指定睡眠时间来唤醒当前等待池中的线程。wait()必须放在synchronized block中，否则会在program runtime时扔出”java.lang.IllegalMonitorStateException“异常.
 
 ----
-## 五、常用函数说明
+## 五、synchronized 是啥?
+
+- 首先说一下synchronized用法
+  
+  1. 修饰实例方法:   **需要获得创建的实例的锁才可以运行**
+  2. 修饰静态方法:   静态方法是属于当前类,无论有多少实例,静态方法only one. **所以调用静态方法的时候只需获取SomeClass.clss的锁资源就行,和实例方法获取每个实例锁资源不冲突**
+  3. 修饰代码块: synchronized作用代码块,进入代码块需要获取指定对应的锁资源
+- 经典的双重检查的单例模式
+
+  ```java
+  public class SingleTonLazy {
+	//使用volatile将该对象编程多线程间可见的
+	private static volatile SingleTonLazy singleTonLazy = null;
+
+    private SingleTonLazy() {}
+
+	public static SingleTonLazy getInsTance() {
+		/*修改成如下方式 双重检查锁**/
+		if (null==singleTonLazy){
+			synchronized (SingleTonLazy.class){
+				if (null==singleTonLazy){
+					singleTonLazy=new SingleTonLazy();
+				}
+			}
+		}
+		return singleTonLazy;
+	}
+}
+
+  ```
+  
+  注意点:
+    1. 实例 singleTonLazy 要加上volatile关键字. 为什么要加上呢? 这跟JVM对指令重排序相关. 简而言之,对一个非原子操作的代码,JVM要分成多个小的原子指令去执行,在执行的过程中这些小的原子操作在多线程的环境下顺序是没办法保证的!
+    
+      例如语句```singleTonLazy=new SingleTonLazy```这条语句,实际上JVM执行指令的时候是分三个原子指令.
+       
+       - 为singleTonLazy实例分配内存空间
+       - 初始化该实例的指令
+       - 将该实例指向已分配的内存地址
+      
+      **使用volatile作用:**各个线程会将共享变量从主内存中拷贝到工作内存，然后执行引擎会基于工作内存中的数据进行操作处理。线程在工作内存进行操作后何时会写到主内存中？这个时机对普通变量是没有规定的，而针对volatile修饰的变量给java虚拟机特殊的约定，线程对volatile变量的修改会立刻被其他线程所感知，即不会出现数据脏读的现象，从而保证数据的“可见性”。
+
+    
+    
+  
