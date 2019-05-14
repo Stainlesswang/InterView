@@ -1,4 +1,4 @@
-package allen.interview.JavaAlgo.sort;
+package allen.interview.JavaAlgo.sort.归并;
 
 /**
  * @author WangJianQiang

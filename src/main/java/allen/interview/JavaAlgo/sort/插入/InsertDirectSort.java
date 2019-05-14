@@ -1,8 +1,10 @@
-package allen.interview.JavaAlgo.sort;
+package allen.interview.JavaAlgo.sort.插入;
 
 /**
  * 插入类排序------直接插入排序
  * 从前到后一个个遍历，
+ *
+ *  * 时间复杂度: 最坏O(n^2)  最好的情况:O(n) 平均时间复杂度 O(n^2)
  */
 public class InsertDirectSort {
 	public static void main(String[] args) {

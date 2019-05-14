@@ -1,4 +1,6 @@
-package allen.interview.JavaAlgo.sort;
+package allen.interview.JavaAlgo.sort.快排;
+
+import allen.interview.JavaAlgo.sort.Sort;
 
 import java.util.Arrays;
 import java.util.Collections;

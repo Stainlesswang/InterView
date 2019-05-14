@@ -1,4 +1,6 @@
-package allen.interview.JavaAlgo.sort;
+package allen.interview.JavaAlgo.sort.希尔;
+
+import allen.interview.JavaAlgo.sort.Sort;
 
 /**
  * 希尔排序

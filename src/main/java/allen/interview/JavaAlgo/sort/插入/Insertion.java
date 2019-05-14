@@ -1,4 +1,6 @@
-package allen.interview.JavaAlgo.sort;
+package allen.interview.JavaAlgo.sort.插入;
+
+import allen.interview.JavaAlgo.sort.Sort;
 
 /**
  * 直接插入排序
