@@ -262,6 +262,36 @@ t2.setPriority(Thread.MIN_PRIORITY);
       
       **使用volatile作用:**各个线程会将共享变量从主内存中拷贝到工作内存，然后执行引擎会基于工作内存中的数据进行操作处理。线程在工作内存进行操作后何时会写到主内存中？这个时机对普通变量是没有规定的，而针对volatile修饰的变量给java虚拟机特殊的约定，线程对volatile变量的修改会立刻被其他线程所感知，即不会出现数据脏读的现象，从而保证数据的“可见性”。
 
+- synchronized在修饰代码块的时候:**synchronized 同步语句块的实现使用的是 monitorenter 和 monitorexit 指令，其中 monitorenter 指令指向同步代码块的开始位置，monitorexit 指令则指明同步代码块的结束位置**
+
+	synchronized修饰方法的时候:**取得代之的确实是 ACC_SYNCHRONIZED 标识，该标识指明了该方法是一个同步方法，JVM 通过该 ACC_SYNCHRONIZED 访问标志来辨别一个方法是否声明为同步方法，从而执行相应的同步调用。**
     
     
-  
+## 五、乐观锁和悲观锁概念? 什么是CAS?
+
+首先展示乐观锁和悲观锁的例子
+
+```
+// ------------------------- 悲观锁的调用方式 -------------------------
+// synchronized
+public synchronized void testMethod() {
+	// 操作同步资源
+}
+// ReentrantLock
+private ReentrantLock lock = new ReentrantLock(); // 需要保证多个线程使用的是同一个锁
+public void modifyPublicResources() {
+	lock.lock();
+	// 操作同步资源
+	lock.unlock();
+}
+
+// ------------------------- 乐观锁的调用方式 -------------------------
+private AtomicInteger atomicInteger = new AtomicInteger();  // 需要保证多个线程使用的是同一个AtomicInteger
+atomicInteger.incrementAndGet(); //执行自增1
+```
+
+- **悲观锁:** 应该是很常见的了,平常经常用,是将整个资源的锁对象获取,其他对象必须等待锁资源释放才可以.
+- **乐观锁:** 乐观锁看不出来明显的占用锁的操作. 常见的就是CAS算法
+____
+
+- **CAS算法:** (Compare And Swap),是一种无锁算法,
