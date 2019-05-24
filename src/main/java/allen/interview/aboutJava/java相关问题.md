@@ -1,6 +1,6 @@
 # Java Interview Question 
 
-1.  ### 为什么String 要设计为final 不可变 
+### 1.  为什么String 要设计为final 不可变 
    
      String的源代码：
      ```java
@@ -15,13 +15,14 @@
        - String 不可变才可以利用它作为不可变的key
        - 线程安全的
 
-2. ### Java异常
+###2. Java异常
    - Throwable子类分为  Exception（异常）And Error（错误）囊括了java中会遇到的各种情况
    - Exception一般是程序出现的错误，是修改我们的代码可以修改的情况，但是Error就是一些我们处理不了的情况，例如：内存溢出异常或者虚拟机异常我们无法处理
    - Exception运行时异常(RuntimeException)是指可以不强制进行try-catch就可以编译通过。例如常见的空指针异常，数组越界异常等
    - 非运行时异常，或者叫编译异常 从程序语法角度讲是必须进行处  理的异常，如果不处理，
    程序就不能编译通过。如IOException、SQLException等以及用户自定义的Exception异常，一般情况下不自定义检查异常。
-3. ### Java反射
+
+###3. Java反射
    > 反射可以获取类的所有信息
    1. 反射的获取Class对象方式有三种：1 Class类的 *forName(String
       clazzName)* 方法，必须使用全限定名
@@ -47,7 +48,7 @@
       //forName方法会初始化static变量和static块代码
        Class n2=Class.forName("allen.interview.jvm.InitialOrderTest");
       ```
-4. ### 接口和静态类的区别
+### 4.接口和静态类的区别
    1. 静态类概念：含有静态方法的类必须声明为静态类
       静态类就是半成品的类，不能实例化只能被继承
       - 静态类不能被实例化
@@ -57,7 +58,8 @@
       - 方法必须都是public的
       - Java8之后增强了接口：可以定义default方法（只能通过实现类使用并且可以重载）
         和static方法（只能通过接口使用）
-5. ### Java基础类型及大小
+
+###5. Java基础类型及大小
 
 |类型|大小| 
 |:-----:|:----:|
@@ -70,7 +72,7 @@
 |double|8字节|
 |boolean|JVM规范中，boolean变量作为int处理，也就是4字节；boolean数组当做byte数组处理|
 
-6. ### Java中为啥只存在值传递???
+###6. Java中为啥只存在值传递???
 
    > 总结:**Java中只存在值传递** 穿进去的参数都是copy
    > > 这里注意了注意了,一直一来我们都有一个误区--->**java中存在引用传递**但是这是不存在的兄弟

@@ -1,18 +1,29 @@
 package allen.interview.aboutJava.reflect;
 
 public class Son extends Father{
-    private static String Name="SON";
-    private String gun;
+    private String mSonName;
+    protected int mSonAge;
+    public String mSonBirthday;
 
-    public String getGun() {
-        return gun;
+    public void printSonMsg(){
+        System.out.println("Son Msg - name : "
+                + mSonName + "; age : " + mSonAge);
     }
 
-    public void setGun(String gun) {
-        this.gun = gun;
+    private void setSonName(String name){
+        mSonName = name;
     }
 
-    static void learn(){
-        System.out.println(Name + "learn something");
+    private void setSonAge(int age){
+        mSonAge = age;
     }
+
+    private int getSonAge(){
+        return mSonAge;
+    }
+
+    private String getSonName(){
+        return mSonName;
+    }
+
 }
