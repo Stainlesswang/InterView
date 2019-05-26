@@ -23,41 +23,45 @@
    程序就不能编译通过。如IOException、SQLException等以及用户自定义的Exception异常，一般情况下不自定义检查异常。
 
 ###3. Java反射
-   > 反射可以获取类的所有信息
-   1. 反射的获取Class对象方式有三种：1 Class类的 *forName(String
-      clazzName)* 方法，必须使用全限定名
-      2.调用某个类的class属性来获取该类对应的Class对象
-      3.调用某个对象的getClass()方法。该方法是java.lang.Object类中的一个方法
-      ```
-         //第一种方式 通过Class类的静态方法——forName()来实现
-         class1 = Class.forName("com.lvr.reflection.Person");
-         //第二种方式 通过类的class属性
-         class1 = Person.class;
-         //第三种方式 通过对象getClass方法
-         Person person = new Person();
-         Class<?> class1 = person.getClass();
-         ```
-   2. Class.forName()和ClassLoader获取类的区别:
-      只要记住了web项目在加载Mysql驱动的时候使用的是Class.forName("com.mysql.Driver"),因为需要执行Driver类中的静态代码块来
-      *DriverManager.registerDriver(new Driver());*注册驱动.
-      [blog about this](http://www.importnew.com/29389.html)
-       ```
-      ClassLoader loader=ClassLoader.getSystemClassLoader();
-      //loadClass只是把类的二进制流加载到JVM中，不进行初始化
-      Class n=loader.loadClass("allen.interview.jvm.InitialOrderTest");
-      //forName方法会初始化static变量和static块代码
-       Class n2=Class.forName("allen.interview.jvm.InitialOrderTest");
-      ```
+1. 反射的获取Class对象方式有三种：      
+  
+  ``` java
+  //第一种方式 通过Class类的静态方法——forName()来实现 必须使用全限定名
+  class1 = Class.forName("com.lvr.reflection.Person");
+  //第二种方式 通过类的class属性
+  class1 = Person.class;
+   //第三种方式 通过对象getClass方法 调用某个对象的getClass()方法。该方法是java.lang.Object类中的一个方法
+   Person person = new Person();
+   Class<?> class1 = person.getClass();
+  ```
+   
+   
+2. **Class.forName()和ClassLoader获取类的区别**:
+
+  只要记住了web项目在加载Mysql驱动的时候使用的是Class.forName("com.mysql.Driver"),因为需要执行Driver类中的静态代码块来 *DriverManager.registerDriver(new Driver());*注册驱动.[blog about this](http://www.importnew.com/29389.html)
+
+	```
+	ClassLoader loader=ClassLoader.getSystemClassLoader();
+	//loadClass只是把类的二进制流加载到JVM中，不进行初始化
+	Class n=loader.loadClass("allen.interview.jvm.InitialOrderTest");
+	//forName方法会初始化static变量和static块代码
+	Class n2=Class.forName("allen.interview.jvm.InitialOrderTest");
+```
+  
+
+
 ### 4.接口和静态类的区别
-   1. 静态类概念：含有静态方法的类必须声明为静态类
-      静态类就是半成品的类，不能实例化只能被继承
+
+1. 静态类概念：含有静态方法的类必须声明为静态类静态类就是半成品的类，不能实例化只能被继承
       - 静态类不能被实例化
       - 静态类的静态方法必须是 非
-   2. 接口：更加抽象的行为抽象
+
+2. 接口：更加抽象的行为抽象
       - 变量默认都是 static final 类型的
       - 方法必须都是public的
       - Java8之后增强了接口：可以定义default方法（只能通过实现类使用并且可以重载）
         和static方法（只能通过接口使用）
+
 
 ###5. Java基础类型及大小
 

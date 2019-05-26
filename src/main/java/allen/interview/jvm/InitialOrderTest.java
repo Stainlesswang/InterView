@@ -3,14 +3,15 @@ package allen.interview.jvm;
 /**
  * @author WangJianQiang
  * @Description:
+
  * @date 2019年03月05日 13:47
  */
 public class InitialOrderTest {
 	public  boolean top;
 	/* 静态变量 */
-	public static String staticField = "静态变量";
+	private static String staticField = "静态变量";
 	/* 变量 */
-	public String field = "变量";
+    private String field = "变量";
 	/* 静态初始化块 */
 	static {
 		System.out.println( staticField );
