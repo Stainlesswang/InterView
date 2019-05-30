@@ -4,6 +4,9 @@ public class Son extends Father{
     private String mSonName;
     protected int mSonAge;
     public String mSonBirthday;
+    static {
+        System.out.println("this is static block method");
+    }
 
     public void printSonMsg(){
         System.out.println("Son Msg - name : "
