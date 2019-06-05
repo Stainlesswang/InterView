@@ -25,12 +25,5 @@ public class MyRunnable implements Runnable{
         thread1.start();
         thread1.join();
         System.out.println("main thread now is End My dear!");
-        //        main thread start running!
-        //        A运行  :  0
-        //        A运行  :  1
-        //        A运行  :  2
-        //        A运行  :  3
-        //        A运行  :  4
-        //        main thread now is End My dear!
     }
 }

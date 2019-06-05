@@ -17,5 +17,6 @@ public class JavaThread {
 		thread.start();
 		thread.interrupt();
 
+
 	}
 }
