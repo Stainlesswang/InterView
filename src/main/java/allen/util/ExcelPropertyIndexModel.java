@@ -4,7 +4,7 @@ import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.metadata.BaseRowModel;
 
 public class ExcelPropertyIndexModel extends BaseRowModel {
-    public ExcelPropertyIndexModel(String name,String age){
+            public ExcelPropertyIndexModel(String name,Integer age){
         this.name=name;
         this.age=age;
         this.email=name;
@@ -14,7 +14,7 @@ public class ExcelPropertyIndexModel extends BaseRowModel {
     private String name;
 
     @ExcelProperty(value = "年龄", index = 1)
-    private String age;
+    private int age;
 
     @ExcelProperty(value = "邮箱", index = 2)
     private String email;
@@ -39,11 +39,11 @@ public class ExcelPropertyIndexModel extends BaseRowModel {
         this.name = name;
     }
 
-    public String getAge() {
+    public int getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(int age) {
         this.age = age;
     }
 

@@ -1,6 +1,8 @@
 package allen.util;
 
 import com.alibaba.excel.ExcelWriter;
+import com.alibaba.excel.annotation.ExcelProperty;
+import com.alibaba.excel.metadata.BaseRowModel;
 import com.alibaba.excel.metadata.Sheet;
 import com.alibaba.excel.support.ExcelTypeEnum;
 
@@ -21,10 +23,10 @@ public class ExcelUtile {
             //写第一个sheet, sheet1  数据全是List<String> 无模型映射关系
             Sheet sheet1 = new Sheet(1, 0,ExcelPropertyIndexModel.class);
             List<ExcelPropertyIndexModel> list=new ArrayList<>();
-            list.add(new ExcelPropertyIndexModel("chizhenfang","12"));
-            list.add(new ExcelPropertyIndexModel("chizhenfang","12"));
-            list.add(new ExcelPropertyIndexModel("chizhenfang","12"));
-            list.add(new ExcelPropertyIndexModel("chizhenfang","12"));
+            list.add(new ExcelPropertyIndexModel("chizhenfang",11));
+            list.add(new ExcelPropertyIndexModel("chizhenfang",12));
+            list.add(new ExcelPropertyIndexModel("chizhenfang",13));
+            list.add(new ExcelPropertyIndexModel("chizhenfang",14));
             writer.write(list, sheet1);
             writer.finish();
         } catch (Exception e) {
