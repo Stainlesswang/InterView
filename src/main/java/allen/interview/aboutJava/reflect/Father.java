@@ -11,4 +11,8 @@ public class Father implements Person{
     public void live() {
         System.out.println("Father live");
     }
+
+    public void out(){
+        System.out.println("Father");
+    }
 }

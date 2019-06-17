@@ -3,7 +3,9 @@ package allen.interview.aboutJava.reflect;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 
@@ -50,8 +52,16 @@ public class Test {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
-
+        Father father=new Father();
+        Father c=new Son();
+        Son son=new Son();
+        List<Father> list=new ArrayList<>();
+        list.add(father);
+        list.add(c);
+        list.add(son);
+        for (Father father1 : list) {
+            father1.out();
+        }
     }
 
 }

@@ -13,6 +13,11 @@ public class Son extends Father{
                 + mSonName + "; age : " + mSonAge);
     }
 
+    @Override
+    public void out() {
+        System.out.println("Son");
+    }
+
     private void setSonName(String name){
         mSonName = name;
     }
