@@ -8,6 +8,16 @@
 
    
 
-2. ****
+2. **Bean 的加载**
+
+  * FactoryBean接口
+    
+     * T getObject(): 返回由FactoryBean创建的bean实例,如果isSingleton()返回true,则该实例会放到Spring单例缓存池中
+    
+     * boolean isSingleton():返回该实例是否是单例
+     
+     * Class<T> getObjectType():创建的bean实例类型
+   
+   当需要获取该bean本身的时候,只需要使用getBean(beanName)的时候加上"&"前缀即可
 
    
