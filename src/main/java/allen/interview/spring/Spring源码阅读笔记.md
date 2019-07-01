@@ -19,5 +19,9 @@
      * Class<T> getObjectType():创建的bean实例类型
    
    当需要获取该bean本身的时候,只需要使用getBean(beanName)的时候加上"&"前缀即可
+   
+   
+3. **Spring Boot体系相关**
+   
 
    
