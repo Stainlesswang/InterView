@@ -23,5 +23,17 @@
 ### 3. **ReadLock 分布式锁**
 
 Redis官方提出了一种权威的基于Redis实现分布式锁的方式交RedLock,此种方式比原先的单节点更安全,它具有以下特性:
+  
   1. 安全特性:互斥访问,永远只有一个client能拿到锁
-  2. 避免死锁:最终client都可能拿到锁,不会出现死锁的情况,即使原本锁住某资源的client crash了
+  2. 避免死锁:最终client都可能拿到锁,不会出现死锁的情况,即使原本锁住某资源的client crash了或者出现了网络分区
+  3. 容错性: 只要大本分Redis节点存活就可以正常提供服务
+
+如何在单节点实现分布式锁?
+
+  ```
+  if redis.call("get",KEYS[1]) == ARGV[1] then
+    return redis.call("del",KEYS[1])
+else
+    return 0
+end
+  ```
