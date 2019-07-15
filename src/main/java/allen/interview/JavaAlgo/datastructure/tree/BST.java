@@ -1,5 +1,10 @@
 package allen.interview.JavaAlgo.datastructure.tree;
 
+/**
+ * 平衡二叉树的数据结构实现
+ * @param <Key>
+ * @param <Value>
+ */
 public class BST<Key extends Comparable<Key>, Value> {
     private Node root;
 
