@@ -64,3 +64,8 @@
   8. 执行distinct去除重复数据
   9. 执行order by语句
   10. 执行limit语句
+
+
+---
+
+## 2.Mysql大表优化
