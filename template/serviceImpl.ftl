@@ -117,7 +117,7 @@ public class ${upClassName}ServiceImpl implements ${upClassName}Service {
 	if (!dbBean.getAasname().equals(${lowClassName}Bean.getAasname())) {
 	${upClassName}Bean dMenuBean = ${lowClassName}Dao.get${upClassName}ByName(${lowClassName}Bean.getAasname());
 	if (null != dMenuBean) {
-	return AlertMessage.getActionResponse("msgAppAnimalRepeat");
+	return AlertMessage.getActionResponse("msg${upClassName}Repeat");
 	}
 	}
 	if (!dbBean.getAudiourl().equals(${lowClassName}Bean.getAudiourl())) {
@@ -177,11 +177,11 @@ public class ${upClassName}ServiceImpl implements ${upClassName}Service {
 	public AjaxResponse add${upClassName}(${upClassName}Bean bean) throws Exception {
 	AjaxResponse ajaxResponse = null;
 	if (StringUtils.isEmpty(bean.getAasname())) {
-	return AlertMessage.getActionResponse("msgAppAnimalNameNull");
+	return AlertMessage.getActionResponse("msg${upClassName}NameNull");
 	}
 	${upClassName}Bean dMenuBean = ${lowClassName}Dao.get${upClassName}ByName(bean.getAasname());
 	if (null != dMenuBean) {
-	return AlertMessage.getActionResponse("msgAppAnimalRepeat");
+	return AlertMessage.getActionResponse("msg${upClassName}Repeat");
 	}
     <#if typeid??>
 	int maxIdx = ${lowClassName}Dao.maxIdx(bean.get${typeid?cap_first}());
