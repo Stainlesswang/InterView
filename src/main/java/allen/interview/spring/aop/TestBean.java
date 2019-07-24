@@ -1,5 +1,6 @@
 package allen.interview.spring.aop;
 
+
 public class TestBean {
     private String testStr="testStr";
 
