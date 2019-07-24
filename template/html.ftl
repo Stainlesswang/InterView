@@ -3,18 +3,7 @@
 <head>
 	<title>${chineseName}管理</title>
 	<head th:replace="include/head"/>
-	<#--<script type="text/javascript" th:src="@{{path}/js/jquery/jquery.json-2.2.js(path=${basePath})}"></script>-->
-	<#--<script type="text/javascript" th:src="@{{path}/js/jquery-flexigrid/flexigrid.js(path=${basePath})}"></script>-->
-	<#--<script type="text/javascript" th:src="@{{path}/js/mJs/ajaxfileupload.js(path=${basePath})}"></script>-->
-	<#--<script type="text/javascript" th:src="@{{path}/js/My97DatePicker/WdatePicker.js(path=${basePath})}"></script>-->
-	<#--<script type="text/javascript"-->
-			<#--th:src="@{{path}/js/jquery-ztree/jquery.ztree.core-3.5.js(path=${basePath})}"></script>-->
-	<#--<script type="text/javascript"-->
-			<#--th:src="@{{path}/js/jquery-ztree/jquery.ztree.excheck-3.5.js(path=${basePath})}"></script>-->
-	<#--<link rel="stylesheet" type="text/css"-->
-		  <#--th:href="@{{path}/js/jquery-flexigrid/css/gray/flexigrid.css(path=${basePath})}"/>-->
-	<#--<link rel="stylesheet" type="text/css"-->
-		  <#--th:href="@{{path}/js/jquery-ztree/zTreeStyle3.5/zTreeStyle.css(path=${basePath})}"/>-->
+
 </head>
 <body>
 <div class="searchTopDiv">

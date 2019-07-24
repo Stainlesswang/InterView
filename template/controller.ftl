@@ -69,7 +69,7 @@ public class ${upClassName}Controller extends BaseController {
 	 */
 	@RequestMapping("/${lowClassName}_delete${upClassName}")
 	public @ResponseBody
-	Object delete${upClassName}(Integer id) {
+	Object delete${upClassName}(Integer id) throws Exception {
 		return ${lowClassName}Service.delete${upClassName}(id, getCurrentUserId());
 	}
 
@@ -99,7 +99,7 @@ public class ${upClassName}Controller extends BaseController {
 	@RequestMapping("/${lowClassName}_add${upClassName}")
 	public @ResponseBody
 	Object add${upClassName}(${upClassName}Bean ${lowClassName}Bean) throws Exception {
-${lowClassName}Bean.setCreatorid(getCurrentUserId());
+${lowClassName}Bean.setCreatorsuid(getCurrentUserId());
 	return ${lowClassName}Service.add${upClassName}(${lowClassName}Bean);
 	}
 
@@ -113,7 +113,7 @@ ${lowClassName}Bean.setCreatorid(getCurrentUserId());
 	@RequestMapping("/${lowClassName}_update${upClassName}")
 	public @ResponseBody
 	Object update${upClassName}(${upClassName}Bean ${lowClassName}Bean) throws Exception {
-	${lowClassName}Bean.setUpdateuserid(getCurrentUserId());
+	${lowClassName}Bean.setUpdatesuid(getCurrentUserId());
 	return ${lowClassName}Service.update${upClassName}ById(${lowClassName}Bean);
 	}
    //var urlPath = path + "/${lowClassName}/${lowClassName}_";
