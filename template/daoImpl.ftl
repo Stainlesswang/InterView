@@ -120,10 +120,10 @@ public class ${upClassName}DaoImpl extends YoungManage<${upClassName}Bean> imple
 			public int delete${upClassName}(${upClassName}Bean bean) throws Exception {
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("${id}", bean.getAasid());
-			params.put("updateuserid", bean.getUpdateuserid());
+			params.put("updatesuid", bean.getUpdatesuid());
 			params.put("updatetime", DateTools.getFormatNowDate());
 			params.put("deleteflag", GlobalFunctionConstants.FINAL_DELETE_FLAG_1);
-			String sqlDelete = "UPDATE " + ${upClassName}Bean.FINAL_TABLE_NAME + " SET deleteflag = :deleteflag, updateuserid = :updateuserid, updatetime = :updatetime WHERE ${id} = :${id}";
+			String sqlDelete = "UPDATE " + ${upClassName}Bean.FINAL_TABLE_NAME + " SET deleteflag = :deleteflag, updatesuid = :updatesuid, updatetime = :updatetime WHERE ${id} = :${id}";
 			return mNamedWriteJdbcTemplate.update(sqlDelete, params);
 			}
 
@@ -214,11 +214,11 @@ public class ${upClassName}DaoImpl extends YoungManage<${upClassName}Bean> imple
 	 */
 	@Override
 	public int updateIdx(String ${id}, int newIdx, String userId, String time) {
-		String sql = "UPDATE " + ${upClassName}Bean.FINAL_TABLE_NAME + " SET idx = :idx, updateuserid = :updateuserid WHERE ${id} = :${id} ";
+		String sql = "UPDATE " + ${upClassName}Bean.FINAL_TABLE_NAME + " SET idx = :idx, updatesuid = :updatesuid WHERE ${id} = :${id} ";
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("${id}", ${id});
 		params.put("idx", newIdx);
-		params.put("updateuserid", userId);
+		params.put("updatesuid", userId);
 		return getNamedJdbc().update(sql, params);
 	}
 
@@ -237,12 +237,12 @@ public class ${upClassName}DaoImpl extends YoungManage<${upClassName}Bean> imple
 	@Override
 	public int incIdx(int beginIdx, int endIdx, String userId,String time<#if typeid??>, Integer ${typeid}</#if>) {
 		String sql = "UPDATE " + ${upClassName}Bean.FINAL_TABLE_NAME +
-				" SET idx = (idx + 1), updateuserid = :updateuserid WHERE deleteflag= 0  AND idx >= :beginIdx AND idx <= :endIdx <#if typeid??>AND ${typeid} = :${typeid}</#if> ";
+				" SET idx = (idx + 1), updatesuid = :updatesuid WHERE deleteflag= 0  AND idx >= :beginIdx AND idx <= :endIdx <#if typeid??>AND ${typeid} = :${typeid}</#if> ";
 		Map<String, Object> params = new HashMap<String, Object>();
         <#if typeid??>params.put("${typeid}", ${typeid});</#if>
 		params.put("beginIdx", beginIdx);
 		params.put("endIdx", endIdx);
-		params.put("updateuserid", userId);
+		params.put("updatesuid", userId);
 		return getNamedJdbc().update(sql, params);
 	}
 
@@ -261,13 +261,13 @@ public class ${upClassName}DaoImpl extends YoungManage<${upClassName}Bean> imple
 	@Override
 	public int decIdx(int beginIdx, int endIdx, String userId, String time<#if typeid??>, Integer ${typeid}</#if>) {
 		String sql = "UPDATE " + ${upClassName}Bean.FINAL_TABLE_NAME +
-				" SET idx = (idx - 1), updateuserid = :updateuserid WHERE deleteflag= 0  AND  idx >= :beginIdx AND idx <= :endIdx <#if typeid??>AND ${typeid} = :${typeid}</#if>";
+				" SET idx = (idx - 1), updatesuid = :updatesuid WHERE deleteflag= 0  AND  idx >= :beginIdx AND idx <= :endIdx <#if typeid??>AND ${typeid} = :${typeid}</#if>";
 		Map<String, Object> params = new HashMap<String, Object>();
                     <#if typeid??>params.put("${typeid}", ${typeid});</#if>
 
                     params.put("beginIdx", beginIdx);
 		params.put("endIdx", endIdx);
-		params.put("updateuserid", userId);
+		params.put("updatesuid", userId);
 		return getNamedJdbc().update(sql, params);
 	}
 
