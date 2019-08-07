@@ -30,6 +30,19 @@ public class EvenClient {
 		},"Producer2").start();
 
 		//一个线程作为消费Event的线程，处理每个线程会耗时30 seconds时间（为了模拟真实情况）
+
+
+        new Thread(()->{
+			for (; ;){
+				eventQueue.take();
+				try {
+					TimeUnit.SECONDS.sleep(30);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		},"Consumer1").start();
+
 		new Thread(()->{
 			for (; ;){
 				eventQueue.take();
@@ -39,16 +52,9 @@ public class EvenClient {
 					e.printStackTrace();
 				}
 			}
-		},"Consumer1").start();new Thread(()->{
-			for (; ;){
-				eventQueue.take();
-				try {
-					TimeUnit.SECONDS.sleep(30);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		},"Consumer2").start();new Thread(()->{
+		},"Consumer2").start();
+
+		new Thread(()->{
 			for (; ;){
 				eventQueue.take();
 				try {
