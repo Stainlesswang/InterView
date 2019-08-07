@@ -133,19 +133,42 @@ static int NORM_PRIORITY  分配给线程的默认优先级，取值为5。
   **使用方式:**主线程生成并起动了子线程，主线程需要等待子线程执行完成之后再结束，这个时候就要用到join()方法了。主线程一定会等子线程都结束了才结束.
   
   ```java
-  public static void main(String[] args) throws InterruptedException {
-        System.out.println("main thread start running!");
-        Thread thread1=new Thread(new MyRunnable("A"));
-        thread1.start();
-        thread1.join();
-        System.out.println("main thread now is End My dear!");
-        //   结果: main thread start running!
+  public class MyRunnable implements Runnable{
+    	private String name;
+    
+    	MyRunnable(String name){
+       		 this.name=name;
+   		 }
+    
+	    public void run() {
+	        for (int i = 0; i < 5; i++) {
+	            System.out.println(name + "运行  :  " + i);
+	            try {
+	                Thread.sleep((int) (Math.random() * 10));
+	            } catch (InterruptedException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
+	
+	
+	    public static void main(String[] args) throws InterruptedException {
+	    
+	        System.out.println("main thread start running!");
+	        Thread thread1=new Thread(new MyRunnable("A"));
+	        thread1.start();
+	        thread1.join();
+	        System.out.println("main thread now is End My dear!");
+	     }
+    	
+	}
+  	//输出结果:     main thread start running!
         //        A运行  :  0
         //        A运行  :  1
         //        A运行  :  2
         //        A运行  :  3
         //        A运行  :  4
-        //        main thread now is End My dear!    }
+        //        main thread now is End My dear!  
   ```
 
 

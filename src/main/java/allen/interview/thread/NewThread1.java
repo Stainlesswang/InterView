@@ -18,7 +18,6 @@ public class NewThread1 extends Thread {
                     sleep((int) (Math.random() * 10));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-
                 }
             }
         }
