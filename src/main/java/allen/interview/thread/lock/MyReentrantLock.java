@@ -1,5 +1,8 @@
 package allen.interview.thread.lock;
 
+/**
+ * 重入锁,自定义实现. 详细核心点药继续理解和细化
+ */
 public class MyReentrantLock {
     private boolean isLocked=false;
     private Thread lockBy=null;

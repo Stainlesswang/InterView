@@ -1,20 +1,23 @@
 package allen.interview.thread.lock;
 
-
+/**
+ * 该类说明了 如何使用可重入锁和不可重入锁
+ * 不可重入锁,当加锁的外层方法执行后,子方法内如果尝试获取锁,会阻塞
+ */
 public class Count {
     MyReentrantLock reentrantLock=new MyReentrantLock();
 
-    private NotReentrantLock lock=new NotReentrantLock();
+    private NotReentrantLock notReentrantLock=new NotReentrantLock();
     private void print() throws InterruptedException {
-        reentrantLock.lock();
+        notReentrantLock.lock();
         doAdd();
-        reentrantLock.unlock();
+        notReentrantLock.unlock();
     }
 
     private void doAdd() throws InterruptedException {
-        reentrantLock.lock();
+        notReentrantLock.lock();
         //do something
-        reentrantLock.unlock();
+        notReentrantLock.unlock();
     }
 
     public static void main(String[] args) {

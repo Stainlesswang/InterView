@@ -7,6 +7,13 @@ package allen.interview.designPatterns.singleton;
  */
 public class SingleTonLazy {
 	//使用volatile保证了'可见性',即多个线程看到的该变量的状态都是'最新的'
+    /**
+     * 加上 volatile关键字以后可以防止指令重排序
+     * 原因在于instance = new Singleton(); 可以分为三步：
+     * 1. memory=allocate();//分配内存空间
+     * 2. instance(memory);//初始化对象
+     * 3. instance=memory;//设置instance指向分配的内存地址，分配成功后，instance!=null
+     * **/
 	private static volatile SingleTonLazy singleTonLazy = null;
 
     private SingleTonLazy() {
