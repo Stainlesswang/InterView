@@ -1,4 +1,4 @@
-package allen.auto.code;
+package allen.autocode;
 
 /**
  * @author WangJianQiang

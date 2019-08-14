@@ -1,4 +1,4 @@
-package allen.auto.code.util;
+package allen.autocode.util;
 
 import java.io.File;
 import java.io.FileOutputStream;

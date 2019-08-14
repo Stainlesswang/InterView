@@ -1,8 +1,8 @@
-package allen.auto.code;
+package allen.autocode;
 
 
 import java.util.HashMap;
-import allen.auto.*;
+
 import allen.util.StringUtils;
 
 /**

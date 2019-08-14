@@ -20,7 +20,7 @@ public class Test {
 		        System.out.println(method.getName());
 	        }
 
-//            Class aClass = Class.forName("allen.auto.code.FreeMarkerTest");
+//            Class aClass = Class.forName("FreeMarkerTest");
 //            Object object=aClass.newInstance();
 //            Method method=aClass.getMethod("hahah");
 //            method.invoke(object ,null);
