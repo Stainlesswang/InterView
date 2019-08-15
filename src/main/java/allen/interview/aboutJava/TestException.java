@@ -3,6 +3,9 @@ package allen.interview.aboutJava;
 /**
  * @author WangJianQiang
  * @Description:
+ * 异常的嵌套捕获:
+ * 捕获异常时分层,最内层被捕获到,上层的catch块是不会走的,只会执行finally代码
+ *
  * @date 2019年03月08日 17:08
  */
 public  class TestException {
@@ -55,9 +58,25 @@ public  class TestException {
 		} catch (Exception e) {
 			System.out.println("testEx2, catch exception");
 			ret = false;
+            try {
+                int i = 0;
+                int a = 10 / i;
+            } catch (Exception ee) {
+                System.out.println("catch in catch block is In-------");
+            } finally {
+                System.out.println("catch in catch block finally----");
+            }
 			throw e;
 		} finally {
 			System.out.println("testEx2, finally; return value=" + ret);
+            try {
+                int i = 0;
+                int a = 10 / i;
+            } catch (Exception ee) {
+                System.out.println("catch in finally block is In-------");
+            } finally {
+                System.out.println("catch in finally block finally----");
+            }
 			return ret;
 		}
 	}

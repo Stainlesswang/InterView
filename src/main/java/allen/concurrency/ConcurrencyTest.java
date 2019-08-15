@@ -4,6 +4,8 @@ import org.slf4j.LoggerFactory;
 
 import java.text.MessageFormat;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.LongAdder;
 import java.util.logging.Logger;
 
 import static com.mysql.cj.conf.PropertyKey.logger;
@@ -17,7 +19,11 @@ public class ConcurrencyTest {
     //总线程数
     public static int threadTotal = 200;
 
-    public static volatile int count = 0;
+    /**LongAdder 是在高并发计数的情况下如何提高性能在java8以后做的优化
+     * 其主要思想是利用了concurrentHashMap分段锁的思想, 每个线程名称经过hash修改制定的cell下标的数据
+     * 然后计算sum的时候对cell数据循环累加得到结果
+     * */
+    private static LongAdder count =new LongAdder();//
 
     public static void main(String[] args) throws InterruptedException {
         ExecutorService executorService = Executors.newCachedThreadPool();
@@ -55,7 +61,7 @@ public class ConcurrencyTest {
 //    }
 
     public static void add() {
-        count++;
+        count.decrement();
     }
 
 
