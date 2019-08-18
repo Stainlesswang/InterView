@@ -22,6 +22,7 @@ public class ConcurrencyTest {
     /**LongAdder 是在高并发计数的情况下如何提高性能在java8以后做的优化
      * 其主要思想是利用了concurrentHashMap分段锁的思想, 每个线程名称经过hash修改制定的cell下标的数据
      * 然后计算sum的时候对cell数据循环累加得到结果
+     * 首先理解到这里. 以后详细使用再来翻翻
      * */
     private static LongAdder count =new LongAdder();//
 
