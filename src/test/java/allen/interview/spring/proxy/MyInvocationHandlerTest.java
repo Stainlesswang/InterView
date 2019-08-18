@@ -10,7 +10,9 @@ public class MyInvocationHandlerTest {
 
     @Test
     public void getProxy() {
+        //首先声明需要的代理类
         UserService userService=new UserServiceImpl();
+        //动态代理技术实现的增强类, add方法执行之前和之后会打印出来相应的信息
         UserService proxy= (UserService) new MyInvocationHandler(userService).getProxy();
         proxy.add();
     }

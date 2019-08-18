@@ -9,6 +9,7 @@ import java.lang.reflect.Proxy;
  *
  */
 public class MyInvocationHandler implements InvocationHandler {
+    //真正需要执行 add()方法的对象
     private Object target;
 
     /**
@@ -19,6 +20,15 @@ public class MyInvocationHandler implements InvocationHandler {
         super();
         this.target=object;
     }
+
+    /**
+     *
+     * @param proxy
+     * @param method
+     * @param args
+     * @return
+     * @throws Throwable
+     */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         System.out.println("before-------------");
