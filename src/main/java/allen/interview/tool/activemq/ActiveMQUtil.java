@@ -9,10 +9,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class ActiveMQUtil {
+class ActiveMQUtil {
     private static final Logger logger = LoggerFactory.getLogger(ActiveMQUtil.class);
 
-    public static ActiveMQConnectionFactory getActiveMQConnectionFactory() throws IOException {
+    static ActiveMQConnectionFactory getActiveMQConnectionFactory() throws IOException {
         // load the ActiveMQ configerations
         Properties props = new Properties();
         try (InputStream inStream = ActiveMQUtil.class.getClassLoader()

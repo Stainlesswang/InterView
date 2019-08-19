@@ -10,10 +10,10 @@ import javax.jms.*;
 /**
  * 消费者
  */
-public class ActiveMQConsumerTest extends JMSTemplate implements MessageListener {
-    private Logger logger = LoggerFactory.getLogger(ActiveMQConsumerTest.class);
+public class ActiveMQTopicConsumerTest2 extends JMSTemplate implements MessageListener {
+    private Logger logger = LoggerFactory.getLogger(ActiveMQTopicConsumerTest2.class);
 
-    public ActiveMQConsumerTest(ConnectionFactory connectionFactory) {
+    public ActiveMQTopicConsumerTest2(ConnectionFactory connectionFactory) {
         super(connectionFactory);
     }
 
@@ -24,8 +24,8 @@ public class ActiveMQConsumerTest extends JMSTemplate implements MessageListener
      */
     @Override
     public void doTask(Session session) throws JMSException {
-        Destination destination = session.createQueue(ActiveMQNameUtil.TEST_QUEUE);
-        MessageConsumer consumer = session.createConsumer(destination);
+        Topic topic = session.createTopic(ActiveMQNameUtil.TEST_TOPIC);
+        MessageConsumer consumer = session.createConsumer(topic);
         consumer.setMessageListener(this);
     }
 
@@ -42,7 +42,7 @@ public class ActiveMQConsumerTest extends JMSTemplate implements MessageListener
     public void onMessage(Message message) {
         TextMessage textMessage = (TextMessage) message;
         try {
-            System.out.println("One 2 One Consumer2###received msg:" + textMessage.getText());
+            System.out.println("Consumer2####Topic msg Is:" + textMessage.getText());
         } catch (JMSException e) {
             logger.error(e.getMessage(), e);
         }

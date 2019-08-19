@@ -41,7 +41,7 @@ public abstract class JMSTemplate {
      * isConsumer();
      * 是继承该类的具体实现
      */
-    public final void startTask() throws JMSException {
+    final void startTask() throws JMSException {
         Connection connection = null;
         Session session = null;
         try {
@@ -56,7 +56,7 @@ public abstract class JMSTemplate {
         }
     }
 
-    public void releaseConnection(Connection connection, Session session) throws JMSException {
+    private void releaseConnection(Connection connection, Session session) throws JMSException {
         if (null != session) {
             session.close();
         }

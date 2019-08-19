@@ -24,7 +24,7 @@ public class ActiveMQProducerTest extends JMSTemplate {
         Destination destination = session.createQueue(ActiveMQNameUtil.TEST_QUEUE);
         MessageProducer producer = session.createProducer(destination);
         producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 20; i++) {
             TextMessage message = session.createTextMessage("Hello,JMS and ActiveMQ----->"+i);
             producer.send(message);
             try {
