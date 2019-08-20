@@ -13,7 +13,7 @@ class ActiveMQUtil {
     private static final Logger logger = LoggerFactory.getLogger(ActiveMQUtil.class);
 
     static ActiveMQConnectionFactory getActiveMQConnectionFactory() throws IOException {
-        // load the ActiveMQ configerations
+        // load the ActiveMQ configurations
         Properties props = new Properties();
         try (InputStream inStream = ActiveMQUtil.class.getClassLoader()
                 .getResourceAsStream("activemqcofig.properties");) {
