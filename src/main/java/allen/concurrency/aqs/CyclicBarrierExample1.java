@@ -23,7 +23,6 @@ public class CyclicBarrierExample1 {
                     e.printStackTrace();
                 }
             });
-
         }
         exec.shutdown();
     }

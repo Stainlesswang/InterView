@@ -15,9 +15,9 @@ import static com.mysql.cj.conf.PropertyKey.logger;
  */
 public class ConcurrencyTest {
     //请求总数
-    public static int clientTotal = 5000;
+    private static int clientTotal = 5000;
     //总线程数
-    public static int threadTotal = 200;
+    private static int threadTotal = 200;
 
     /**LongAdder 是在高并发计数的情况下如何提高性能在java8以后做的优化
      * 其主要思想是利用了concurrentHashMap分段锁的思想, 每个线程名称经过hash修改制定的cell下标的数据
