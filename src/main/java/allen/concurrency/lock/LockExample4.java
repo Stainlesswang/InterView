@@ -1,19 +1,19 @@
 package allen.concurrency.lock;
 
 import java.text.MessageFormat;
-import java.util.concurrent.*;
-import java.util.concurrent.atomic.LongAdder;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.StampedLock;
 
 /**
- * ReentrantLock 如何使用的例子
- * 首先他是jdk层面实现的锁,必须用代码加锁和解锁,
- * 并且和synchronized 相比较 特殊之处在于以下三点
- * 1.能够指定 公平锁 或者 非公平锁
- * 2.可以使用Condition类,可以分组唤醒需要唤醒的锁
- * 3.提供了一种中断等在锁的机制
+ * StampedLock 是什么: stampedLock 不仅实现了读锁和写锁,还实现了乐观写锁
+ *
+ * 当调用写锁加锁时会返回一个标记, 解锁的时候必须带上该标记才能够解锁
  */
-public class LockExample1 {
+public class LockExample4 {
     //请求总数
     private static int clientTotal = 5000;
     //总线程数
@@ -21,7 +21,7 @@ public class LockExample1 {
 
     private static int count =0;
 
-    private final static ReentrantLock reentrantLock=new ReentrantLock();
+    private final static StampedLock stampedLock=new StampedLock();
     public static void main(String[] args) throws InterruptedException {
         ExecutorService executorService = Executors.newCachedThreadPool();
         Semaphore semaphore = new Semaphore(threadTotal);
@@ -44,11 +44,11 @@ public class LockExample1 {
     }
 
     public static  void add() {
-        reentrantLock.lock();
+        long stamp=stampedLock.writeLock();
         try{
             count++;
         }finally {
-            reentrantLock.unlock();
+            stampedLock.unlock(stamp);
         }
     }
 }

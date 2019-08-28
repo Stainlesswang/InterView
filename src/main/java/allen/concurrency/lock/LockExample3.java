@@ -1,19 +1,17 @@
 package allen.concurrency.lock;
 
 import java.text.MessageFormat;
-import java.util.concurrent.*;
-import java.util.concurrent.atomic.LongAdder;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * ReentrantLock 如何使用的例子
- * 首先他是jdk层面实现的锁,必须用代码加锁和解锁,
- * 并且和synchronized 相比较 特殊之处在于以下三点
- * 1.能够指定 公平锁 或者 非公平锁
+ * ReentrantLock 第二点例子使用, 如何使用Condition类
  * 2.可以使用Condition类,可以分组唤醒需要唤醒的锁
- * 3.提供了一种中断等在锁的机制
  */
-public class LockExample1 {
+public class LockExample3 {
     //请求总数
     private static int clientTotal = 5000;
     //总线程数
