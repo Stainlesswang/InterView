@@ -11,6 +11,7 @@ import java.util.Map;
 
 /**
  * socket服务提供者,监听一个端口,收到信息,处理后并返回数据
+ * 启动该类
  */
 public class ProviderRPC {
     private static Map<String, Object> servicesPool = new HashMap<>();
