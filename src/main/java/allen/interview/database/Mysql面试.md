@@ -10,3 +10,12 @@
   - Consistency **一致性:**数据库经过事务以后,整个数据库状态是完美从一个状态到另一个状态,是完全符合规则的.例如 A向B转了一百块,最后的状态是A的账户少了100,B的账号多了100. 这就是一致性
   - Isolation **隔离性:**数据库允许并行多个事务执行数据的更新,隔离性可以防止多个事务并发交叉执行而导致的数据不一致问题. 事务隔离分为多个级别,包括 未提交(Read uncommitted),读提交(read committed),可重复读(repeatable read)和串行化(Serializable)
   - Durability **持久性:**一个事务执行完毕,对数据的修改时永久的,及时系统故障也不会丢失
+  
+2. 事务的隔离级别
+
+	|隔离级别|脏读可能性|不可重复读可能性| 幻读可能性|加锁读|
+	|:-----:|:----:|:----:|:----:|:----:|
+	|Read Uncommitted|Yes|Yes|Yes|N0|
+	|Read Committed|No|Yes|Yes|No|
+	|Repeatable Read|No|No|Yes|No|
+	|Serializable|No|No|No|Yes|
