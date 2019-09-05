@@ -1,4 +1,7 @@
-package allen.interview.thread.chapter08;
+package allen.interview.thread.pool;
+
+import allen.interview.thread.pool.demo.BasicThreadPool;
+import allen.interview.thread.pool.demo.ThreadPool;
 
 import java.util.concurrent.TimeUnit;
 

@@ -1,4 +1,4 @@
-package allen.interview.thread.chapter08;
+package allen.interview.thread.pool.demo;
 
 import java.util.ArrayDeque;
 import java.util.Queue;
@@ -33,7 +33,7 @@ public class BasicThreadPool extends Thread implements ThreadPool {
 	private final static DenyPolicy DEFAULT_DENY_POLICY = new DenyPolicy.DiscardDenyPolicy();
 	private final static ThreadFactory DEFAULT_THREAD_FACTORY = new DefaultFactory();
 
-	BasicThreadPool(int initSize, int maxSize, int coreSize, int queueSize) {
+	public BasicThreadPool(int initSize, int maxSize, int coreSize, int queueSize) {
 		this(initSize, maxSize, coreSize, queueSize, DEFAULT_THREAD_FACTORY, DEFAULT_DENY_POLICY, 10, TimeUnit.SECONDS);
 	}
 

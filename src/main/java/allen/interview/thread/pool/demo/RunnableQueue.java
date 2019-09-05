@@ -1,4 +1,4 @@
-package allen.interview.thread.chapter08;
+package allen.interview.thread.pool.demo;
 
 /**
  * @author WangJianQiang
