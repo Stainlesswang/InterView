@@ -3,6 +3,7 @@ package allen.interview.thread.pool.demo;
 /**
  * @author WangJianQiang
  * @Description:
+ * 线程池的接口定义,一个线程池需要什么操作首先定义出来
  * @date 2018年11月12日 10:15
  */
 public interface ThreadPool {

@@ -5,6 +5,10 @@ import java.util.LinkedList;
 /**
  * @author WangJianQiang
  * @Description:
+ * LinkedList实现的Runnable接口列表作为存放容器, 提供入队/出队操作
+ * 入队时要判断是否到达了最大限制,到达限制后执行构造时注入进来的拒绝策略
+ * 出队时队列若无可执行runnable则当前线程阻塞wait();否则 取出相应的runnable
+ *
  * @date 2018年11月12日 13:53
  */
 public class LinkedRunnableQueue implements RunnableQueue {

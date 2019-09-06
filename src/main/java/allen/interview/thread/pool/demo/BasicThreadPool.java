@@ -49,7 +49,8 @@ public class BasicThreadPool extends Thread implements ThreadPool {
 	}
 
 	private void init() {
-		start();
+		start();//启动维护ThreadPool的线程
+        //初始化线程池线程数量
 		for (int i = 0; i < initSize; i++) {
 			newThread();
 		}
@@ -167,7 +168,9 @@ public class BasicThreadPool extends Thread implements ThreadPool {
 		return this.isShutdown;
 	}
 
-	//线程任务队形， 负责包装 thread 和internalTask 两个实例
+    /**
+     * 负责包装一个线程,和它负责执行的任务(runnable)
+     */
 	private static class ThreadTask {
 		private Thread thread;
 		private InternalTask internalTask;
@@ -178,7 +181,11 @@ public class BasicThreadPool extends Thread implements ThreadPool {
 		}
 	}
 
+    /**
+     * 一个创建线程的工厂类
+     */
 	private static class DefaultFactory implements ThreadFactory {
+	    //原子类int计数器
 		private static final AtomicInteger GROUP_COUNTER = new AtomicInteger(1);
 		private static final ThreadGroup group = new ThreadGroup("MyThreadPool-" + GROUP_COUNTER.getAndDecrement());
 		private static final AtomicInteger COUNTER = new AtomicInteger(0);
