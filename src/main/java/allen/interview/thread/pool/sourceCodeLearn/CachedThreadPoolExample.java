@@ -8,7 +8,7 @@ import java.util.concurrent.*;
  * 该例子场景描述: 简单的使用到信号量 做1000次加一操作
  *
  */
-public class PoolSourceCodeExample1 {
+public class CachedThreadPoolExample {
     /**
      * 首先贴出使用ThreadPoolExecutor构造函数创建的四个参数
      * return new ThreadPoolExecutor(0, Integer.MAX_VALUE,
