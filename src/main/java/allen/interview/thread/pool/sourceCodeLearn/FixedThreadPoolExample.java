@@ -21,7 +21,6 @@ public class FixedThreadPoolExample {
      * 阻塞队列: LinkedBlockingQueue 一个不限制大小的队列(int 最大值的容量)
      */
     private static ExecutorService fixedThreadPool =Executors.newFixedThreadPool(5);
-    private static ExecutorService cachedThreadPool=Executors.newSingleThreadExecutor();
 
     private static int count =0;
 
