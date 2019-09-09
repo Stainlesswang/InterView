@@ -3,7 +3,7 @@ package allen.concurrency.aqs;
 import java.util.concurrent.*;
 
 /**
- * 循环使用平常,使用场景: 主要是多个线程全部都就绪的时候才可以继续执行
+ * 循环屏障,使用场景: 主要是多个线程全部都就绪的时候才可以继续执行
  */
 public class CyclicBarrierExample2 {
     private static  final CyclicBarrier cyclicBarrier =new CyclicBarrier(5);
