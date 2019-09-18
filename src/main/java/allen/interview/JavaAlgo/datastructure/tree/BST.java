@@ -6,14 +6,14 @@ package allen.interview.JavaAlgo.datastructure.tree;
  * @param <Value>
  */
 public class BST<Key extends Comparable<Key>, Value> {
-    private Node root;
 
+    private Node root;//二叉查找树的根节点
 
     private class Node {
-        private Key key;
-        private Value val;
-        private Node left, right;
-        private int N;
+        private Key key;//键
+        private Value val;//值
+        private Node left, right;//指向子树的链接
+        private int N;           //以该节点为根节点的子树中的节点总数
 
         public Node(Key key, Value val, int N) {
             this.key = key;
@@ -22,6 +22,10 @@ public class BST<Key extends Comparable<Key>, Value> {
         }
     }
 
+    /**
+     * 返回节点总数
+     * @return
+     */
     public int size() {
         return size(root);
     }
@@ -29,6 +33,20 @@ public class BST<Key extends Comparable<Key>, Value> {
     private int size(Node x) {
         if (x == null) return 0;
         else return x.N;
+    }
+
+    /**
+     * 求树的深度的方法
+     * @return
+     */
+    public int deep() {
+        return deep(root);
+    }
+    private int deep(Node x){
+        if (x==null) return 0;
+        int left=deep(x.left);
+        int right=deep(x.right);
+        return left>right?left+1:right+1;
     }
 
     /**

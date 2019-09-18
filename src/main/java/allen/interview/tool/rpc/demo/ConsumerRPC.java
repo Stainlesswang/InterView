@@ -6,6 +6,7 @@ import java.lang.reflect.Method;
 import java.net.Socket;
 
 /**
+ * -----自定义RPC框架,使用socket通信------
  * 服务使用者; 发送相应参数,id 方法名称,接口名称等
  *
  * 然后获取RPC服务提供者返回的信息

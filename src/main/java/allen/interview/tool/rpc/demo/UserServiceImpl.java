@@ -3,6 +3,10 @@ package allen.interview.tool.rpc.demo;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * -----自定义RPC框架,使用socket通信------
+ * 模拟数据请求的service,根据用户ID获取用户名称
+ */
 public class UserServiceImpl implements UserService {
 
 

@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * -----自定义RPC框架,使用socket通信------
  * socket服务提供者,监听一个端口,收到信息,处理后并返回数据
  * 启动该类
  */

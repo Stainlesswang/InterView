@@ -1,6 +1,7 @@
 package allen.interview.tool.rpc.demo;
 
 /**
+ * -----自定义RPC框架,使用socket通信------
  * 一个简单的Service 接口示例
  *
  */
