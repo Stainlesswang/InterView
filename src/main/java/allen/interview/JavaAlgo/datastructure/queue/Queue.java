@@ -1,45 +1,38 @@
 package allen.interview.JavaAlgo.datastructure.queue;
 
 /**
+ * 首先定义队列操作的接口,不需要太复杂,简单的能够说明
+ * 问题就可以了
+ *
  * @author AllenWong
  * @date 2019/9/18 8:28 PM
  */
-public class Queue<E>{
-    private int front;//队头的位置,只允许删除
+public interface Queue<E>{
 
-    private int tail;//队尾,只允许增加
+    /**
+     * 入队操作
+     * 只能从队尾入队
+     */
+    public void add(E e);
 
-    private int max_size=16;
+    /**
+     * 出队操作
+     * @return 队头的元素,无数据返回null
+     */
+    public E pop();
 
-    private Object [] data;
+    /**
+     * 队列是否为空
+     * @return
+     */
+    public boolean isEmpty();
 
-    public Queue(){
-        this(10);
-    }
-    public Queue(int size){
-        if (size<0) throw new IllegalArgumentException("参数不合法"+size);
-        this.max_size=size;
-        front=tail=0;
-        data=new Object[size];
-    }
-    public boolean add(E e){
-        if (data.length>=max_size) throw new RuntimeException("超出了最大容量");
-        data[tail++]=e;
-        return true;
-    }
+    /**
+     * 返回头不元素,但是不删除元素
+     * @return
+     */
+    public E front();
 
-    public E pop(){
-        if (isEmpty()) throw new RuntimeException("队列空了,没啥数据");
-        E e= (E) data[front];
-        //此处使用链表比较好一点
-        data[front++]=null;
-        return e;
-
-    }
-    //判断是否为空
-    public boolean isEmpty(){
-        return tail == front;
-    }
-
+    public int size();
 
 }
