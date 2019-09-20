@@ -15,4 +15,7 @@ public class Father implements Person{
     public void out(){
         System.out.println("Father");
     }
+    public final void take(){
+        System.out.println("take money");
+    }
 }
