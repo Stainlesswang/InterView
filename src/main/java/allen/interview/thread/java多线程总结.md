@@ -12,7 +12,7 @@
   
   线程是和进程类似的东西,但是线程更加的轻量级,是更小的执行单位. java中线程共享**堆**和**方法区**,每个线程有自己独自的**程序计数器,虚拟机栈,本地方法栈**
   
-  一张图表明进程和线程的关系:![进程线程区别](https://diycode.b0.upaiyun.com/photo/2019/ff96fed0e2a354bb16bbc84dcedf503a.png)
+  一张图表明进程和线程的关系:![进程线程区别](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9teS1ibG9nLXRvLXVzZS5vc3MtY24tYmVpamluZy5hbGl5dW5jcy5jb20vMjAxOS0zL0pWTSVFOCVCRiU5MCVFOCVBMSU4QyVFNiU5NyVCNiVFNiU5NSVCMCVFNiU4RCVBRSVFNSU4QyVCQSVFNSU5RiU5Ri5wbmc?x-oss-process=image/format,png)
 
 
 ****
@@ -83,7 +83,7 @@ public class Test {
 
 ##二.关于线程的状态改变
 **线程的状态示意图（详细版本）：**
-![Alt text](http://incdn1.b0.upaiyun.com/2016/08/665f644e43731ff9db3d341da5c827e1.png "optional title")
+![Alt text](https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/19-1-29/Java+%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81%E5%8F%98%E8%BF%81.png)
 
 * **新建状态**： 
 使用new关键字新建一个Thread类或者其子类的对象后，该线程就处于新建状态，程序调用start（）方法之前线程会一直保持新建状态。
@@ -186,16 +186,20 @@ static int NORM_PRIORITY  分配给线程的默认优先级，取值为5。
      另外，sleep 方法允许较低优先级的线程获得运行机会，但 yield()  方法执行时，当前线程仍处在可运行状态，所以，不可能让出较低优先级的线程些时获得 CPU 占有权。在一个运行系统中，如果较高优先级的线程没有调用 sleep 方法，又没有受到 I\O 阻塞，那么，较低优先级线程只能等待所有较高优先级的线程运行结束，才有机会运行。 
 
 
-4. setPriority(): 更改线程的优先级。
-　　　　MIN_PRIORITY = 1
-  　　   NORM_PRIORITY = 5
-           MAX_PRIORITY = 10
+4. setPriority(): 更改线程的优先级。用法：
+   
+   ```
+     MIN_PRIORITY = 1
+     NORM_PRIORITY = 5
+     MAX_PRIORITY = 10
+	  Thread4 t1 = new Thread4("t1");
+	  Thread4 t2 = new Thread4("t2");
+	  t1.setPriority(Thread.MAX_PRIORITY);
+	  t2.setPriority(Thread.MIN_PRIORITY);
+    
+   ```
 
-用法：
-Thread4 t1 = new Thread4("t1");
-Thread4 t2 = new Thread4("t2");
-t1.setPriority(Thread.MAX_PRIORITY);
-t2.setPriority(Thread.MIN_PRIORITY);
+  
 
 5. interrupt():  
    不要以为它是中断某个线程！它只是线线程发送一个中断信号，让线程在无限等待时（如死锁时）能抛出抛出，从而结束线程，但是如果你吃掉了这个异常，那么这个线程还是不会中断的！
@@ -344,4 +348,23 @@ ____
   
   非可重入: 获得锁资源的当前线程在没有释放锁的时候再次获取锁资源,会被wait()造成阻塞,然而当前线程阻塞后原来的资源永远无法被释放,就造成了死锁
    
-    
+## 七、死锁是什么? 四个必要条件
+
+死锁举例: 当前状态: 线程A获得B资源,线程B获得A资源,且两者都在运行当中
+
+突然间: 强迫症烦了,字母顺序搞混了, 线程A 想要获得A资源, 线程B 想要获得B资源.  这时候就开始去傻傻等了,这样造成一种循环的状态, 线程A一直在等线程B释放A资源, 线程B也一直在等线程A释放B资源, 两个线程就成了死锁的状态
+
+下边我们说下线程死锁的四个必要条件,也就是说,线程死锁的话,下边这四个条件是肯定满足的
+
+1. 互斥条件: 同一时刻,一个资源只能被一个线程占用 (**这个是必然存在的一个条件,这也是锁的原理**)
+2. 请求与保持条件: 一个进程因请求资源而阻塞时，对已获得的资源保持不放
+
+   破坏方法: 一次性申请所有资源
+   
+3. 不剥夺条件:一个资源只能被占有它的线程使用完了放弃,不然其他任何人没有权利剥夺
+
+   破坏方法:已经获取资源的线程当想申请更多资源的时候可以先把占有的释放
+
+4. 循环等待条件:若干资源形成一种首尾相接的循环等待场景
+
+   破坏方法:按照一定顺序获取锁资源,然后按照反序释放资源,这样就避免了循环等待的发生

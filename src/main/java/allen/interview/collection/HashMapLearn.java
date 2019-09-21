@@ -1,6 +1,7 @@
 package allen.interview.collection;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author WangJianQiang
@@ -14,12 +15,23 @@ public class HashMapLearn {
 
         hashMap.put("sss", null);
         Map<String, String> hashtable = new Hashtable<>();
-        Map<String, String> concurrentHashMap = new LinkedHashMap<>();
-        HashSet<String> set=new HashSet<>();
-        set.add("fuck");
+        Map<String, String> concurrentHashMap = new ConcurrentHashMap<>();
 
         for (Map.Entry<String, String> o : hashMap.entrySet()) {
             System.out.println(o.getKey());
         }
+
+        int n = 20 - 1;
+        n |= n >>> 1;
+        System.out.println(n);
+        n |= n >>> 2;
+        System.out.println(n);
+        n |= n >>> 4;
+        System.out.println(n);
+        n |= n >>> 8;
+        System.out.println(n);
+        n |= n >>> 16;
+        System.out.println(n);
+        System.out.println((n < 0) ? 1 : (n >= 1024) ? 1024 : n + 1);
     }
 }
