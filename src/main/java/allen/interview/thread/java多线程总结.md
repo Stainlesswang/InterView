@@ -288,12 +288,20 @@ static int NORM_PRIORITY  分配给线程的默认优先级，取值为5。
        - 将该实例指向已分配的内存地址
       
       **使用volatile作用:**各个线程会将共享变量从主内存中拷贝到工作内存，然后执行引擎会基于工作内存中的数据进行操作处理。线程在工作内存进行操作后何时会写到主内存中？这个时机对普通变量是没有规定的，而针对volatile修饰的变量给java虚拟机特殊的约定，线程对volatile变量的修改会立刻被其他线程所感知，即不会出现数据脏读的现象，从而保证数据的“可见性”。
+      
+- Synchronized在JVM实现的原理:
 
-- synchronized在修饰代码块的时候:**synchronized 同步语句块的实现使用的是 monitorenter 和 monitorexit 指令，其中 monitorenter 指令指向同步代码块的开始位置，monitorexit 指令则指明同步代码块的结束位置**
+ synchronized在修饰代码块的时候:**synchronized 同步语句块的实现使用的是 monitorenter 和 monitorexit 指令，其中 monitorenter 指令指向同步代码块的开始位置，monitorexit 指令则指明同步代码块的结束位置**
 
 	synchronized修饰方法的时候:**取得代之的确实是 ACC_SYNCHRONIZED 标识，该标识指明了该方法是一个同步方法，JVM 通过该 ACC_SYNCHRONIZED 访问标志来辨别一个方法是否声明为同步方法，从而执行相应的同步调用。**
     
-    
+- Synchronized和ReenTrantLock区别和联系
+
+  1. 两者都是可重入锁
+  2. Synchronized是依赖JVM实现的,ReenTrantLock是依赖java API
+  3. ReentrantLock 提供了额外的三个功能,当有这些需要的时候再考虑使用ReenTrantLock **等待可中断特性,公平锁非公平锁,支持分组wait()和notify()**    
+  
+  
 ## 五、乐观锁和悲观锁概念? 什么是CAS?
 
 首先展示乐观锁和悲观锁的例子
