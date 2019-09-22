@@ -376,3 +376,16 @@ ____
 4. 循环等待条件:若干资源形成一种首尾相接的循环等待场景
 
    破坏方法:按照一定顺序获取锁资源,然后按照反序释放资源,这样就避免了循环等待的发生
+   
+## 八、AQS是什么? 
+
+AQS是一个用来构建锁和同步器的框架.核心思想是 如果当前共享资源空闲,则当前线程作为工作线程,并且把资源设置为锁定状态(通常是一个int值,0代表空闲状态,1代表被锁定), 如果当前共享资源被锁定,则需要一个变种`CLH`(Craig、Landin和Hagersten三位作者)队列来保存当前线程封装到一个Node节点. 
+
+AQS对资源的访问方式
+
+- Exclusive(独占): 代表的类是ReentrantLock,只有一个线程可以获取资源,又可以细分为公平锁和非公平锁
+- Share(共享): 多个线程可以同时执行,代表的类: Semaphore, CountDownLatCh, CyclicBarrier
+
+## 九.Semaphore,CountDownLatch,CyclicBarrier说明
+这些都是基于AQS
+
