@@ -35,7 +35,6 @@ public class MyInvocationHandler implements InvocationHandler {
 
         Object result= method.invoke(target,args);
 
-
         System.out.println("after-------------");
 
         return result;
