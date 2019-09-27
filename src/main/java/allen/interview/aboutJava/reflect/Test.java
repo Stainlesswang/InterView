@@ -32,16 +32,25 @@ public class Test {
 //            Field[] fields = mClass.getDeclaredFields();
 
             //3. 遍历变量并输出变量信息
-            for (Field field : fields) {
-                //获取访问权限并输出
-                int modifiers = field.getModifiers();
-                System.out.println("访问权限:"+Modifier.toString(modifiers));
-                //输出变量的类型及变量名
-                System.out.println("变量类型:"+field.getType().getName()
-                        + "--变量名称 " + field.getName());
-
-            }
-        } catch (ClassNotFoundException e) {
+//            for (Field field : fields) {
+//                //获取访问权限并输出
+//                int modifiers = field.getModifiers();
+//                System.out.println("访问权限:"+Modifier.toString(modifiers));
+//                //输出变量的类型及变量名
+//                System.out.println("变量类型:"+field.getType().getName()
+//                        + "--变量名称 " + field.getName());
+//            }
+            Son sonBean=new Son();
+            Field field=n.getDeclaredField("sonName");
+            field.setAccessible(true);
+            field.set(sonBean,"AllenSon");
+            Field field2=n.getDeclaredField("sonAge");
+            field2.setAccessible(true);
+            field2.set(sonBean,18);
+            sonBean.printSonMsg();
+        } catch (ClassNotFoundException | NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
     }
