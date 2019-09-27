@@ -1,38 +1,38 @@
 package allen.interview.aboutJava.reflect;
 
 public class Son extends Father{
-    private String mSonName;
-    protected int mSonAge;
-    public String mSonBirthday;
     static {
-        System.out.println("this is static block method");
+        System.out.println("this is Son static block method");
+    }
+
+    private String sonName;
+
+
+    private int sonAge;
+
+    @Override
+    public void out() {
+        System.out.println("Son Out method");
     }
 
     public void printSonMsg(){
         System.out.println("Son Msg - name : "
-                + mSonName + "; age : " + mSonAge);
+                + sonName + "; age : " + sonAge);
     }
 
-    @Override
-    public void out() {
-        System.out.println("Son");
+    public String getSonName() {
+        return sonName;
     }
 
-
-    private void setSonName(String name){
-        mSonName = name;
+    public void setSonName(String sonName) {
+        this.sonName = sonName;
     }
 
-    private void setSonAge(int age){
-        mSonAge = age;
+    public int getSonAge() {
+        return sonAge;
     }
 
-    private int getSonAge(){
-        return mSonAge;
+    public void setSonAge(int sonAge) {
+        this.sonAge = sonAge;
     }
-
-    private String getSonName(){
-        return mSonName;
-    }
-
 }
