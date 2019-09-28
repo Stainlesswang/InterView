@@ -40,6 +40,8 @@ public class Test {
 //                System.out.println("变量类型:"+field.getType().getName()
 //                        + "--变量名称 " + field.getName());
 //            }
+
+            //根据反射修改一个类中的属性
             Son sonBean=new Son();
             Field field=n.getDeclaredField("sonName");
             field.setAccessible(true);
@@ -48,9 +50,7 @@ public class Test {
             field2.setAccessible(true);
             field2.set(sonBean,18);
             sonBean.printSonMsg();
-        } catch (ClassNotFoundException | NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (ClassNotFoundException | NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
         }
     }
