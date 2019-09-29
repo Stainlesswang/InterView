@@ -10,6 +10,7 @@ import java.util.List;
  * 主要是理解Java的多态机制
  * 主要是通过 继承方法的重写 以及同方法内的 重载来实现多态的特性
  * 对象在执行的时候才可以确定去调用哪个实现的方法. 十分的灵活
+ *
  */
 public class ReflectTest {
     public static void main(String[] args) {
