@@ -72,4 +72,4 @@ Spring Cloud Eureka是服务的注册和发现中心,一般搭建都会搭建高
     
   - **Feign:**
 
-    Feign整和了Ribbon和Hy
+    Feign整和了Ribbon和Hynix断路器,实现了服务降级,服务降级需要实现一个接口,并且在降级的时候指定该接口来替换原有的服务. 并且Feign能够像调用本地方法一样去调用服务提供者
