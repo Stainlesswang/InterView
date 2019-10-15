@@ -11,7 +11,9 @@ public class DemoFactoryTest {
     @Test
     public void getProxy() {
         CGLBProxy proxy = new CGLBProxy();
-        DemoFactory.getInstence(proxy).add();
+        CGLIBDemo demo=DemoFactory.getInstance(proxy);
+        demo.add();
+        demo.desc();
     }
 
 }

@@ -14,4 +14,7 @@ public class CGLIBDemo {
     public void add(){
         System.out.println("the CGLIBDemo Class Old add() method");
     }
+    public static void desc(){
+        System.out.println("the CGLIBDemo Class Old desc method");
+    }
 }

@@ -17,7 +17,7 @@ public class CGLBProxy implements MethodInterceptor {
     public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
         System.out.println("before-------------");
         methodProxy.invokeSuper(o,objects);
-        System.out.println("before-------------");
+        System.out.println("after-------------");
         return null;
     }
 }
