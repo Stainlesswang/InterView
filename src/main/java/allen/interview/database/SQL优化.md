@@ -8,7 +8,9 @@
 提到索引呢,不得不提**B树和B+树**
   
   - **B+树:**
-  ![](https://awps-assets.meituan.net/mit-x/blog-images-bundle-2014/7af22798.jpg) 因为磁盘IO的速度是十分慢的,这是时间消耗的罪魁祸首,所以,使用B+树这种平衡二叉树采用类似于二分法的方式每次取出**一页**的数据
+  ![](https://awps-assets.meituan.net/mit-x/blog-images-bundle-2014/7af22798.jpg) 
+  
+  因为磁盘IO的速度是十分慢的,这是时间消耗的罪魁祸首,所以,使用B+树这种平衡二叉树采用类似于二分法的方式每次取出**一页**的数据
 
   拿表中的数据查找29举例
     
