@@ -31,7 +31,7 @@ public class NIOServer {
      * @throws IOException
      */
     public void initServer(int port) throws IOException {
-        // 获得一个ServerSocket通道
+        // 获得一个ServerSocket通道,其中之一的重要组件: Channel
         ServerSocketChannel serverChannel = ServerSocketChannel.open();
         // 设置通道为非阻塞
         serverChannel.configureBlocking(false);
