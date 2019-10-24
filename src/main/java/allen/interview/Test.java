@@ -19,7 +19,6 @@ public class Test {
 	        for (Method method : methods) {
 		        System.out.println(method.getName());
 	        }
-
 //            Class aClass = Class.forName("FreeMarkerTest");
 //            Object object=aClass.newInstance();
 //            Method method=aClass.getMethod("hahah");
