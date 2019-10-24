@@ -12,6 +12,7 @@ import java.io.UnsupportedEncodingException;
  * @date 2019/10/21 3:18 PM
  */
 public class NettyClientHandler extends SimpleChannelInboundHandler {
+    //定义字节缓冲流
     private ByteBuf firstMessage;
 
     @Override
