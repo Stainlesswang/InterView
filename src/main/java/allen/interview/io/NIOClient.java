@@ -14,7 +14,7 @@ import java.util.Iterator;
  * @date 2019/9/22 5:27 PM
  */
 public class NIOClient {
-    //通道管理器
+    /**通道管理器*/
     private Selector selector;
 
     /**

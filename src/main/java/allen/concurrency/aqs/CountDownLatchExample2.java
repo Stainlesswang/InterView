@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 倒数计数器开关 例子2
  * CountDownLatch  指定时间完成任务,未完成丢弃服务
+ * @author wangjianqiang
  */
 public class CountDownLatchExample2 {
     private final static int threadCount=200;
@@ -30,7 +31,8 @@ public class CountDownLatchExample2 {
                 }
             });
         }
-        countDownLatch.await(10,TimeUnit.MILLISECONDS);//可以指定等待时间
+        //可以指定等待时间
+        countDownLatch.await(10,TimeUnit.MILLISECONDS);
         System.out.println("finish");
         executorService.shutdown();
     }

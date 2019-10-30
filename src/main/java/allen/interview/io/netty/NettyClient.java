@@ -14,14 +14,10 @@ import io.netty.channel.socket.nio.NioSocketChannel;
  * @date 2019/10/21 3:17 PM
  */
 public class NettyClient {
-    /*
-     * 服务器端口号
-     */
+    /**服务器端口*/
     private int port;
 
-    /*
-     * 服务器IP
-     */
+    /**服务器IP*/
     private String host;
 
     public NettyClient(int port, String host) throws InterruptedException {

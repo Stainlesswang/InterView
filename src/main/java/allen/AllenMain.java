@@ -1,6 +1,9 @@
 package allen;
 
 
+/**
+ * @author wangjianqiang
+ */
 public class AllenMain {
 
     public static void main(String[] args) {

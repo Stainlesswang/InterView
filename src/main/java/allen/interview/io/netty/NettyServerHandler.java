@@ -28,9 +28,7 @@ public class NettyServerHandler extends SimpleChannelInboundHandler {
         }
     }
 
-    /*
-     * 从ByteBuf中获取信息 使用UTF-8编码返回
-     */
+    /** 从ByteBuf中获取信息 使用UTF-8编码返回*/
     private String getMessage(ByteBuf buf) {
 
         byte[] con = new byte[buf.readableBytes()];

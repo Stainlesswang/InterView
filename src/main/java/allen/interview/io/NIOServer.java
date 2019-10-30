@@ -22,7 +22,7 @@ import java.util.Set;
  */
 public class NIOServer {
 	private static final Logger LOGGER =  LoggerFactory.getLogger(NIOServer.class);
-    //通道管理器
+    /**通道管理器*/
     private Selector selector;
 
     /**
@@ -99,7 +99,8 @@ public class NIOServer {
         String msg = new String(data).trim();
         System.out.println("服务端收到信息："+msg);
         ByteBuffer outBuffer = ByteBuffer.wrap(msg.getBytes());
-        channel.write(outBuffer);// 将消息回送给客户端
+        // 将消息回送给客户端
+        channel.write(outBuffer);
     }
 
     /**
