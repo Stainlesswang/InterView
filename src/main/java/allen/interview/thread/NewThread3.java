@@ -1,11 +1,12 @@
 package allen.interview.thread;
-/**
- * 带返回结果的 Future 加 Callable 以及线程池老师先又返回结果的多线程
- * */
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.*;
+/**
+ * 带返回结果的 Future 加 Callable 以及线程池老师先又返回结果的多线程
+ * @author wangjianqiang
+ */
 public class NewThread3 {
 
     public static void main(String[] args) throws ExecutionException,  InterruptedException {

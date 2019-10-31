@@ -1,6 +1,9 @@
 package allen.interview.tool.activemq;
 
-public class ActiveMQNameUtil {
+/**
+ * @author wangjianqiang
+ */
+public class ActiveMqNameUtil {
 
     public static final String TEST_QUEUE = "testQueue";
 

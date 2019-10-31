@@ -13,9 +13,12 @@ import org.slf4j.LoggerFactory;
 import javax.jms.JMSException;
 import java.io.IOException;
 
-public class ActiveMQTest {
+/**
+ * @author wangjianqiang
+ */
+public class ActiveMqTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(ActiveMQTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(ActiveMqTest.class);
 
     public static void main(String[] args) {
         try {

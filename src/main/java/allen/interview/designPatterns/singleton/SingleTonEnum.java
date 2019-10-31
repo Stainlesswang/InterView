@@ -8,5 +8,8 @@ package allen.interview.designPatterns.singleton;
  * @date 2019年03月27日 18:11
  */
 public enum  SingleTonEnum {
+	/**
+	 * 保证该类只有一个，完全是单例的兄弟
+	 */
 	INSTANCE
 }

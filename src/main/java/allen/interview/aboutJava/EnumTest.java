@@ -6,7 +6,12 @@ package allen.interview.aboutJava;
  * @date 2019年03月27日 16:05
  */
 public enum  EnumTest {
-	INSTENCE("cao");
+	/**
+	 *
+	 */
+	INSTANCE("cao");
+
+
 	private String name;
 	EnumTest(String name){
 		this.name=name;
@@ -24,7 +29,7 @@ public enum  EnumTest {
 	}
 
 	public static void main(String[] args) {
-		EnumTest.INSTENCE.print();
-		System.out.println(EnumTest.INSTENCE==EnumTest.INSTENCE);
+		EnumTest.INSTANCE.print();
+		System.out.println(EnumTest.INSTANCE ==EnumTest.INSTANCE);
 	}
 }
