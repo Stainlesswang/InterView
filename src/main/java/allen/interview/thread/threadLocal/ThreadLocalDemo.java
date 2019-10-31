@@ -8,6 +8,7 @@ package allen.interview.thread.threadLocal;
  *    记录当前线程也就是当前url访问者的信息. 以便在controller,service,dao等地方使用当前用户的信息
  * 实现思路:
  *    当前访问线程id作为key,用户对象信息作为value存储下来
+ * @author wangjianqiang
  */
 public class ThreadLocalDemo {
     /**
