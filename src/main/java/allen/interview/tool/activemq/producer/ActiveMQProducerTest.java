@@ -1,6 +1,6 @@
 package allen.interview.tool.activemq.producer;
 
-import allen.interview.tool.activemq.ActiveMQNameUtil;
+import allen.interview.tool.activemq.ActiveMqNameUtil;
 import allen.interview.tool.activemq.JMSTemplate;
 
 import javax.jms.*;
@@ -21,7 +21,7 @@ public class ActiveMQProducerTest extends JMSTemplate {
      */
     @Override
     public void doTask(Session session) throws JMSException {
-        Destination destination = session.createQueue(ActiveMQNameUtil.TEST_QUEUE);
+        Destination destination = session.createQueue(ActiveMqNameUtil.TEST_QUEUE);
         MessageProducer producer = session.createProducer(destination);
         producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
         for (int i = 0; i < 20; i++) {

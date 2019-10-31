@@ -1,6 +1,6 @@
 package allen.interview.tool.activemq.consumer;
 
-import allen.interview.tool.activemq.ActiveMQNameUtil;
+import allen.interview.tool.activemq.ActiveMqNameUtil;
 import allen.interview.tool.activemq.JMSTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +24,7 @@ public class ActiveMQConsumerTest2 extends JMSTemplate implements MessageListene
      */
     @Override
     public void doTask(Session session) throws JMSException {
-        Destination destination = session.createQueue(ActiveMQNameUtil.TEST_QUEUE);
+        Destination destination = session.createQueue(ActiveMqNameUtil.TEST_QUEUE);
         MessageConsumer consumer = session.createConsumer(destination);
         consumer.setMessageListener(this);
     }

@@ -1,6 +1,6 @@
 package allen.interview.tool.activemq.consumer;
 
-import allen.interview.tool.activemq.ActiveMQNameUtil;
+import allen.interview.tool.activemq.ActiveMqNameUtil;
 import allen.interview.tool.activemq.JMSTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +24,7 @@ public class ActiveMQTopicConsumerTest extends JMSTemplate implements MessageLis
      */
     @Override
     public void doTask(Session session) throws JMSException {
-        Destination destination = session.createTopic(ActiveMQNameUtil.TEST_TOPIC);
+        Destination destination = session.createTopic(ActiveMqNameUtil.TEST_TOPIC);
         MessageConsumer consumer = session.createConsumer(destination);
         consumer.setMessageListener(this);
     }

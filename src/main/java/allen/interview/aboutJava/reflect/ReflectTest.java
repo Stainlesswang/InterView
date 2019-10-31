@@ -28,6 +28,7 @@ public class ReflectTest {
         for (Father bean : list) {
             if (bean instanceof Son) {
                 System.out.println("-------Son is Instance");
+                System.out.println(bean.toString());
             }
             System.out.println(bean.getClass().toString());
             bean.out();

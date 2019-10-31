@@ -38,4 +38,14 @@ public class Father implements Person{
         System.out.println("Father Msg - name : "
                 + fatherName + "; age : " + FatherAge);
     }
+
+    @Override
+    public String toString() {
+        return "Father{" +
+                "house='" + house + '\'' +
+                ", money=" + money +
+                ", fatherName='" + fatherName + '\'' +
+                ", FatherAge=" + FatherAge +
+                '}';
+    }
 }
