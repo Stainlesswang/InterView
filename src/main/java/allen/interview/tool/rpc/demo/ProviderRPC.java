@@ -43,7 +43,7 @@ public class ProviderRPC {
                 //参数
                 Object[] params = (Object[]) input.readObject();
                 for (Object s: params){
-                    System.out.println("方法名:"+s);
+                    System.out.println("参数详细信息:"+s);
                 }
 
                 //将类加载到内存中
