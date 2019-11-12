@@ -11,6 +11,7 @@ import java.io.IOException;
  * 一个重要的功能就是 watch 功能,当一个节点内容发生变化,可以通知订阅该节点的相关业务做变化
  *
  * 实际使用的场景中常用作去中心化的服务治理,保证分布式系统下的一致性
+ * @author wangjianqiang
  */
 public class ZookeeperMain {
     public static void main(String[] args) throws IOException, KeeperException, InterruptedException {
@@ -28,7 +29,8 @@ public class ZookeeperMain {
         // 创建一个子目录节点
         zk.create("/testRootPath/testChildPathOne", "testChildDataOne".getBytes(),
                 ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
-        Stat stat=new Stat();//一个传出参数,能够返回当前node的状态信息
+        //一个传出参数,能够返回当前node的状态信息
+        Stat stat=new Stat();
         System.out.println(new String(zk.getData("/testRootPath", false, stat)));
         // 取出子目录节点列表
         System.out.println(zk.getChildren("/testRootPath", true));

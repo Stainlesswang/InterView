@@ -3,6 +3,3 @@ git seconde step
 git dev modify
 Allen & Jack
 fix some bug in master
-13353923668
-13343928382
-13839205371
