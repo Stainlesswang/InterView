@@ -22,8 +22,8 @@ public class JavaSerializationDemo {
             allenBean.setName("songFucker");
             //将实现了Serializable接口的类写入到流中
             out.writeObject(allenBean);
-
-            byte[] songBytes=os.toByteArray();//二进制流就可以在网络中传输或者写入文件 做任意操作了
+            //二进制流就可以在网络中传输或者写入文件 做任意操作了
+            byte[] songBytes=os.toByteArray();
 
             //字节数组输入流
             ByteArrayInputStream inputStream=new ByteArrayInputStream(songBytes);

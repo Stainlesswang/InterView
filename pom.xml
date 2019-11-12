@@ -123,7 +123,11 @@
             <artifactId>jedis</artifactId>
             <version>2.9.0</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.58</version>
+        </dependency>
     </dependencies>
 
 </project>
