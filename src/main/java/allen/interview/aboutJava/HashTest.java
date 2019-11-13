@@ -36,5 +36,7 @@ public class HashTest {
         System.out.println(JSON.toJSONString(arg));
         System.out.println(JSON.toJSONString(arg2));
 
+        System.out.println(HashTest.class.getName().substring(HashTest.class.getName().lastIndexOf(".")+1));
+
     }
 }
