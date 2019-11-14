@@ -22,14 +22,11 @@ public class HashTest {
         map.put("4",1);
         map.put("2",2);
         map.put("1",1);
-
         TreeMap<Integer, Integer> map2=new TreeMap<>();
         map2.put(3,1);
         map2.put(4,1);
         map2.put(2,2);
         map2.put(1,1);
-
-
         Object[] arg={"111",map};
         Object[] arg2={"111",map2};
 
