@@ -1,4 +1,4 @@
-package allen;
+package allen.util;
 
 import allen.interview.designPatterns.singleton.SomeThing;
 
