@@ -1,2 +1,3 @@
 dev git file create
 dev developer
+Hbase 协处理器原理,每个分区计算根据用户ID切分的五百万份数据
