@@ -21,7 +21,7 @@ git
 
 下图描述了从Hive->HDFS的工作流
 
-![](https://www.tutorialspoint.com/hive/images/how_hive_works.jpg)
+![](https://www.tutorialspoint.com/hive/images/how_1hive_works.jpg)
 
 下边的表格详细介绍每个步骤的含义
 
