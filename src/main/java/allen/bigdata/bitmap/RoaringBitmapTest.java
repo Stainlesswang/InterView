@@ -26,10 +26,10 @@ public class RoaringBitmapTest {
         while (intIterator.hasNext()){
             System.out.println(intIterator.next());
         }
-//        System.out.println(cardinality);
-//        // a "forEach" is faster than this loop, but a loop is possible:
-//        for(int i : rr) {
-//            System.out.println(i);
-//        }
+        System.out.println(cardinality);
+        // a "forEach" is faster than this loop, but a loop is possible:
+        for(int i : rr) {
+            System.out.println(i);
+        }
     }
 }
