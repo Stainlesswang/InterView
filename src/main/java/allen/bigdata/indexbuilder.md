@@ -59,15 +59,22 @@ Q3:Hbase涉及到的两个表数据举例
 
 #### Hbase中表结构及示例数据
 
-hdp_jinrong_qiangui:index(标签索引找到对应标签的用户)
+`hdp_jinrong_qiangui:index`(标签索引找到对应标签的用户)
 
  - cf.name = "d"
  - q.name = "q"
 
-hdp_jinrong_qiangui:gid-mapping(根据Gid找到对应用户信息phone iemi uid等信息)
+`hdp_jinrong_qiangui:gid-mapping`(根据Gid找到对应用户信息phone iemi uid等信息)
 
   - gid.hbase.cf.name = "d"
   - gid.hbase.q.phone = "p"
   - gid.hbase.q.imei = "i"
   - gid.hbase.q.uid = "u"
   - gid.hbase.q.xparams = "x"
+
+  
+  
+  
+#### 出现错误count返回结果出错 解决方案:
+
+首先要加上日志,看看报错的时候日志信息是否有价值,然后报错的时候查看JVM的状态,是否存在内存泄漏导致的OOMCPU占用过高等异常情况,看是否是垃圾回收机制错误  
