@@ -76,7 +76,7 @@ from
  FROM  hdp_jinrong_qiangui_defaultdb.ctf_xfjr_history_vs_app_action_90d_user_001 
  where daystr='${dateSuffix}'
 ) t0 --九十天活跃+金融全量用户
-left join(
+left join
 (
 	select 58uid as wb_id,customer_id,fbu_decode_xffq(mobile) as phone
 	from hdp_jinrong_qiangui_defaultdb.ctd_yh_xfjr_customer_info_001
