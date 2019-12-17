@@ -83,4 +83,4 @@ Q3:Hbase涉及到的两个表数据举例
 出错的时候首先查看java进程的运行状态啥的步骤:
 
 1. jps 查看java进程对应的pid
-2. 
+2. jmap -histo pis 查看存活对象
