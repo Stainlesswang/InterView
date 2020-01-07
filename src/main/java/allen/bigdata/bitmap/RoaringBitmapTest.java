@@ -23,10 +23,14 @@ public class RoaringBitmapTest {
         // number of values stored?
         long cardinality = rr.getLongCardinality();
         IntIterator intIterator= rr.getIntIterator();
+        System.out.println("遍历rr");
         while (intIterator.hasNext()){
             System.out.println(intIterator.next());
         }
+        System.out.println("cardinality");
         System.out.println(cardinality);
+        System.out.println("rr遍历");
+
         // a "forEach" is faster than this loop, but a loop is possible:
         for(int i : rr) {
             System.out.println(i);
