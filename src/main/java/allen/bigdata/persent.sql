@@ -1,8 +1,8 @@
 select 
     t1.userid
     ,case when  t2.recall_is_realauth is null then '3' else t2.recall_is_realauth  end as recall_is_realauth
-    ,case when  t2.recall_realauth_time is null then '8' else t2.recall_realauth_time  end as recall_realauth_time  
     ,case when  t3.recall_reg_time is null then '8' else t3.recall_reg_time  end as recall_reg_time  --注册时间（首次登录贷超）
+    ,case when  t2.recall_realauth_time is null then '8' else t2.recall_realauth_time  end as recall_realauth_time  
 from
 (
     select 
@@ -73,3 +73,52 @@ from(
 	where t21.rnk=1
 	)t33
 ) t3 on t1.userid=t3.user_id;
+
+
+--back c1标签备份
+
+select 
+    t1.userid
+    ,case when  t2.recall_is_realauth is null then '3' else t2.recall_is_realauth  end as recall_is_realauth
+    ,case when  t2.recall_reg_time is null then '8' else t2.recall_reg_time  end as recall_reg_time  --注册时间（首次登录贷超）
+    ,case when  t2.recall_realauth_time is null then '8' else t2.recall_realauth_time  end as recall_realauth_time  
+from
+(
+
+    select 
+    userid
+    from hdp_jinrong_qiangui_defaultdb.stf_app_action_90d_001 where daystr='${todaySuffix}'
+    group by userid
+
+) t1
+left join 
+(
+select 
+user_id,
+case when realname_auth_time is not null then '1' else '2' end as recall_is_realauth,
+case when recall_reg_time=0 then '1' 
+when recall_reg_time=1 then '2' 
+when (recall_reg_time<=3 and recall_reg_time>1) then '3' 
+when (recall_reg_time<=7 and recall_reg_time>3) then '4' 
+when (recall_reg_time<=14 and recall_reg_time>7) then '5' 
+when (recall_reg_time<=30 and recall_reg_time>14) then '6' 
+when recall_reg_time>30 then '7' else '8' end as recall_reg_time,
+case  when recall_realauth_time=0 then '1'
+when recall_realauth_time=1 then '2'
+when (recall_realauth_time<=3 and recall_reg_time>1) then '3' 
+when (recall_realauth_time<=7 and recall_reg_time>3) then '4' 
+when (recall_realauth_time<=14 and recall_reg_time>7) then '5' 
+when (recall_realauth_time<=30 and recall_reg_time>14) then '6' 
+when recall_realauth_time>30  then '7' else '8' end as recall_realauth_time
+from
+(
+select
+user_id,
+realname_auth_time,
+datediff(${today},substr(create_time,1,10)) as recall_reg_time,
+datediff(${today},substr(realname_auth_time,1,10)) as recall_realauth_time
+from hdp_jinrong_qiangui_defaultdb.kfpt_t_portal_user 
+where daystr="$bash{date -d'${todaySuffix} -1 day ' +%Y%m%d}" 
+
+) t
+) t2 on t1.userid=t2.user_id;
