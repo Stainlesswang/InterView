@@ -87,6 +87,32 @@ Q3:Hbase涉及到的两个表数据举例
 2. jmap -histo pid > histo.log
 3. jstack -F pid 
 
+#### 整个营销平台的数据流程及走向:
+
+1. 首先每个标签任务跑出相应的字段对应的标签
+
+例如新增了一个标签组c27 的hive表字段配置: 
+
+```
+ userid
+ 1270001,limit_status
+ 1270002,removed
+ 1270003,derating_days
+ 1270004,is_black
+ 1270005,withdraw_status
+ 1270006,withdraw_days
+ 1270007,cur_overdue_days
+ 1270008,score_id
+ 1270009,risk_level
+```
+
+标识了key`1270001`对应的字段名为'limit_status'
+
+2. Spark 任务`itf_fsmart_indexbuilder_datamerge_001`
+
+该Spark任务主要
+
+
 
 
 

@@ -7,5 +7,6 @@ public class AllenMain {
         System.out.println(System.getProperty("java.library.path"));
 
         System.out.println(UUID.randomUUID().toString());
+        System.out.println("王梓硕");
     }
 }
