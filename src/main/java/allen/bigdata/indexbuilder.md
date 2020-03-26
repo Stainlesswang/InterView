@@ -89,33 +89,87 @@ Q3:Hbase涉及到的两个表数据举例
 
 #### 整个营销平台的数据流程及走向:
 
-1. 首先每个标签任务跑出相应的字段对应的标签
 
-例如新增了一个标签组c27 的hive表字段配置: 
+ 1.  首先每个标签任务跑出相应的字段对应的标签
 
-```
- userid
- 1270001,limit_status
- 1270002,removed
- 1270003,derating_days
- 1270004,is_black
- 1270005,withdraw_status
- 1270006,withdraw_days
- 1270007,cur_overdue_days
- 1270008,score_id
- 1270009,risk_level
-```
+	例如新增了一个标签组c27 的hive表字段配置:
 
-标识了key`1270001`对应的字段名为'limit_status'
+	配置地址为:
+
+	`viewfs://58-cluster/home/hdp_jinrong_qiangui/resultdata/fsmart/configuration/dict/c27_fields.conf` 
+
+	配置内容为:
+
+	```
+	 userid
+	 1270001,limit_status
+	 1270002,removed
+	 1270003,derating_days
+	 1270004,is_black
+	 1270005,withdraw_status
+	 1270006,withdraw_days
+	 1270007,cur_overdue_days
+	 1270008,score_id
+	 1270009,risk_level
+	```
+	标识了key`1270001`对应的字段名为'limit_status'
 
 2. Spark 任务`itf_fsmart_indexbuilder_datamerge_001`
 
-该Spark任务主要
+
+ - 首先读取`viewfs://58-cluster/home/hdp_jinrong_qiangui/resultdata/fsmart/configuration/dict/*_fields.conf`下的所有配置文件
+  - 然后获取每个标签,例如`c27`的文件存放路径`viewfs://58-cluster/home/hdp_jinrong_qiangui/resultdata/fsmart/configuration/fsmart_data_import/c27/20200320`
+  - 将所有的现有的27个标签整和成 一个uid 和对应标签的值作为一行数据存储在hdfs
+
+  
+  最终的格式为,假设两个uid 他们的存储数据为
+  
+  ```
+  41790988673294 1170001:-99 1170002:6 1170003:-99 1170004:-99 1170005:-99 1170006:-99 1170007:-99 1170008:-99 1170009:-99 1170010:-99
+  ```
+  
+  合并成 uid 以及符合uid27个标签的所有码值
 
 
+3. Spark 任务`itf_fsmart_indexbuilder_gengid_001`
+
+	对第二步数据合并后的一张大表中,使用map构建(uid-value)的键值对,其中value就是该用户所满足的所有三级标签(形如1270012:1)
+	
+	然后将所有的Uid以及根据行号算出来的Gid构建写入到hive表 `stf_yx_uid_gid_mapping_001`中
+	
+	```
+	insert overwrite table hdp_jinrong_qiangui_defaultdb.stf_yx_uid_gid_mapping_001
+	 partition(type="all", daystr=${today})
+	 select uid, gid from hdp_jinrong_qiangui_defaultdb.stf_yx_uid_gid_mapping_001
+	 where type="all" and daystr=${lastDay}
+	 union
+	 select uid, gid from hdp_jinrong_qiangui_defaultdb.stf_yx_uid_gid_mapping_001
+	 where type="incr-gid" and daystr=${today}
+	```
+	
+	hive表`stf_yx_gid_data_001` 保存uid 对应value 这里需要注意的是 该表的路径为
+	
+	`"location":"viewfs://58-cluster/home/hdp_jinrong_qiangui/resultdata/fsmart/gid_data"`
+	
+	
+4. `stf_user_fsmart_uid2imei_001` 
+
+	根据`stf_yx_uid_gid_mapping_001` 关联  `stf_yx_gid_params_001`
+	
+	然后关联其他相关表获取 phone, imei ,params 到表 `stf_user_fsmart_uid2imei_001` 
 
 
+5. `itf_fsmart_indexbuilder_gidmapping_001` 
 
+	使用`stf_user_fsmart_uid2imei_001 `作为入参,输出到路径为:
+	
+	`/home/hdp_jinrong_qiangui/resultdata/fsmart/hbase_gid_mapping/${todaySuffix}`
+	
+	是Hbase表  gid-mapping 的数据来源, 保存了 gid和其对应的uid,phone,imei,params
+	
+	1058562   
+	
+	
 
 
 
