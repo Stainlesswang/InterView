@@ -72,6 +72,14 @@ Q3:Hbase涉及到的两个表数据举例
   - gid.hbase.q.uid = "u"
   - gid.hbase.q.xparams = "x"
 
+`hdp_jinrong_qiangui:uid-mapping`(根据Uid找到对应用户信息phone iemi gid等信息)
+
+  - gid.hbase.cf.name = "d"
+  - gid.hbase.q.phone = "p"
+  - gid.hbase.q.imei = "i"
+  - gid.hbase.q.gid = "g"
+  - gid.hbase.q.xparams = "x"
+
   
   
   
@@ -167,7 +175,7 @@ Q3:Hbase涉及到的两个表数据举例
 	
 	是Hbase表  gid-mapping 的数据来源, 保存了 gid和其对应的uid,phone,imei,params
 	
-	1058562   
+	1058562   1059029
 	
 	
 
