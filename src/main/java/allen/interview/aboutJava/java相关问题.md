@@ -1,6 +1,6 @@
 # Java Interview Question 
 
-### 1.  为什么String 要设计为final 不可变 
+### 1.为什么String 要设计为final 不可变 
 String的源代码：
 
 ```java
@@ -26,7 +26,7 @@ final修饰的 value[] 数组是final的只能说明它是地址不可变，并�
 ### 3. Java反射
 1. 反射的获取Class对象方式有三种：      
   
-  ``` java
+  ```
   //第一种方式 通过Class类的静态方法——forName()来实现 必须使用全限定名
   class1 = Class.forName("com.lvr.reflection.Person");
   //第二种方式 通过类的class属性
@@ -39,15 +39,24 @@ final修饰的 value[] 数组是final的只能说明它是地址不可变，并�
    
 2. **Class.forName()和ClassLoader获取类的区别**:
 
-  只要记住了web项目在加载Mysql驱动的时候使用的是Class.forName("com.mysql.Driver"),因为需要执行Driver类中的静态代码块来 *DriverManager.registerDriver(new Driver());*注册驱动.[blog about this](http://www.importnew.com/29389.html)
-
-	```
-	ClassLoader loader=ClassLoader.getSystemClassLoader();
-	//loadClass只是把类的二进制流加载到JVM中，不进行初始化
-	Class n=loader.loadClass("allen.interview.jvm.InitialOrderTest");
-	//forName方法会初始化static变量和static块代码
-	Class n2=Class.forName("allen.interview.jvm.InitialOrderTest");
-```
+  只要记住了web项目在加载Mysql驱动的时候使用的是Class.forName("com.mysql.Driver"),
+  因为需要执行Driver类中的静态代码块来 *DriverManager.registerDriver(new Driver());*
+  注册驱动.[blog about this](http://www.importnew.com/29389.html)
+  
+  ```java
+  public class ReflectTest{ 
+    
+    public static void main(String[] args){ 
+        ClassLoader loader=ClassLoader.getSystemClassLoader();
+	
+        //loadClass只是把类的二进制流加载到JVM中，不进行初始化
+        Class n=loader.loadClass("allen.interview.jvm.InitialOrderTest");
+	    
+        //forName方法会初始化static变量和static块代码
+	    Class n2=Class.forName("allen.interview.jvm.InitialOrderTest");
+    }
+}
+  ```
   
 
 
@@ -66,8 +75,8 @@ final修饰的 value[] 数组是final的只能说明它是地址不可变，并�
 
 ### 5. Java基础类型及大小
 
-|类型|大小| 
-|:-----:|:----:|
+|类型|大小|
+|:-----:|:-----:|
 |byte|1字节|
 |char|2字节|
 |short|2字节|
@@ -93,8 +102,8 @@ final修饰的 value[] 数组是final的只能说明它是地址不可变，并�
       
 ### 7. Java内存溢出和内存泄漏
 
-  - **内存泄漏(Memery Leak):**是指程序动态分配内存给一些临时变量,但是它始终不能够被GC,即*该对象可达但已经无用*
-  - **内存溢出(Out Of Memery):**是指程序在申请内存的时候,没有足够的空间来提供,通常发生在老年代和永久代在进行垃圾回收以后,仍然没有足够的空间就会出现OOM
+  - **内存泄漏(Memory Leak):**是指程序动态分配内存给一些临时变量,但是它始终不能够被GC,即*该对象可达但已经无用*
+  - **内存溢出(Out Of Memory):**是指程序在申请内存的时候,没有足够的空间来提供,通常发生在老年代和永久代在进行垃圾回收以后,仍然没有足够的空间就会出现OOM
 
   所以综上所述的概念我们总结出来: **内存泄漏时造成内存泄漏的一种诱因,但不是唯一的因素**
   
