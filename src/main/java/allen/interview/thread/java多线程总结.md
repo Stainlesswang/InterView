@@ -16,7 +16,7 @@
 
 
 ****
-##一.如何New一个新线程``
+##一.如何New一个新线程
 在java中要想实现多线程，有两种手段，
  
  * **一种是继承Thread类，**（详见 我的Interview项目 thread包下的 NewThread1.java）

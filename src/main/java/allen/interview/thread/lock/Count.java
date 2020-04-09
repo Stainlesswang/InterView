@@ -9,15 +9,15 @@ public class Count {
 
     private NotReentrantLock notReentrantLock=new NotReentrantLock();
     private void print() throws InterruptedException {
-        reentrantLock.lock();
+        notReentrantLock.lock();
         doAdd();
-        reentrantLock.unlock();
+        notReentrantLock.unlock();
     }
 
     private void doAdd() throws InterruptedException {
-        reentrantLock.lock();
+        notReentrantLock.lock();
         //do something
-        reentrantLock.unlock();
+        notReentrantLock.unlock();
     }
 
     public static void main(String[] args) {
