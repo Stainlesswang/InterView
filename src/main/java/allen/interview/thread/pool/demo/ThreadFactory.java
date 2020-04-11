@@ -8,8 +8,4 @@ package allen.interview.thread.pool.demo;
 @FunctionalInterface
 public interface ThreadFactory {
 	Thread createThread(Runnable runnable);
-
-	default void defaultMethod() {
-		System.out.println("this is interface default method");
-	}
 }

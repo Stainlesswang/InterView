@@ -3,6 +3,7 @@ package allen.interview.thread.pool.demo;
 /**
  * @author WangJianQiang
  * @Description:
+ * 将任务队列包装进来,run方法是从任务队里中取出来的Runnable的run方法在执行
  * 一个InternalTask就是一个Runnable的实现
  * @date 2018年11月13日 16:12
  */

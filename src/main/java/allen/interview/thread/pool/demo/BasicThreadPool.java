@@ -49,7 +49,8 @@ public class BasicThreadPool extends Thread implements ThreadPool {
 	}
 
 	private void init() {
-		start();//启动维护ThreadPool的线程
+        //启动维护ThreadPool的线程
+		start();
         //初始化线程池线程数量
 		for (int i = 0; i < initSize; i++) {
 			newThread();
@@ -80,6 +81,10 @@ public class BasicThreadPool extends Thread implements ThreadPool {
 
 	}
 
+    /**
+     * 在初始化线程池的时候,线程池本身也是一个线程在启动,一直在运行作为管理整个线程池的Manager
+     * 主要任务是根据任务的数量来创建线程和当没有任务的时候进行线程的销毁管理
+     */
 	@Override
 	public void run() {
 		while (!isShutdown && !isInterrupted()) {
