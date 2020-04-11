@@ -33,9 +33,14 @@ public class DeadLock {
 		System.out.println(currentThread().getName() + " release Write Lock#");
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		DeadLock deadLock = new DeadLock();
-		//线程会因为交叉获取锁资源导致死锁 无法继续执行
+		Thread thread=Thread.currentThread();
+        System.out.println(thread.getId());
+        System.out.println(thread.getThreadGroup().toString());
+        System.out.println(thread.toString());
+
+        //线程会因为交叉获取锁资源导致死锁 无法继续执行
 		new Thread(() ->
 		{
 			while (true) {
