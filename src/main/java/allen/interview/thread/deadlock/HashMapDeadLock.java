@@ -1,4 +1,4 @@
-package allen.interview.thread.chapter04;
+package allen.interview.thread.deadlock;
 
 import java.util.HashMap;
 

@@ -34,17 +34,13 @@ public class BooleanLock implements Lock {
 	 * @return void
 	 */
 	@Override
-	public void lock()  {
+	public void lock() throws InterruptedException {
 		synchronized (this) {
 			while (locked) {
 				//锁已被其他线程获取，当前线程阻塞加入阻塞列表
 				blockList.add(currentThread());
 				//当前线程阻塞加入 wait set中
-				try {
-					this.wait();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+                this.wait();
 			}
 			//将当前线程移除阻塞列表
 			blockList.remove(currentThread());
