@@ -16,8 +16,12 @@ public class BooleanLockTest {
 
 	private void synMethod() {
 
-		lock.lock();
-		try {
+        try {
+            lock.lock();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        try {
 			int randomInt = ThreadLocalRandom.current().nextInt(10);
 			System.out.println(currentThread() + " get the lock");
 			TimeUnit.SECONDS.sleep(randomInt);

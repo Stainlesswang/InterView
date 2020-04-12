@@ -11,9 +11,10 @@ import java.util.concurrent.*;
 public class ScheduledThreadPoolExample {
     /**
      * 首先贴出使用ThreadPoolExecutor构造函数创建的四个参数我的天啊
-     *  return new ThreadPoolExecutor(coreNum, 1,
-     *                                       0L, TimeUnit.MILLISECONDS,
-     *                                       new LinkedBlockingQueue<Runnable>());
+     *  public ScheduledThreadPoolExecutor(int corePoolSize) {
+     *         super(corePoolSize, Integer.MAX_VALUE, 0, NANOSECONDS,
+     *               new DelayedWorkQueue());
+     *     }
      * 核心线程数: coreNum
      * 最大线程数量:int 最大值
      * 线程最大空闲时间:0
