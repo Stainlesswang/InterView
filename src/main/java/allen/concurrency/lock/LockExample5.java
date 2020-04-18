@@ -13,6 +13,7 @@ public class LockExample5 {
 
         ReentrantLock reentrantLock=new ReentrantLock();
         Condition condition=reentrantLock.newCondition();
+        Condition condition2=reentrantLock.newCondition();
 
         //创建第一个线程
         new Thread(()->{
@@ -31,17 +32,37 @@ public class LockExample5 {
 
         },"First").start();
 
-        //创建第二个线程
+        //创建第二个在阻塞的线程
+        new Thread(()->{
+            try{
+                reentrantLock.lock();
+                System.out.println(Thread.currentThread().getName() + "::获取锁资源");
+
+                condition2.await();
+                System.out.println(Thread.currentThread().getName() + "::Condition.await之后继续执行!");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } finally {
+                reentrantLock.unlock();
+            }
+
+
+        },"First-2").start();
+
+        //创建第唤醒condition1个线程
         new Thread(()->{
             try{
                 reentrantLock.lock();
                 System.out.println(Thread.currentThread().getName() + "::获取锁资源");
                 Thread.sleep(2000);
                 condition.signalAll();
+                Thread.sleep(2000);
+                condition2.signalAll();
                 System.out.println(Thread.currentThread().getName() + "::Condition.await之后继续执行!");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } finally {
+                System.out.println(Thread.currentThread().getName() + "::释放ReenTrantLocak!");
                 reentrantLock.unlock();
             }
         },"Second").start();
