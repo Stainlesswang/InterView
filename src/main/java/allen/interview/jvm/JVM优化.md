@@ -1,197 +1,80 @@
-# JVM Question 
-1. **进程和线程的区别** 
----
-  - 进程是什么?
-
-  进程就是计算机开启了一个应用程序,是一次应用程序执行过程.典型例子就是windows下的任务管理器看到的每一个就是一个进程.是计算机执行的基本单位,一个进程包含多个线程
- 
-  - 线程是撒? 
-  
-  线程是和进程类似的东西,但是线程更加的轻量级,是更小的执行单位. java中线程共享**堆**和**方法区**,每个线程有自己独自的**程序计数器,虚拟机栈,本地方法栈**
-  
-  一张图表明进程和线程的关系:![进程线程区别](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9teS1ibG9nLXRvLXVzZS5vc3MtY24tYmVpamluZy5hbGl5dW5jcy5jb20vMjAxOS0zL0pWTSVFOCVCRiU5MCVFOCVBMSU4QyVFNiU5NyVCNiVFNiU5NSVCMCVFNiU4RCVBRSVFNSU4QyVCQSVFNSU5RiU5Ri5wbmc?x-oss-process=image/format,png)
-  
-  线程共享的区域是:
-	
-   - **堆:** Heap,GC的主要区域,所有线程共享,保存java对象和数组.
-   - **方法区:** 主要用于存储类的信息、常量池、方法数据、方法代码等,逻辑上属于堆的组成 (java8后移除了方法区,转而使用元空间Metaspace代替)
-  
-  
-  线程私有的部分:
-  
-   - **虚拟机栈(VM Stack):** 每个线程有一个私有的栈，随着线程的创建而创建。栈里面存着的是一种叫“栈帧”的东西，每个方法会创建一个栈帧，栈帧中存放了局部变量表（基本数据类型和对象引用）、操作数栈、方法出口等信息。
-   - **本地方法栈 (Native Method Stack):** 虚拟机用到的 Native 方法相关
-   - **程序计数器(Program Counter Register):**PC 是指向指令执行到哪里的关键记录员 **主要任务:线程切换后能恢复到正确的执行位置**
+# JVM问题排查
 
 
-2. 理解JAVA存储模型(JMM)以及相关的Happens-Before规则
----
+### CPU飙高
 
-   JMM叫做Java Memery Model,java内存模型,更确切来说它是java虚拟机在针对不同种类的操作系统差异背景下,采用的一种和物理机数据交互的一种规范. 每个线程使用的变量都是JVM主存的一份拷贝,当修改的时候首先修改这份拷贝,然后在同步到JVM的堆中. 这也是为什么多线程在操作同一个资源的时候没有考虑线程的安全情况下数据总是出现奇怪的错误的直接原因.
-  
-  后边做下好的总结,涉及到点,为什么要这样 为什么这么重要,理解JMM可以解决什么问题,以及如何通过举例子来牢记这个情况
-
-
-3. JVM类加载机制
----
-
-  **3.1 类加载的过程整体说明:**
-  
-  加载-->连接-->初始化
-  
-  其中连接又分为  验证-->准备-->解析
-  
-  
-  **3.2 什么是双亲委派模型? 有什么用?**
-  
-  说明这个问题首先要知道java中存在的三种级别的类加载器:
-  
-  1. BootstrapClassLoader(启动类加载器):最顶层的类加载器,负责加载`%JAVA_HOME/lib`目录下的jar包和类
-  2. ExtensionClassLoader(扩展类加载器):主要负责`%JRE_HOME%/lib/ext`目录下的jar包和类
-  3. APPClassLoader(应用程序加载器):面向用户,负责加载所有`classpath`下的jar包和类
-
-  双亲委派模型:**来了加载任务了,先汇报上级,上级能处理的下级别BB! 规矩!!**这样防止类重复加载,并且保证了Java API的安全性, 比如我们编写了`java.lang.Object`类的话,是不会破坏原来的那个Object类的,不然会出现很危险的情况,天下会大乱
-  
-  
-
-  
-   - 类的加载顺序:(静态变量 静态代码块) > (变量 代码块) > (构造函数)
-  
-    ```
-        public class InitialOrderTest {
-            	/* 静态变量 */
-            	public static String staticField = "静态变量";
-            	/* 变量 */
-            	public String field = "变量";
-            	/* 静态初始化块 */
-            	static {
-            		System.out.println( staticField );
-            		System.out.println( "静态初始化块" );
-            	}
-            	/* 初始化块 */
-            	{
-            		System.out.println( field );
-            		System.out.println( "初始化块" );
-            	}
-            	/* 构造器 */
-            	public InitialOrderTest()
-            	{
-            		System.out.println( "构造器" );
-            	}
-            
-            
-            	public static void main( String[] args )
-            	{
-            		new InitialOrderTest();
-            	}
-            }
-    ```
-          
-    ```java
-    class Parent {
-            /* 静态变量 */
-        public static String p_StaticField = "父类--静态变量";
-             /* 变量 */
-        public String    p_Field = "父类--变量";
-        protected int    i    = 9;
-        protected int    j    = 0;
-            /* 静态初始化块 */
-        static {
-            System.out.println( p_StaticField );
-            System.out.println( "父类--静态初始化块" );
-        }
-            /* 初始化块 */
-        {
-            System.out.println( p_Field );
-            System.out.println( "父类--初始化块" );
-        }
-            /* 构造器 */
-        public Parent()
-        {
-            System.out.println( "父类--构造器" );
-            System.out.println( "i=" + i + ", j=" + j );
-            j = 20;
-        }
-    }
-    
-    public class SubClass extends Parent {
-             /* 静态变量 */
-        public static String s_StaticField = "子类--静态变量";
-             /* 变量 */
-        public String s_Field = "子类--变量";
-            /* 静态初始化块 */
-        static {
-            System.out.println( s_StaticField );
-            System.out.println( "子类--静态初始化块" );
-        }
-           /* 初始化块 */
-        {
-            System.out.println( s_Field );
-            System.out.println( "子类--初始化块" );
-        }
-           /* 构造器 */
-        public SubClass()
-        {
-            System.out.println( "子类--构造器" );
-            System.out.println( "i=" + i + ",j=" + j );
-        }
-    
-    
-            /* 程序入口 */
-        public static void main( String[] args )
-        {
-            System.out.println( "子类main方法" );
-            new SubClass();
-        }
-    }
-    ```
-    执行结果:
-      - 父类--静态变量 
-      - 父类--静态初始化块 
-      - 子类--静态变量
-      - 子类--静态初始化块 
-      -  子类main方法 
-      - 父类--变量 
-      - 父类--初始化块 
-      - 父类--构造器
-      - i=9, j=0 
-      - 子类--变量
-      - 子类--初始化块 
-      - 子类--构造器 
-      - i=9,j=20
-
-5. **Java创建对象过程**
----
-
-   1.  **类加载检查**: 当遇到`new`关键字的时候,首先要去检查该指令的参数是否能够在常量池中定位到该类的符号引用. 如果能够定位到, 还要检查该符号引用对应的类是否已经被加载过,解析过,初始化过,若没有,要执行相应的类加载过程
-   2. **分配内存空间**: 类加载检查通过后,就可以确定该类占用多少空间,然后就是去堆上划分一个相应大小的空间,按照堆上的空间是否规整 分为两种;
-
-      如果是使用`标记-清除`会导致堆内存十分的散乱, 这时候分配的方式是**空闲三列:**JVM会维护一个列表来映射空闲的内存块,然后选取一个足够大的块来指定; 
-
-      如果是使用`标记-整理`或者`拷贝-复制`的方式,堆中的空间相对规整,这时候分配方式采用**指针碰撞:**在已使用和未使用的分界点有一个指针,指针向未分配的区域移动即可分配出来对应的内存
-     
-      分配内存需要考虑的并发的问题,因为在同一时间上会有很多对象的创建,那么对于共享的堆内存空间就存在并发的安全性问题,JVM采用的策略是**CAS和失败重试保证操作的原子性**以及**TLAB(Thread Local Allocation Buffer）类似ThreadLocal,堆先给每个线程预先分配一些空间,这样就不存在竞争的问题(由党和国家统一划分,谁也别抢)**
-  
-   3. **初始化零值**:这个过程就是我们的变量赋初始值的过程
-   4. **设置对象头**:对象头就是虚拟机给该对象的定位,比如属于什么年代的?如何定位该对象的信息?还有哈希码啥的东西,要给你贴个标签,方便随时拖出来五十大板
-   5. **调用init方法**:经过上边的四个步骤呢,对于虚拟机来讲这个对象就是存在的,但是对象是程序员使用的,所以需要做些初始化的工作,也就是调用init方法吧
+1. top 命令找到 CPU 消耗最高的进程，并记住进程 ID
+2. 再次通过 top -Hp pid  找到 CPU 消耗最高的线程 ID，并记住线程 ID.
+3. 通过 JDK 提供的 jstack 工具 dump 线程堆栈信息到指定文件中。具体命令：jstack -l
+   pid >jstack.log。
+4. 由于刚刚的线程 ID 是十进制的，而堆栈信息中的线程 ID 是16进制的
+   因此我们需要将10进制的转换成16进制的，并用这个线程 ID 在堆栈中查找。 使用 printf
+   "%x\n" [十进制数字] ,可以将10进制转换成16进制。
+5. 通过刚刚转换的16进制数字从堆栈信息里找到对应的线程堆栈。就可以从该堆栈中看出端倪。
 
 
+### Full GC次数太多了，如何优化
+
+（1）调用System.gc时，系统建议执行Full GC，但是不必然执行
+
+（2）老年代空间不足
+
+（3）方法区空间不足
+
+（4）通过Minor GC后进入老年代的平均大小大于老年代的可用内存
+
+（5）由Eden区、From Space区向To Space区复制时，对象大小大于To Space可用内存，则把该对象转存到老年代，且老年代的可用内存小于该对象大小
 
 
-6.  JVM中对象的内存布局
----
+### 内存问题排查
 
-对象在HotSpot的JVM中主要分三部分:1.对象头 2.实例数据 3.对齐填充
+1. 内存溢出 内存溢出的情况可以通过加上 -XX:+HeapDumpOnOutOfMemoryError 参数，
+   该参数作用是：在程序内存溢出时输出 dump 文件。 有了 dump 文件，就可以通过 dump
+   分析工具进行分析了，比如常用的MAT,Jprofile，jvisualvm
+   等工具都可以分析，这些工具都能够看出到底是哪里溢出，哪里创建了大量的对象等等信息
+   
+2. GC 不健康
 
-  1. **对象头:**第一部分用于存储对象自身的**自身运行时数据**（哈希码、GC分代年龄、锁状态标志,偏向线程ID,偏向时间戳等），另一部分是**类型指针**即对象指向它的类元数据的指针，虚拟机通过这个指针来确定这个对象是那个类的实例.需要注意的一点是,java虚拟机可以通过类的元数据判断出该对象的大小,但是当对象是数组的时候,无法确定大小,所以对象数组的大小要保存在对象头中
-  2. **实例数据:**真正存储的有效数据,无论是父类继承下来的还是子类中定义的,都需要记录起来,存储顺序是受虚拟机的分配策略影响,一般是相同长度的放到一起的顺序(longs/double,ints,short/chars,bytes/booleans,oops(Ordinary,Object Pointers))
-  3. **Padding(对齐位):**因为
+而 GC 的优化有2个维度，一是频率，二是时长。
+
+我们看YGC，首先看频率，如果 YGC 超过5秒一次，甚至更长，说明系统内存过大，应该缩小容量，
+如果频率很高，说明 Eden 区过小，可以将 Eden 区增大，但整个新生代的容量应该在堆的 
+30% - 40%之间，eden，from 和 to 的比例应该在 8：1：1左右，这个比例可根据对象晋升的大小进行调整。
+
+如果 YGC 时间过长呢？YGC 有2个过程，一个是扫描，
+一个是复制，通常扫描速度很快，复制速度相比而言要慢一些，如果每次都有大量对象要复制，
+就会将 STW 时间延长，还有一个情况就是 StringTable ，
+这个数据结构中存储着 String.intern 方法返回的常连池的引用，
+YGC 每次都会扫描这个数据结构（HashTable），如果这个数据结构很大，且没有经过 FGC，
+那么也会拉长 STW 时长，还有一种情况就是操作系统的虚拟内存，当 GC 时正巧操作系统正在交换内存，
+也会拉长 STW 时长。
+
+再来看看FGC，实际上，FGC 我们只能优化频率，无法优化时长，因为这个时长无法控制。如何优化频率呢？
+
+首先，FGC 的原因有几个，1 是 Old 区内存不够，2 是元数据区内存不够，3 是 System.gc()， 
+4 是 jmap 或者 jcmd，5 是CMS Promotion failed 或者 concurrent mode failure，
+6 JVM 基于悲观策略认为这次 YGC 后 Old 区无法容纳晋升的对象，因此取消 YGC，提前 FGC。
+
+通常优化的点是 Old 区内存不够导致 FGC。如果 FGC 后还有大量对象，说明 Old 区过小，
+应该扩大 Old 区，如果 FGC 后效果很好，说明 Old 区存在了大量短命的对象，
+优化的点应该是让这些对象在新生代就被 YGC 掉，通常的做法是增大新生代，如果有大而短命的对象，
+通过参数设置对象的大小，不要让这些对象进入 Old 区，还需要检查晋升年龄是否过小。如果 YGC 后，
+有大量对象因为无法进入 Survivor 区从而提前晋升，这时应该增大 Survivor 区，但不宜太大。
+
+上面说的都是优化的思路，我们也需要一些工具知道 GC 的状况。
+
+JDK 提供了很多的工具，比如 jmap ，jcmd 等，oracle 官方推荐使用 jcmd 代替 jmap，
+因为 jcmd 确实能代替 jmap 很多功能。jmap 可以打印对象的分布信息，可以 dump 文件，注意，
+jmap 和 jcmd dump 文件的时候会触发 FGC ，使用的时候注意场景。
+
+还有一个比较常用的工具是 jstat，该工具可以查看GC 的详细信息，
+比如eden ，from，to，old 等区域的内存使用情况。
+
+还有一个工具是 jinfo，该工具可以查看当前 jvm 使用了哪些参数，并且也可以在不停机的情况下修改参数。
+
+包括我们上面说的一些分析 dump 文件的可视化工具，
+MAT，Jprofile，jvisualvm 等，这些工具可以分析 jmap dump 下来的文件，看看哪个对象使用的内存较多，通常是能够查出问题的。
+
+还有很重要的一点就是，线上环境一定要带上 GC 日志！！！
 
 
-6. 对象的访问方式
----
-我们知道当一个对象保存另一个对象的时候,保存的是一个Reference,一个引用,作用是如何找到存放在堆中的**对象类型实例,对象数据实例**
-
-1. 句柄: reference和真实数据之间多了个代理商! 我们需要的时候首先找代理商,然后代理商去找真实数据,这样的好处是,引用的对象变动的时候reference不需要老是变动,只需要代理商去找不同的厂家进货即可满足我们的需求
-2. 直接指针:没有中间商赚差价,直接去堆上找,方便直接迅速,但是存在一定的不稳定性,修改对象的时候reference要改变存储的数据
