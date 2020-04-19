@@ -2,6 +2,7 @@ package allen.interview.JavaAlgo.leecode;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author AllenWong
@@ -38,30 +39,21 @@ public class leecode24 {
         }
 
     }
-
+    public  static int lengthOfLongestSubstring(String s) {
+        int n = s.length(), ans = 0;
+        Map<Character, Integer> map = new HashMap<>(); // current index of character
+        // try to extend the range [i, j]
+        for (int j = 0, i = 0; j < n; j++) {
+            if (map.containsKey(s.charAt(j))) {
+                i = Math.max(map.get(s.charAt(j)), i);
+            }
+            ans = Math.max(ans, j - i + 1);
+            map.put(s.charAt(j), j + 1);
+        }
+        return ans;
+    }
     public static void main(String[] args) {
-        ListNode listNode=new ListNode(1);
-        ListNode listNode2=new ListNode(2);
-
-        ListNode listNode3=new ListNode(3);
-
-        ListNode listNode4=new ListNode(4);
-
-        listNode.next=listNode2;
-        listNode2.next=listNode3;
-        listNode3.next=listNode4;
-        System.out.println(listNode);
-        System.out.println(listNode.next);
-        System.out.println(listNode.next.next);
-        System.out.println(listNode.next.next.next);
-        ListNode fin= swapPairs(listNode);
-
-        System.out.println(fin.val);
-        System.out.println(fin.next);
-        System.out.println(fin.next.next);
-        System.out.println(fin.next.next.next);
-
-
+        System.out.println(lengthOfLongestSubstring("abaseda"));
     }
 
 }
