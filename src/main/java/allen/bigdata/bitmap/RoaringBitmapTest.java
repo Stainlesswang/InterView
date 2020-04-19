@@ -6,6 +6,7 @@ import org.roaringbitmap.RoaringBitmap;
  * @author wangjianqiang
  */
 public class RoaringBitmapTest {
+
     public static void main(String[] args) {
         RoaringBitmap rr = RoaringBitmap.bitmapOf(1,2,3,1000);
         RoaringBitmap rr2 = new RoaringBitmap();
