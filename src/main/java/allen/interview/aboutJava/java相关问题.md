@@ -86,6 +86,15 @@ final修饰的 value[] 数组是final的只能说明它是地址不可变，并�
 |double|8字节|
 |boolean|JVM规范中，boolean变量作为int处理，也就是4字节；boolean数组当做byte数组处理|
 
+switch() 基本数据类型
+
+byte short char int四种数据类型.
+JDK1.5 中增加了枚举类与byte short char int的包装类
+jdk1.7开始支持String类型
+
+String其实是用hashcode()转换为int, 而 byte short char 都可以不损失精度的情况下转移到int
+枚举类也是通过其中的ordinal方法对应的值
+
 ### 6. Java中为啥只存在值传递???
 
    > 总结:**Java中只存在值传递** 传进去的参数都是copy

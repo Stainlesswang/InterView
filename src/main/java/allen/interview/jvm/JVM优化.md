@@ -1,5 +1,25 @@
 # JVM问题排查
 
+常用的命令
+
+jstat，该工具可以查看GC
+
+jstack -l pid  dump线程堆栈信息
+
+1、jmap -histo[:live] <pid>  通过histo选项，打印当前java堆中各个对象的数量、大小。
+
+ 3、jmap -heap <pid>
+
+通过-heap选项，打印java堆的配置情况和使用情况，还有使用的GC算法。
+
+ 5、jmap -permstat <pid>
+
+通过-permstat选项，打印java堆永久代的信息，包括class loader相关的信息,和interned Strings的信息。
+
+jstat -gcutil 28893 5000查看进程gc情况
+
+jstat -gcnew pid:new对象的信息。 
+
 
 ### CPU飙高
 
@@ -51,12 +71,18 @@ YGC 每次都会扫描这个数据结构（HashTable），如果这个数据结�
 
 再来看看FGC，实际上，FGC 我们只能优化频率，无法优化时长，因为这个时长无法控制。如何优化频率呢？
 
-首先，FGC 的原因有几个，1 是 Old 区内存不够，2 是元数据区内存不够，3 是 System.gc()， 
+首先，FGC 的原因有几个，
+
+1. 是 Old 区内存不够，
+2. 是元数据区内存不够，
+3. 是 System.gc()， 
 4 是 jmap 或者 jcmd，5 是CMS Promotion failed 或者 concurrent mode failure，
 6 JVM 基于悲观策略认为这次 YGC 后 Old 区无法容纳晋升的对象，因此取消 YGC，提前 FGC。
 
-通常优化的点是 Old 区内存不够导致 FGC。如果 FGC 后还有大量对象，说明 Old 区过小，
+通常优化的点是 Old 区内存不够导致 FGC。
+如果 FGC 后还有大量对象，说明 Old 区过小，
 应该扩大 Old 区，如果 FGC 后效果很好，说明 Old 区存在了大量短命的对象，
+
 优化的点应该是让这些对象在新生代就被 YGC 掉，通常的做法是增大新生代，如果有大而短命的对象，
 通过参数设置对象的大小，不要让这些对象进入 Old 区，还需要检查晋升年龄是否过小。如果 YGC 后，
 有大量对象因为无法进入 Survivor 区从而提前晋升，这时应该增大 Survivor 区，但不宜太大。

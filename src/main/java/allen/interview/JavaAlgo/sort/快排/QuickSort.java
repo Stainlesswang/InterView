@@ -16,7 +16,8 @@ import java.util.List;
  * 3.a[j+1]到a[hi]中的所有元素都不小于a[j]
  *
  *
- * QuickSort优化：
+ *
+ * ：
  * 1.在数组较小（1到15）这种的规模下，插入排序要优于快速排序，可以利用这一点在递归的时候使用InsertSort
  * 2.三项切分，该方法适用于数据中含有较多重复元素的情况下，分组的是否多加一组相等元素
  * @author WangJianQiang
@@ -26,6 +27,7 @@ import java.util.List;
 public class QuickSort<T extends Comparable<T>> extends Sort<T> {
     @Override
     public void sort(T[] nums) {
+        //打乱一下顺序
         shuffle(nums);
         sort(nums, 0, nums.length - 1);
     }

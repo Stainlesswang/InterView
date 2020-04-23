@@ -13,6 +13,37 @@
   redis上边的基本类型都是由redis封装实现的各种对象,各种对象在底层的实现会根据类型的不同
   选择相对合适的高效的数据类型
   
+ 对象类型           编码方式
+ 1. OBJ_STRING       
+ 
+     OBJ_ENCODING_RAW
+     
+     OBJ_ENCODING_INT
+     
+     OBJ_ENCODING_EMBSTR
+2. OBJ_LIST          
+    OBJ_ENCODING_LINKEDLIST
+    
+    OBJ_ENCODING_ZIPLIST
+                  
+    OBJ_ENCODING_QUICKLIST
+3. OBJ_SET
+
+     OBJ_ENCODING_INTSET
+     
+     OBJ_ENCODING_HT          
+4. OBJ_ZSET  
+    OBJ_ENCODING_ZIPLIST 
+           
+    OBJ_ENCODING_SKIPLIST
+5. OBJ_HASH 
+
+    OBJ_ENCODING_ZIPLIST         
+    
+    OBJ_ENCODING_HT               
+
+
+  
 -    字符串对象(三种数据类型)
        
        当保存为整数的时候 `object encoding key` 类型为 int 
