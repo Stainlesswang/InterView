@@ -2,13 +2,16 @@ package allen.interview.aboutJava;
 
 import com.alibaba.fastjson.JSON;
 
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 /**
  * @author wangjianqiang
  */
 public class HashTest {
+
     public static void main(String[] args) {
+
         String a= "fuck";
         String b=new String("fuck");
         String c="fuck";

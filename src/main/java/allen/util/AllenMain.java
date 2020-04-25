@@ -7,9 +7,19 @@ package allen.util;
 public class AllenMain {
 
     public static void main(String[] args) {
-        String ip="10.10.267.98";
-        int hashcode=ip.hashCode();
-        System.out.println(hashcode);
-        System.out.println(hashcode % 4);
+       getNum();
+    }
+    public static boolean getNum(){
+        int [] ints= new int[]{1,2,5,8,3,6};
+        int length= ints.length;
+
+        for (int i = 0; i <length ; i++) {
+            System.out.println("****"+ints[i]+"****");
+
+            for (int j = length-1; j >i ; j--) {
+                System.out.println(ints[j]);
+            }
+        }
+        return false;
     }
 }
