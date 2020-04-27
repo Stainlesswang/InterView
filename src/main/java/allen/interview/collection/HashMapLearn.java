@@ -12,10 +12,10 @@ public class HashMapLearn {
 
     public static void main(String[] args) {
         Map<String, String> hashMap = new HashMap<>();
+        ConcurrentHashMap concurrentHashMap;
 
         hashMap.put("sss", null);
         Map<String, String> hashtable = new Hashtable<>();
-        Map<String, String> concurrentHashMap = new ConcurrentHashMap<>();
 
         for (Map.Entry<String, String> o : hashMap.entrySet()) {
             System.out.println(o.getKey());
