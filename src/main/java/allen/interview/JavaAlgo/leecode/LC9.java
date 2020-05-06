@@ -9,7 +9,7 @@ public class LC9 {
         String reversedStr = (new StringBuilder(x + "")).reverse().toString();
         return (x + "").equals(reversedStr);
     }
-    public boolean isPalindrome2(int x) {
+    public static boolean isPalindrome2(int x) {
         if (x < 0) {
             return false;
         }
@@ -30,6 +30,6 @@ public class LC9 {
     }
 
     public static void main(String[] args) {
-        System.out.println(isPalindrome(34534));
+        System.out.println(isPalindrome2(1000021));
     }
 }
