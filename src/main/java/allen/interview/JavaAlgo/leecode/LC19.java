@@ -28,4 +28,5 @@ public class LC19 {
         first.next = first.next.next;
         return dummy.next;
     }
+
 }

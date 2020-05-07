@@ -36,7 +36,13 @@ public class FixedThreadPoolExample {
                 try {
                     semaphore.acquire();//获取到信号量才可以进行加1操作
                     Thread.sleep(80);//模拟一个耗时操作,世界上最难的事是装作自己很忙的样子
+//                    try{
+                        int a=2/0;
+//                    }catch (Exception e){
+//                        System.out.println(e.getMessage());
+//                    }
                     add();
+
                     semaphore.release();//执行完释放信号量
                     countDownLatch.countDown();//不要忘了报数
                 } catch (InterruptedException e) {
