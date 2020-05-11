@@ -2,12 +2,24 @@ package allen.bigdata.bitmap;
 
 import org.roaringbitmap.IntIterator;
 import org.roaringbitmap.RoaringBitmap;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 /**
  * @author wangjianqiang
  */
 public class RoaringBitmapTest {
 
     public static void main(String[] args) {
+        Set<Integer> set=new HashSet<>();
+        set.add(1);
+        set.contains(1);
+        Iterator in =set.iterator();
+        in.hasNext();
+        in.next();
+
         RoaringBitmap rr = RoaringBitmap.bitmapOf(1,2,3,1000);
         RoaringBitmap rr2 = new RoaringBitmap();
 //        rr2.add(4000L,4255L);
