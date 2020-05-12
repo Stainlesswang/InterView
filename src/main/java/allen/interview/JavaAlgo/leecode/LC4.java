@@ -6,39 +6,30 @@ package allen.interview.JavaAlgo.leecode;
  */
 public class LC4 {
 
-    public double findMedianSortedArrays(int[] A, int[] B) {
+    public static double findMedianSortedArrays(int[] A, int[] B) {
         int m = A.length;
         int n = B.length;
-        if (m > n) { // to ensure m<=n
-            int[] temp = A; A = B; B = temp;
-            int tmp = m; m = n; n = tmp;
-        }
-        int iMin = 0, iMax = m, halfLen = (m + n + 1) / 2;
-        while (iMin <= iMax) {
-            int i = (iMin + iMax) / 2;
-            int j = halfLen - i;
-            if (i < iMax && B[j-1] > A[i]){
-                iMin = i + 1; // i is too small
-            }
-            else if (i > iMin && A[i-1] > B[j]) {
-                iMax = i - 1; // i is too big
-            }
-            else { // i is perfect
-                int maxLeft = 0;
-                if (i == 0) { maxLeft = B[j-1]; }
-                else if (j == 0) { maxLeft = A[i-1]; }
-                else { maxLeft = Math.max(A[i-1], B[j-1]); }
-                if ( (m + n) % 2 == 1 ) { return maxLeft; }
-
-                int minRight = 0;
-                if (i == m) { minRight = B[j]; }
-                else if (j == n) { minRight = A[i]; }
-                else { minRight = Math.min(B[j], A[i]); }
-
-                return (maxLeft + minRight) / 2.0;
+        int len = m + n;
+        int left = -1, right = -1;
+        int aStart = 0, bStart = 0;
+        for (int i = 0; i <= len / 2; i++) {
+            left = right;
+            if (aStart < m && (bStart >= n || A[aStart] < B[bStart])) {
+                right = A[aStart++];
+            } else {
+                right = B[bStart++];
             }
         }
-        return 0.0;
+        if ((len & 1) == 0)
+            return (left + right) / 2.0;
+        else
+            return right;
+
+
+    }
+
+    public static void main(String[] args) {
+        findMedianSortedArrays(new int[]{1,4},new int[]{2,3,6,9,11,16,45});
     }
 
 }
