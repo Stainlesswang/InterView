@@ -54,8 +54,38 @@ public class YY {
         c[b] = tmp;
     }
 
+//    public static void main(String[] args) {
+//        YY yy=new YY();
+//        yy.permutation("abcdefghhi");
+//    }
+
+    static boolean flag=true;
     public static void main(String[] args) {
-        YY yy=new YY();
-        yy.permutation("abcdefghhi");
+        String A="AAABCCDDDCB";
+        A=getStr(A);
+        System.out.println(A);
+
     }
+
+
+    public static  String getStr(String input){
+        int len=input.length();
+        StringBuilder builder=new StringBuilder();
+        for(int i=0;i<len;i++){
+            char curr=input.charAt(i);
+            StringBuilder temp=new StringBuilder(String.valueOf(curr));
+            int count=1;
+            while(++i<len&&curr==input.charAt(i)){
+                temp.append(input.charAt(i));
+                count++;
+            }i--;
+            if(count<3){
+                builder.append(temp);
+            }else{
+                flag=true;
+            }
+        }
+        return builder.toString();
+    }
+
 }
