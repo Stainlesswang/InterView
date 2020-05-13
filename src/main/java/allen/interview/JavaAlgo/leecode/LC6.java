@@ -10,6 +10,7 @@ import java.util.List;
 public class LC6 {
     public String convert(String s, int numRows) {
 
+
         if (numRows == 1) return s;
 
         List<StringBuilder> rows = new ArrayList<>();
