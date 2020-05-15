@@ -1,9 +1,12 @@
 package allen.interview.aboutJava;
 
-import java.util.List;
-import java.util.Map;
+import org.checkerframework.checker.units.qual.A;
+
+import java.lang.reflect.Array;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author AllenWong
@@ -28,7 +31,13 @@ public class Java8 {
     }
 
     public static void main(String[] args) {
-        Account account=new Account();
-        account.setUsername("1");
+//        Account account=new Account();
+//        account.setUsername("1");
+        Integer[] array={1, 2, 4, 23, 11, 23, 45, 33, 66, 76, 4, 5};
+
+       List<Integer> list= Arrays.asList(array);
+        System.out.println(list.stream().filter(x -> x > 4).findFirst().toString());
+
+
     }
 }
