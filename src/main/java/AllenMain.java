@@ -1,10 +1,10 @@
-import allen.interview.aboutJava.GoogleGuava;
 
-import java.util.UUID;
 
 public class AllenMain {
     public static void main(String[] args) {
         System.out.println(myAtoi("1"));
+        System.out.println(Math.sqrt(18));
+        System.out.println(Math.pow(4,3));
         System.out.println(Integer.MAX_VALUE);
     }
     public static int myAtoi(String str) {
