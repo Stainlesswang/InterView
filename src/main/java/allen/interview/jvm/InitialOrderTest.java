@@ -10,6 +10,7 @@ public class InitialOrderTest {
 	public  boolean top;
 	/* 静态变量 */
 	private static String staticField = "静态变量";
+	private static InitialOrderTest initialOrderTest=new InitialOrderTest();
 	/* 变量 */
     private String field = "变量";
 	/* 静态初始化块 */
@@ -54,8 +55,8 @@ public class InitialOrderTest {
 	public static void main( String[] args )
 	{
 	    InitialOrderTest initialOrderTest=new InitialOrderTest();
-        System.out.println(InnerNotStatic.i);
-        InnerNotStatic innerNotStatic= initialOrderTest.new InnerNotStatic();
-        System.out.println(InnerStatic.innerFile);
+//        System.out.println(InnerNotStatic.i);
+//        InnerNotStatic innerNotStatic= initialOrderTest.new InnerNotStatic();
+//        System.out.println(InnerStatic.innerFile);
     }
 }
