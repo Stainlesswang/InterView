@@ -61,6 +61,11 @@
             <artifactId>spring-web</artifactId>
             <version>5.1.8.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-core</artifactId>
+            <version>9.0.41</version>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
         <dependency>
             <groupId>org.springframework</groupId>
