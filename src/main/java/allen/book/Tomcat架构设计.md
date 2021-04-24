@@ -29,3 +29,30 @@ Tomcat中每个Container组件通过执行一个职责链来完成具体的请�
 并且每个层级的Container(Engine,Host,Context,Wrapper)都有对应的基础Value实现,同时维护了一个Pipeline实例,
 
 ##### Connector的设计
+
+一个Connector一般要完成如下的几个主要工作:
+
+- 监听服务器端口,读取来自客户端的请求
+- 将请求按照指定协议解析
+- 根据请求地址匹配正确的容器进行处理
+- 将相应数据返回给客户端
+
+所以一个**Connector** 根据协议的不同提供不同的ProtocolHandler,例如Http11NioProtocol,表示基于NIO的HTTP协议处理器,
+一个ProtocolHandler包含一个Endpoint(用来启动Socket监听),一个Processor(按照指定协议读取数据,并将请求交由容器处理)
+
+Processor交由哪个容器处理的时候会根据一个容器的映射来查找,Mapper用来维护容器的映射信息,MapperListener实现了ContainerListener
+和LifecycleListener,用于在容器组件发生变化的时候注册或者取消对应的容器映射信息
+
+整个框架的总结
+
+| 组件名称 | 说明 |
+| :---- | :---- |
+| Server |  表示整个Servlet容器,Tomcat运行环境中只有一个Server实例 |
+| Service | Service表示一个或者多个Connector的集合,他们共享同一个Container来处理其请求,同一个Tomcat实例中可以由任意个相互独立的Service |
+| Connector | Tomcat的连接器,监听并转化Socket请求,同时将读取的Socket请求交由Container处理,支持不同的协议以及不同的I/O方式|
+| Container | 处理客户端的请求并返回结果的一类组件统称,四个级别的容器分别为Engine,Host,Context,Wrapper |
+| Engine| 表示整个Servlet引擎,为最高层的容器对象,尽管Engine不处理具体的请求,确实获取目标容器的入口 |
+| Host | Host作为一类容器,表示Servlet引擎(Engine)中的虚拟机,与一个服务的网络名有关,如域名等,客户端可以使用这个网络名连接服务器,这个名称要在DNS服务器上注册|
+|Context| Context作为一类容器,用于表示ServletContext,在Servlet规范中,一个ServletContext即表示一个独立的Web应用
+| Wrapper| Wrapper作为一类容器,用于表示Web应用中定义的Servlet
+| Executor | 表示Tomcat组件间可以共享的线程池|
