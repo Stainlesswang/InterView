@@ -56,3 +56,31 @@ Processor交由哪个容器处理的时候会根据一个容器的映射来查�
 |Context| Context作为一类容器,用于表示ServletContext,在Servlet规范中,一个ServletContext即表示一个独立的Web应用
 | Wrapper| Wrapper作为一类容器,用于表示Web应用中定义的Servlet
 | Executor | 表示Tomcat组件间可以共享的线程池|
+
+
+##### Tomcat中的类加载机制
+
+普通的类加载器通过双亲委派模式加载类
+
+1. 从换从中加载
+2. 如果没有,则从父类加载器中加载
+3. 如果父类加载器没有,则从当前类加载器加载
+4. 如果没有 抛出异常
+
+Tomcat中默认的方式稍有不同(delegate属性默认等于false)
+
+1. 从缓冲中加载
+2.  如果没有,  从JVM的Bootstrap类加载器加载
+3. 如果没有,则从当前类加载器加载(按照WEB-INF/classes, WEB-INF/lib顺序)
+4. 如果没有, 则从父类加载器加载(System Common Shared)
+
+为什么要这么设计? 
+
+##### 第三章 Catalina 
+
+Catalina是Tomcat的核心组件,作为Servlet的容器实现,它包括的部分有哪些呢?
+
+1. Digester 解析 `server.xml`
+
+Digester的设计思想是使用栈的思想,从顶部节点开始构建对象,设置属性,当遇到节点的结束,需要将本次的对象出栈并且将当前对象的上一个
+(当前对象的父节点)和当前节点关联起来,以此来解析整个xml文件,并将顶层节点的引用保存起来以备使用
