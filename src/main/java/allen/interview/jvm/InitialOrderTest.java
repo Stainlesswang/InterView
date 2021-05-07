@@ -10,7 +10,7 @@ public class InitialOrderTest {
 	public  boolean top;
 	/* 静态变量 */
 	private static String staticField = "静态变量";
-	private static InitialOrderTest initialOrderTest=new InitialOrderTest();
+//	private static InitialOrderTest initialOrderTest=new InitialOrderTest();
 	/* 变量 */
     private String field = "变量";
 	/* 静态初始化块 */

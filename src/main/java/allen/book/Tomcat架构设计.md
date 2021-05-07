@@ -84,3 +84,13 @@ Catalina是Tomcat的核心组件,作为Servlet的容器实现,它包括的部分
 
 Digester的设计思想是使用栈的思想,从顶部节点开始构建对象,设置属性,当遇到节点的结束,需要将本次的对象出栈并且将当前对象的上一个
 (当前对象的父节点)和当前节点关联起来,以此来解析整个xml文件,并将顶层节点的引用保存起来以备使用
+
+2. Web应用加载
+
+Web应用加载属于Server启动的核心处理过程,其中主要涉及五个类 `StandardHost`,`HostConfig`,`StandardContext`,`ContextConfig`,
+`StandardWrapper`
+
+##### 第四章 Coyote
+ 
+Catalina是Tomcat提供的Servlet容器实现,负责处理来自客户端的请求并输出响应,主力有了还需要有人去对接客户端,使用什么协议解析? 然后交给
+Servlet容器处理,Coyote就是Tomcat的连接器组件

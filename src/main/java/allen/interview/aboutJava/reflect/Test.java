@@ -27,7 +27,9 @@ public class Test {
             //2.1 获取所有 public 访问权限的变量
             // 包括本类声明的和从父类继承的
             Field[] fields = n.getDeclaredFields();
-
+            for (int i = 0; i < fields.length; i++) {
+                System.out.println(fields[i]);
+            }
             //2.2 获取所有本类声明的变量（不问访问权限）
 //            Field[] fields = mClass.getDeclaredFields();
 
