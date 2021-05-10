@@ -13,7 +13,7 @@ import java.util.List;
  *
  * 然后运行会看到抛出OOM的错误
  *
- * 当我们线上遇到这样的问题的时候,我们首先根据
+ * 当我们线上遇到这样的问题的时候,我们首先根据 -XX:+HeapDumpOnOutOfMemoryError 参数dump下来的文件进行分析
  *
  *
  * @author AllenWong

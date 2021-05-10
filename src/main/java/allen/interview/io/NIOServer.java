@@ -10,24 +10,26 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
-import java.text.MessageFormat;
 import java.util.Iterator;
-import java.util.Set;
 
 /**
  * NIO Demo 服务端实现
+ *
  * @author WangJianQiang
  * @Description:
  * @date 2019年03月26日 11:04
  */
 public class NIOServer {
-	private static final Logger LOGGER =  LoggerFactory.getLogger(NIOServer.class);
-    /**通道管理器*/
+    private static final Logger LOGGER = LoggerFactory.getLogger(NIOServer.class);
+    /**
+     * 通道管理器
+     */
     private Selector selector;
 
     /**
      * 获得一个ServerSocket通道，并对该通道做一些初始化的工作
-     * @param port  绑定的端口号
+     *
+     * @param port 绑定的端口号
      * @throws IOException
      */
     public void initServer(int port) throws IOException {
@@ -46,6 +48,7 @@ public class NIOServer {
 
     /**
      * 采用轮询的方式监听selector上是否有需要处理的事件，如果有，则进行处理
+     *
      * @throws IOException
      */
     @SuppressWarnings("unchecked")
@@ -84,12 +87,14 @@ public class NIOServer {
 
         }
     }
+
     /**
      * 处理读取客户端发来的信息 的事件
+     *
      * @param key
      * @throws IOException
      */
-    public void read(SelectionKey key) throws IOException{
+    public void read(SelectionKey key) throws IOException {
         // 服务器可读取消息:得到事件发生的Socket通道
         SocketChannel channel = (SocketChannel) key.channel();
         // 创建读取的缓冲区
@@ -97,7 +102,7 @@ public class NIOServer {
         channel.read(buffer);
         byte[] data = buffer.array();
         String msg = new String(data).trim();
-        System.out.println("服务端收到信息："+msg);
+        System.out.println("Server get Message：" + msg);
         ByteBuffer outBuffer = ByteBuffer.wrap(msg.getBytes());
         // 将消息回送给客户端
         channel.write(outBuffer);
@@ -105,6 +110,7 @@ public class NIOServer {
 
     /**
      * 启动服务端测试
+     *
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
