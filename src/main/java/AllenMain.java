@@ -1,4 +1,3 @@
-import org.apache.tomcat.util.digester.Digester;
 
 public class AllenMain {
     public static void main(String[] args) {
@@ -6,9 +5,6 @@ public class AllenMain {
         System.out.println(Math.sqrt(18));
         System.out.println(Math.pow(4, 3));
         System.out.println(Integer.MAX_VALUE);
-        Digester digester = new Digester();
-        ClassLoader classLoader1=digester.getClass().getClassLoader();
-        ClassLoader classLoader2=digester.getClass().getClassLoader().getParent();
     }
 
     public static int myAtoi(String str) {
