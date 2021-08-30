@@ -34,7 +34,9 @@ public class LC5 {
     }
 
     public static void main(String[] args) {
-        long curr=System.currentTimeMillis();
-        longestPalindrome("sdasdfweasdfergasdfjasodksndvcxknck");
+        System.out.println(longestPalindrome("habbah"));
     }
+
+
+
 }

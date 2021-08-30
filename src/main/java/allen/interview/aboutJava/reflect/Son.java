@@ -3,7 +3,7 @@ package allen.interview.aboutJava.reflect;
 /**
  * @author wangjianqiang
  */
-public class Son extends Father{
+public class Son extends Father {
     static {
         System.out.println("this is Son static block method");
     }
@@ -18,8 +18,12 @@ public class Son extends Father{
         System.out.println("Son Out method");
     }
 
+    public void out(String place) {
+        System.out.println("Son Out method" + place);
+    }
+
     @Override
-    public void printSonMsg(){
+    public void printSonMsg() {
         System.out.println("Son Msg - name : "
                 + sonName + "; age : " + sonAge);
     }
@@ -42,7 +46,7 @@ public class Son extends Father{
 
     @Override
     public String toString() {
-        return  super.toString()+"Son{" +
+        return super.toString() + "Son{" +
                 "sonName='" + sonName + '\'' +
                 ", sonAge=" + sonAge +
                 '}';
