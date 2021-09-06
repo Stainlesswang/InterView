@@ -52,8 +52,7 @@ public class LC10 {
 
         System.out.println(maxRain(new int[]{1,8,6,2,5,4,8,3,7}));
 //        for (int i = 0; i < 15; i++) {
-//            System.out.println(i);现在的我们感觉是十分的懒散和得意的,如果我们的未来变的不可知,如果我们的事情变得突然复杂了起来
-        //现在面试一面不过,八股文不太行,算法基础不太行
+//            System.out.println(i);
 //        }
     }
 

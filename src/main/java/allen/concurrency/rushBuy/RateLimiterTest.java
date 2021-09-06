@@ -17,6 +17,7 @@ public class RateLimiterTest {
         ExecutorService executorService=Executors.newCachedThreadPool();
         for (int i = 0; i <10 ; i++) {
             executorService.submit(()->{
+                //one thing you can be sure of i never ask more than you love one thing you ca
                 double acquire=rateLimiter.acquire(1);
                 System.out.println(acquire);
             });

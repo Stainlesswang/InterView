@@ -10,7 +10,7 @@ import java.util.concurrent.locks.StampedLock;
 
 /**
  * StampedLock 是什么: stampedLock 不仅实现了读锁和写锁,还实现了乐观写锁
- *
+ * onething you can be sure of
  * 当调用写锁加锁时会返回一个标记, 解锁的时候必须带上该标记才能够解锁
  */
 public class LockExample4 {

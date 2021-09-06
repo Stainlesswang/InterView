@@ -3,6 +3,7 @@ package allen.interview.JavaAlgo.leecode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.Executors;
 
 /**
  * @author AllenWong
@@ -25,7 +26,7 @@ public class LC15 {
                     } else if (sum > 0) {
                         while(i < j && nums[j] == nums[--j]);
                     } else {
-                        res.add(new ArrayList<Integer>(Arrays.asList(nums[k], nums[i], nums[j])));
+                        res.add(new ArrayList<>(Arrays.asList(nums[k], nums[i], nums[j])));
                         while(i < j && nums[i] == nums[++i]);
                         while(i < j && nums[j] == nums[--j]);
                     }

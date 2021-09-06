@@ -1,10 +1,23 @@
 # Redis设计与实现
 
+redis 涉及到的关键数据结构
+
+- SDS 简单动态字符串,
+
+int len; int free, char buf[];
+
+1). 常数复杂度获取字符串长度,c语言需要遍历字符计数
+2). 杜绝缓冲区溢出,不需要手动扩容,sds帮着操作了
+3). 减少修改字符串长度时所需的内存分配次数, 预分配策略,小于1M 扩展后多长,再double一下,大于1M,扩展后再多分配1M free空间
+4). 二进制安全,存什么取什么,不会像C一样,遇到空字符就算字符结束了
+5). 兼容部分c字符串函数,因为尾部保留了\0结束符
+
+
 1. redis的基本类型有哪些
     
-    - 字符串对象
-    - 列表对象(list Object)
-    - 哈希对象(hash Object)
+    - 字符串对象 type=string object encoding= int | embstr | raw
+    - 列表对象(list Object) type=list  object encoding= ziplist 或者 linkedlist
+    - 哈希对象(hash Object) 
     - 集合对象(set Object)
     - 有序集合对象(sorted set Object)
     
@@ -42,7 +55,7 @@
     
     OBJ_ENCODING_HT               
 
-
+d
   
 -    字符串对象(三种数据类型)
        
