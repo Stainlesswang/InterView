@@ -1,51 +1,59 @@
 package allen.interview.JavaAlgo.leecode;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 
 /**
  * @author AllenWong
+ * <p>
+ * 有效的括号,遇到左括号,入栈, 遇到右括号,必须要有栈顶的一个元素与之匹配
+ * 并且元素出栈
  * @date 2020/4/22 12:18 AM
  */
 public class LC20 {
-    class Solution {
+    //构造一个映射,右括号为key 做边括号为value
+    Map<Character, Character> mapping = new HashMap<>();
 
-        // Hash table that takes care of the mappings.
-        private HashMap<Character, Character> mappings;
+    {
+        mapping.put(')', '(');
+        mapping.put(']', '[');
+        mapping.put('}', '{');
+    }
 
-        // Initialize hash map with mappings. This simply makes the code easier to read.
-        public Solution() {
-            this.mappings = new HashMap<Character, Character>();
-            this.mappings.put(')', '(');
-            this.mappings.put('}', '{');
-            this.mappings.put(']', '[');
+    public boolean isVal(String input) {
+        if ("".equals(input) || null == input) {
+            return false;
+        }
+        int len = input.length();
+        if (len % 2 > 0) {
+            return false;
         }
 
-        public boolean isValid(String s) {
+        Stack<Character> stack = new Stack<>();
 
-            Stack<Character> stack = new Stack<Character>();
+        for (int i = 0; i < len; i++) {
 
-            for (int i = 0; i < s.length(); i++) {
-                char c = s.charAt(i);
+            Character now = input.charAt(i);
+            //是右边结束括号,需要出栈一个元素,做比较
+            if (mapping.containsKey(now)) {
 
-                // If the current character is a closing bracket.
-                if (this.mappings.containsKey(c)) {
-
-                    // Get the top element of the stack. If the stack is empty, set a dummy value of '#'
-                    char topElement = stack.empty() ? '#' : stack.pop();
-
-                    // If the mapping for this bracket doesn't match the stack's top element, return false.
-                    if (topElement != this.mappings.get(c)) {
-                        return false;
-                    }
-                } else {
-                    // If it was an opening bracket, push to the stack.
-                    stack.push(c);
+                Character left = mapping.get(now);
+                Character stackNode = stack.isEmpty() ? '*' : stack.pop();
+                if (!stackNode.equals(left)) {
+                    return false;
                 }
+
+            } else {
+                stack.push(now);
             }
 
-            // If the stack still contains elements, then it is an invalid expression.
-            return stack.isEmpty();
         }
+
+
+        return stack.isEmpty();
+
     }
+
+
 }

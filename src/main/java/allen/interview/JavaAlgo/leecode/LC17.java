@@ -22,33 +22,29 @@ public class LC17 {
             put("9", "wxyz");
         }};
 
-        List<String> output = new ArrayList<String>();
+        List<String> output = new ArrayList<>();
 
-        public void backtrack(String combination, String next_digits) {
-            // if there is no more digits to check
-            if (next_digits.length() == 0) {
-                // the combination is done
-                output.add(combination);
+        public List<String> getAllLetterByPhone(String number) {
+            if (number.length() > 0) {
+                backTrack("", number);
             }
-            // if there are still digits to check
-            else {
-                // iterate over all letters which map
-                // the next available digit
-                String digit = next_digits.substring(0, 1);
-                String letters = phone.get(digit);
-                for (int i = 0; i < letters.length(); i++) {
-                    String letter = phone.get(digit).substring(i, i + 1);
-                    // append the current letter to the combination
-                    // and proceed to the next digits
-                    backtrack(combination + letter, next_digits.substring(1));
+            return output;
+
+        }
+
+        public void backTrack(String lastStr, String number) {
+            if (number.length() == 0) {
+                output.add(number);
+            } else {
+                String nowNum = number.substring(0, 1);
+                String letter = phone.get(nowNum);
+                for (int i = 0; i < letter.length(); i++) {
+                    backTrack(lastStr + letter.substring(i, i + 1), number.substring(1));
                 }
             }
+
         }
 
-        public List<String> letterCombinations(String digits) {
-            if (digits.length() != 0)
-                backtrack("", digits);
-            return output;
-        }
+
     }
 }

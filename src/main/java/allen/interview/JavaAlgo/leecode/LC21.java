@@ -5,33 +5,36 @@ package allen.interview.JavaAlgo.leecode;
  * @date 2020/4/25 10:04 PM
  */
 public class LC21 {
+    public ListNode mergeTwoLinkedList(ListNode l1, ListNode l2) {
+        ListNode p1 = l1, p2 = l2, resultHead = new ListNode(-1);
+        ListNode point = resultHead;
+        while (null != p1 && null != p2) {
+            if (p1.val > p2.val) {
+                point.next = p2;
+                p2 = p2.next;
+            } else {
+                point.next = p1;
+                p1 = p1.next;
+            }
+            point = point.next;
+        }
+
+        if (p1 == null) {
+            point.next = p2;
+        }
+        if (p2 == null) {
+            point.next = p1;
+        }
+        return resultHead.next;
+
+    }
+
     public class ListNode {
         int val;
         ListNode next;
-        ListNode(int x) { val = x; }
-    }
-    class Solution {
-        public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-            // maintain an unchanging reference to node ahead of the return node.
-            ListNode prehead = new ListNode(-1);
 
-            ListNode prev = prehead;
-            while (l1 != null && l2 != null) {
-                if (l1.val <= l2.val) {
-                    prev.next = l1;
-                    l1 = l1.next;
-                } else {
-                    prev.next = l2;
-                    l2 = l2.next;
-                }
-                prev = prev.next;
-            }
-
-            // exactly one of l1 and l2 can be non-null at this point, so connect
-            // the non-null list to the end of the merged list.
-            prev.next = l1 == null ? l2 : l1;
-
-            return prehead.next;
+        ListNode(int x) {
+            val = x;
         }
     }
 
