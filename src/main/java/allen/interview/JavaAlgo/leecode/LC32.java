@@ -1,7 +1,6 @@
 package allen.interview.JavaAlgo.leecode;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.Stack;
 
 /**
  * @author jianqiang8
@@ -34,6 +33,12 @@ import java.util.Queue;
  * @date 2021/9/23 8:07 下午
  */
 public class LC32 {
+    //核心点 栈里边要存下标
+
+    public static void main(String[] args) {
+        LC32 lc32 = new LC32();
+        System.out.println(lc32.longestValidParentheses("()(()"));
+    }
 
     public int longestValidParentheses(String s) {
         /*
@@ -44,38 +49,23 @@ public class LC32 {
         if (null == s || "".equals(s)) {
             return 0;
         }
-        Queue<Character> tempQueue = new LinkedList<>();
+        Stack<Integer> st = new Stack<>();
         int ans = 0;
-        int onceLen = 0;
+        int start = 0;
         for (int i = 0; i < s.length(); i++) {
             Character now = s.charAt(i);
             if (now.equals('(')) {
-                if (tempQueue.size()>0){
-                    //前边还剩余一个没匹配到的,那么这次清零
-                    //计数清零,前边和后边的连不上了
-                    ans = Math.max(onceLen, ans);
-                    onceLen = 0;
-                }else {
-                    tempQueue.add(now);
-                }
+                st.add(i);
             } else {
-                Character queueItem = tempQueue.poll();
-                if (null != queueItem) {
-                    //匹配上了,
-                    onceLen = onceLen + 2;
+                if (!st.isEmpty()) {
+                    st.pop();
+                    if (st.isEmpty()) ans = Math.max(ans, i - start + 1);
+                    else ans = Math.max(ans, i - st.peek());
                 } else {
-                    //没有匹配上
-                    //计数清零,前边和后边的连不上了
-                    ans = Math.max(onceLen, ans);
-                    onceLen = 0;
+                    start = i + 1;
                 }
             }
         }
-        return Math.max(ans, onceLen);
-    }
-
-    public static void main(String[] args) {
-        LC32 lc32 = new LC32();
-        System.out.println(lc32.longestValidParentheses("()(())"));
+        return ans;
     }
 }
