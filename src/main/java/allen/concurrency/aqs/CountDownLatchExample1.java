@@ -18,10 +18,10 @@ public class CountDownLatchExample1 {
         final CountDownLatch countDownLatch=new CountDownLatch(threadCount);
 
         for (int i = 0; i <threadCount ; i++) {
-            final int thereadNum=i;
+            final int threadNum=i;
             executorService.submit(()->{
                 try {
-                    test(thereadNum);
+                    test(threadNum);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }finally {

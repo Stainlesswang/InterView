@@ -39,6 +39,38 @@ public class Father implements Person{
                 + fatherName + "; age : " + FatherAge);
     }
 
+    public String getHouse() {
+        return house;
+    }
+
+    public void setHouse(String house) {
+        this.house = house;
+    }
+
+    public long getMoney() {
+        return money;
+    }
+
+    public void setMoney(long money) {
+        this.money = money;
+    }
+
+    public String getFatherName() {
+        return fatherName;
+    }
+
+    public void setFatherName(String fatherName) {
+        this.fatherName = fatherName;
+    }
+
+    public int getFatherAge() {
+        return FatherAge;
+    }
+
+    public void setFatherAge(int fatherAge) {
+        FatherAge = fatherAge;
+    }
+
     @Override
     public String toString() {
         return "Father{" +
