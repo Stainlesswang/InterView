@@ -54,7 +54,7 @@ public class LC23 {
             return resultHead.next;
         }
         for (ListNode list : lists) {
-            resultHead.next=mergeTwoList(resultHead.next,list);
+            resultHead.next = mergeTwoList(resultHead.next, list);
         }
         return resultHead.next;
     }
@@ -109,6 +109,18 @@ public class LC23 {
         ListNode(int val, ListNode next) {
             this.val = val;
             this.next = next;
+        }
+
+        public ListNode revert(ListNode head) {
+            ListNode re = null;
+            ListNode curr = head;
+            while (curr != null) {
+                ListNode next = curr.next;
+                curr.next = re;
+                re = curr;
+                curr = next;
+            }
+            return re;
         }
 
         @Override
