@@ -1,8 +1,8 @@
 package allen.interview.JavaAlgo.leecode;
 
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
+import org.apache.activemq.store.kahadb.disk.index.ListNode;
+
+import java.util.*;
 
 /**
  * @author AllenWong
@@ -70,6 +70,8 @@ public class YY {
 
     public static  String getStr(String input){
         int len=input.length();
+        Map<Integer, ListNode> nodeMap = new HashMap<>();
+
         StringBuilder builder=new StringBuilder();
         for(int i=0;i<len;i++){
             char curr=input.charAt(i);
